@@ -1,0 +1,45 @@
+Index: Hanoi Local Hub/app/src/main/res/layout/activity_home.xml
+===================================================================
+diff --git a/Hanoi Local Hub/app/src/main/res/layout/activity_home.xml b/Hanoi Local Hub/app/src/main/res/layout/activity_home.xml
+deleted file mode 100644
+--- a/Hanoi Local Hub/app/src/main/res/layout/activity_home.xml	(revision b94db9a73abcbeb0047d607dfd8f9def983daf85)
++++ /dev/null	(revision b94db9a73abcbeb0047d607dfd8f9def983daf85)
+@@ -1,18 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    >
+-
+-    <TextView
+-        android:id="@+id/textView4"
+-        android:layout_width="81dp"
+-        android:layout_height="15dp"
+-        android:text="test"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent" />
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: Hanoi Local Hub/app/src/main/res/layout/customer_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml b/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml
+new file mode 100644
+--- /dev/null	(date 1748411307134)
++++ b/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml	(date 1748411307134)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="#FFFFFF"
++    android:orientation="vertical">
++
++</LinearLayout>
+\ No newline at end of file
