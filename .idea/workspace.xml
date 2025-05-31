@@ -22,12 +22,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74684ac1-ca95-4864-acb5-bd1839f73b43" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/activity_home.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/mipmap-xxxhdpi/ icon _User_.png" afterPathEscaped="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/mipmap-xxxhdpi/🦆 icon _User_.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/mipmap-xxxhdpi/ icon _home_.png" afterPathEscaped="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/mipmap-xxxhdpi/🦆 icon _home_.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/mipmap-xxxhdpi/ icon _notification_.png" afterPathEscaped="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/mipmap-xxxhdpi/🦆 icon _notification_.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,6 +112,14 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\8.2\AndroidStudioProjects\GROUP_16\Hanoi Local Hub\app\src\main\res\mipmap-xxxhdpi" />
+      <recent name="D:\8.2\AndroidStudioProjects\GROUP_16\Hanoi Local Hub\app\src\main\res\mipmap-mdpi" />
+      <recent name="D:\8.2\AndroidStudioProjects\GROUP_16\Hanoi Local Hub\app\src\main\res\drawable" />
+      <recent name="D:\8.2\AndroidStudioProjects\GROUP_16\Hanoi Local Hub\app\src\main\res\mipmap-hdpi" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Hanoi_Local_Hub.app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="Hanoi_Local_Hub.app" />
@@ -203,12 +210,12 @@
       <map>
         <entry key="com.example.hanoi_local_hub">
           <value>
-            <CheckInfo lastCheckTimestamp="1748577687068" />
+            <CheckInfo lastCheckTimestamp="1748664589371" />
           </value>
         </entry>
         <entry key="com.example.hanoi_local_hub.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1748577687087" />
+            <CheckInfo lastCheckTimestamp="1748664589371" />
           </value>
         </entry>
       </map>
