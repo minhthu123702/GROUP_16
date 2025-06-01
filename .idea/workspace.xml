@@ -22,9 +22,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74684ac1-ca95-4864-acb5-bd1839f73b43" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/mipmap-xxxhdpi/ icon _User_.png" afterPathEscaped="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/mipmap-xxxhdpi/🦆 icon _User_.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/mipmap-xxxhdpi/ icon _home_.png" afterPathEscaped="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/mipmap-xxxhdpi/🦆 icon _home_.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/mipmap-xxxhdpi/ icon _notification_.png" afterPathEscaped="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/mipmap-xxxhdpi/🦆 icon _notification_.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml" afterDir="false" />
     </list>
@@ -114,9 +111,10 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\8.2\AndroidStudioProjects\GROUP_16\Hanoi Local Hub\app\src\main\res\drawable" />
+      <recent name="D:\8.2\AndroidStudioProjects\GROUP_16\Hanoi Local Hub\app\src\main\res\icon" />
       <recent name="D:\8.2\AndroidStudioProjects\GROUP_16\Hanoi Local Hub\app\src\main\res\mipmap-xxxhdpi" />
       <recent name="D:\8.2\AndroidStudioProjects\GROUP_16\Hanoi Local Hub\app\src\main\res\mipmap-mdpi" />
-      <recent name="D:\8.2\AndroidStudioProjects\GROUP_16\Hanoi Local Hub\app\src\main\res\drawable" />
       <recent name="D:\8.2\AndroidStudioProjects\GROUP_16\Hanoi Local Hub\app\src\main\res\mipmap-hdpi" />
     </key>
   </component>
