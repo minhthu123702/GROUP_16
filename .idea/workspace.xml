@@ -20,11 +20,6 @@
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/menu/bottom_nav_menu.xml">
-        <config>
-          <theme>@style/Theme.Hanoi_Local_Hub</theme>
-        </config>
-      </layout>
     </layouts>
   </component>
   <component name="AutoImportSettings">
@@ -32,9 +27,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74684ac1-ca95-4864-acb5-bd1839f73b43" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/item_service.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/drawable/spinner_background.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/item_service.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/item_service.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,22 +102,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Android App.Hanoi_Local_Hub.app.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Quỳnh-Anh&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/8.2/AndroidStudioProjects/GROUP_16/Hanoi Local Hub/settings.gradle.kts&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.Hanoi_Local_Hub.app.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "git-widget-placeholder": "Quỳnh-Anh",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/8.2/AndroidStudioProjects/GROUP_16/Hanoi Local Hub/settings.gradle.kts",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\8.2\AndroidStudioProjects\GROUP_16\Hanoi Local Hub\app\src\main\res\drawable" />
@@ -220,12 +218,12 @@
       <map>
         <entry key="com.example.hanoi_local_hub">
           <value>
-            <CheckInfo lastCheckTimestamp="1748664589371" />
+            <CheckInfo lastCheckTimestamp="1748782135761" />
           </value>
         </entry>
         <entry key="com.example.hanoi_local_hub.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1748664589371" />
+            <CheckInfo lastCheckTimestamp="1748782135761" />
           </value>
         </entry>
       </map>
