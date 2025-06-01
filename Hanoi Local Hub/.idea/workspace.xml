@@ -22,14 +22,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a16d3b34-89fd-4307-8cb0-2856bc3e1075" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/user.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_admindashboard.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_admindashboard.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_admindashboard.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,12 +239,12 @@
       <map>
         <entry key="com.example.hanoi_local_hub">
           <value>
-            <CheckInfo lastCheckTimestamp="1748362879424" />
+            <CheckInfo lastCheckTimestamp="1748679363336" />
           </value>
         </entry>
         <entry key="com.example.hanoi_local_hub.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1748362879424" />
+            <CheckInfo lastCheckTimestamp="1748679363336" />
           </value>
         </entry>
         <entry key="com.example.hanoilocalhub">

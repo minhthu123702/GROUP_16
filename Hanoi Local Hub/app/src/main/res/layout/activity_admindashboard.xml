@@ -7,83 +7,54 @@
     android:backgroundTint="#ADD7F8">
 
     <Button
-        android:id="@+id/button10"
-        android:layout_width="133dp"
-        android:layout_height="134dp"
+        android:id="@+id/button9"
+        android:layout_width="160dp"
+        android:layout_height="154dp"
         android:backgroundTint="#AFD9FB"
-        android:text="Button"
-        android:textColor="#020202"
+        android:text="Báo cáo thống kê"
+        android:textColor="#070707"
+        android:textSize="16sp"
+        android:typeface="serif"
         app:cornerRadius="30dp"
         app:iconPadding="2sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
+        app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.541" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="133dp"
-        android:layout_height="134dp"
-        android:backgroundTint="#AFD9FB"
-        android:text="Button"
-        android:textColor="#090909"
-        app:cornerRadius="30dp"
-        app:iconPadding="2sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.251" />
+        app:layout_constraintVertical_bias="0.733" />
 
     <Button
         android:id="@+id/button8"
-        android:layout_width="133dp"
-        android:layout_height="134dp"
+        android:layout_width="157dp"
+        android:layout_height="157dp"
         android:backgroundTint="#AFD9FB"
-        android:text="Button"
+        android:text="Quản lý người dùng"
         android:textColor="#000000"
         app:cornerRadius="30dp"
         app:iconPadding="2sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintHorizontal_bias="0.122"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.251" />
+        app:layout_constraintVertical_bias="0.385" />
 
     <Button
-        android:id="@+id/button9"
-        android:layout_width="133dp"
-        android:layout_height="134dp"
+        android:id="@+id/button7"
+        android:layout_width="153dp"
+        android:layout_height="157dp"
         android:backgroundTint="#AFD9FB"
-        android:text="Button"
-        android:textColor="#070707"
+        android:text="Quản lý danh mục dịch vụ"
+        android:textColor="#090909"
         app:cornerRadius="30dp"
         app:iconPadding="2sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintHorizontal_bias="0.864"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.541" />
-
-    <Button
-        android:id="@+id/button11"
-        android:layout_width="133dp"
-        android:layout_height="134dp"
-        android:backgroundTint="#AFD9FB"
-        android:text="Button"
-        android:textColor="#070707"
-        app:cornerRadius="30dp"
-        app:iconPadding="2sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.832" />
+        app:layout_constraintVertical_bias="0.383" />
 
     <TextView
         android:id="@+id/textView4"
