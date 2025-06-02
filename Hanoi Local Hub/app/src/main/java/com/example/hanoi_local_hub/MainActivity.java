@@ -1,5 +1,6 @@
 package com.example.hanoi_local_hub;
 
+import android.app.Service;
 import android.os.Bundle;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
@@ -9,6 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,5 +40,21 @@ public class MainActivity extends AppCompatActivity {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
         }
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewServices);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        List<Service> services = new ArrayList<>();
+        services.add(new Service(R.drawable.image33, "Gia sư Tiếng Anh", "150.000đ", "4.5", "102"));
+        services.add(new Service(R.drawable.image33, "Sửa chữa tủ lạnh", "Liên hệ", "4.3", "58"));
+        services.add(new Service(R.drawable.image33, "Thiết kế", "Liên hệ", "4.7", "50"));
+        services.add(new Service(R.drawable.image33, "Chụp ảnh", "300.000đ", "4.4", "364"));
+        services.add(new Service(R.drawable.image33, "Dọn dẹp", "200.000đ", "4.2", "1.1k"));
+        services.add(new Service(R.drawable.image33, "Makeup", "Liên hệ", "4.8", "207"));
+        services.add(new Service(R.drawable.image33, "Sửa chữa điều hòa", "Liên hệ", "4.8", "9"));
+        services.add(new Service(R.drawable.image33, "Gia sư Toán", "130.000", "4.3", "271"));
+
+        ServiceAdapter adapter = new ServiceAdapter(this, services);
+        recyclerView.setAdapter(adapter);
+
     }
 }
