@@ -43,7 +43,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ServiceAdapter.ViewHolder holder, int position) {
         Service service = serviceList.get(position);
         holder.imageAvatar.setImageResource(service.imageResId);
         holder.textTitle.setText(service.title);
@@ -57,3 +57,4 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
         return serviceList.size();
     }
 }
+
