@@ -27,10 +27,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74684ac1-ca95-4864-acb5-bd1839f73b43" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/drawable/spinner_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AndroidProjectSystem.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AndroidProjectSystem.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/ServiceItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/ServiceAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/ServiceAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/item_service.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/item_service.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,6 +83,7 @@
         <option value="layoutResourceFile_vertical" />
         <option value="layoutResourceFile" />
         <option value="resourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -93,6 +107,9 @@
     &quot;accountId&quot;: &quot;57482653-a1fd-4884-8181-57e6eeb180c4&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
@@ -102,24 +119,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Android App.Hanoi_Local_Hub.app.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "Quỳnh-Anh",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/8.2/AndroidStudioProjects/GROUP_16/Hanoi Local Hub/settings.gradle.kts",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Android App.Hanoi_Local_Hub.app.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Quỳnh-Anh&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/8.2/AndroidStudioProjects/GROUP_16/Hanoi Local Hub/settings.gradle.kts&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.hanoi_local_hub" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\8.2\AndroidStudioProjects\GROUP_16\Hanoi Local Hub\app\src\main\res\drawable" />
       <recent name="D:\8.2\AndroidStudioProjects\GROUP_16\Hanoi Local Hub\app\src\main\res\icon" />
@@ -213,17 +233,28 @@
     </task>
     <servers />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/ServiceAdapter.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.example.hanoi_local_hub">
           <value>
-            <CheckInfo lastCheckTimestamp="1748782135761" />
+            <CheckInfo lastCheckTimestamp="1748965907303" />
           </value>
         </entry>
         <entry key="com.example.hanoi_local_hub.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1748782135761" />
+            <CheckInfo lastCheckTimestamp="1748965907304" />
           </value>
         </entry>
       </map>

@@ -15,9 +15,9 @@ import java.util.List;
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHolder> {
 
     private Context context;
-    private List<Service> serviceList;
+    private List<ServiceItem> serviceList;
 
-    public ServiceAdapter(Context context, List<Service> serviceList) {
+    public ServiceAdapter(Context context, List<ServiceItem> serviceList) {
         this.context = context;
         this.serviceList = serviceList;
     }
@@ -44,7 +44,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ServiceAdapter.ViewHolder holder, int position) {
-        Service service = serviceList.get(position);
+        ServiceItem service = serviceList.get(position);
         holder.imageAvatar.setImageResource(service.imageResId);
         holder.textTitle.setText(service.title);
         holder.textPrice.setText(service.price);
