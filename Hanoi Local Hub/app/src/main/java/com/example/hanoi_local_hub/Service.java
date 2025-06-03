@@ -7,6 +7,7 @@ public class Service {
     public String rating;
     public String contact;
 
+    // Constructor đúng thứ tự và kiểu dữ liệu
     public Service(int imageResId, String title, String price, String rating, String contact) {
         this.imageResId = imageResId;
         this.title = title;

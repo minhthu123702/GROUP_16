@@ -45,13 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         List<Service> services = new ArrayList<>();
         services.add(new Service(R.drawable.image33, "Gia sư Tiếng Anh", "150.000đ", "4.5", "102"));
-        services.add(new Service(R.drawable.image33, "Sửa chữa tủ lạnh", "Liên hệ", "4.3", "58"));
+        services.add(new Service(R.drawable.image35, "Sửa chữa tủ lạnh", "Liên hệ", "4.3", "58"));
         services.add(new Service(R.drawable.image33, "Thiết kế", "Liên hệ", "4.7", "50"));
         services.add(new Service(R.drawable.image33, "Chụp ảnh", "300.000đ", "4.4", "364"));
-        services.add(new Service(R.drawable.image33, "Dọn dẹp", "200.000đ", "4.2", "1.1k"));
+        services.add(new Service(R.drawable.image33, "Dọn dẹp", "200.000đ", "4.2", "114"));
         services.add(new Service(R.drawable.image33, "Makeup", "Liên hệ", "4.8", "207"));
         services.add(new Service(R.drawable.image33, "Sửa chữa điều hòa", "Liên hệ", "4.8", "9"));
-        services.add(new Service(R.drawable.image33, "Gia sư Toán", "130.000", "4.3", "271"));
+        services.add(new Service(R.drawable.image33, "Gia sư Toán", "130.000đ", "4.3", "271"));
+
 
         ServiceAdapter adapter = new ServiceAdapter(this, services);
         recyclerView.setAdapter(adapter);
