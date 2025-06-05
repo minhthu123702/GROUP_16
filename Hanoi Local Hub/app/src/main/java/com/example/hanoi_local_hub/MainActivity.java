@@ -2,6 +2,8 @@ package com.example.hanoi_local_hub;
 
 import com.example.hanoi_local_hub.ServiceItem;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 
@@ -18,44 +20,65 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private List<ServiceItem> allServices = new ArrayList<>();
+    private ServiceAdapter adapter;
+    private RecyclerView recyclerView;
+    private Spinner spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-
         setContentView(R.layout.customer_home);
 
-        // Ánh xạ layout gốc (ConstraintLayout) phải có id là "main"
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.recyclerViewServices), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        recyclerView = findViewById(R.id.recyclerViewServices);
+        spinner = findViewById(R.id.spinnerCategory);
 
-        // Khởi tạo Spinner (nếu có trong layout)
-        Spinner spinner = findViewById(R.id.spinnerCategory);
-        if (spinner != null) {
-            String[] categories = {"Gia sư", "Thiết kế", "Sửa chữa", "Chụp Ảnh"};
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(adapter);
-        }
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewServices);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        List<ServiceItem> services = new ArrayList<>();
-        services.add(new ServiceItem(R.drawable.image33, "Gia sư Tiếng Anh", "150.000đ", "4.5", "102"));
-        services.add(new ServiceItem(R.drawable.image35, "Sửa chữa tủ lạnh", "Liên hệ", "4.3", "58"));
-        services.add(new ServiceItem(R.drawable.image33, "Thiết kế", "Liên hệ", "4.7", "50"));
-        services.add(new ServiceItem(R.drawable.image33, "Chụp ảnh", "300.000đ", "4.4", "364"));
-        services.add(new ServiceItem(R.drawable.image33, "Dọn dẹp", "200.000đ", "4.2", "114"));
-        services.add(new ServiceItem(R.drawable.image33, "Makeup", "Liên hệ", "4.8", "207"));
-        services.add(new ServiceItem(R.drawable.image33, "Sửa chữa điều hòa", "Liên hệ", "4.8", "9"));
-        services.add(new ServiceItem(R.drawable.image33, "Gia sư Toán", "130.000đ", "4.3", "271"));
+        // Danh sách danh mục
+        String[] categories = {"Tất cả", "Gia sư", "Thiết kế", "Sửa chữa", "Chụp Ảnh"};
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
 
+        // Danh sách dịch vụ (đầy đủ)
+        allServices.add(new ServiceItem(R.drawable.image33, "Gia sư Tiếng Anh", "150.000đ", "4.5", "102", "Gia sư"));
+        allServices.add(new ServiceItem(R.drawable.image33, "Gia sư Toán", "130.000đ", "4.3", "271", "Gia sư"));
+        allServices.add(new ServiceItem(R.drawable.image33, "Gia sư Văn", "130.000đ", "4.4", "67", "Gia sư"));
+        allServices.add(new ServiceItem(R.drawable.image33, "Thiết kế", "Liên hệ", "4.7", "50", "Thiết kế"));
+        allServices.add(new ServiceItem(R.drawable.image33, "Sửa chữa tủ lạnh", "Liên hệ", "4.3", "58", "Sửa chữa"));
+        allServices.add(new ServiceItem(R.drawable.image33, "Chụp ảnh", "300.000đ", "4.4", "364", "Chụp Ảnh"));
+        allServices.add(new ServiceItem(R.drawable.image33, "Makeup", "Liên hệ", "4.8", "207", "Khác"));
+        allServices.add(new ServiceItem(R.drawable.image33, "Sửa điều hòa", "Liên hệ", "4.8", "9", "Sửa chữa"));
 
-        ServiceAdapter adapter = new ServiceAdapter(this, services);
+        // Gán tất cả dịch vụ ban đầu
+        adapter = new ServiceAdapter(this, new ArrayList<>(allServices));
         recyclerView.setAdapter(adapter);
 
+        // Xử lý chọn danh mục
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedCategory = parent.getItemAtPosition(position).toString();
+
+                if (selectedCategory.equals("Tất cả")) {
+                    adapter.updateData(new ArrayList<>(allServices));
+                } else {
+                    List<ServiceItem> filtered = new ArrayList<>();
+                    for (ServiceItem item : allServices) {
+                        if (item.getCategory().equals(selectedCategory)) {
+                            filtered.add(item);
+                        }
+                    }
+                    adapter.updateData(filtered);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
     }
 }
+
+

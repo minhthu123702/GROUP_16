@@ -8,13 +8,12 @@
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp">
 
-<LinearLayout
-android:layout_width="160dp"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:padding="12dp">
-
+    <LinearLayout
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="12dp">
 
         <ImageView
             android:id="@+id/imageAvatar"
@@ -22,7 +21,7 @@ android:layout_width="160dp"
             android:layout_height="64dp"
             android:src="@drawable/image33"
             android:scaleType="centerCrop"
-            android:background="" />
+            android:clipToOutline="true" />
 
         <TextView
             android:id="@+id/textTitle"
@@ -31,20 +30,23 @@ android:layout_width="160dp"
             android:text="Gia sư Tiếng Anh"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="150.000đ"
-            android:textColor="#444" />
+            android:textColor="#444"
+            android:textSize="13sp" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp">
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/textRating"
@@ -52,7 +54,8 @@ android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:text="4.5 ★"
                 android:textColor="#F9A825"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textContact"
@@ -60,7 +63,8 @@ android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:text="Đã liên lạc 102"
-                android:textColor="#888" />
+                android:textColor="#888"
+                android:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>

@@ -27,22 +27,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74684ac1-ca95-4864-acb5-bd1839f73b43" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/AndroidProjectSystem.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AndroidProjectSystem.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/.gradle/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/ServiceItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/ServiceAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/ServiceAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/ServiceItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/java/com/example/hanoi_local_hub/ServiceItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/customer_home.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/item_service.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Hanoi Local Hub/app/src/main/res/layout/item_service.xml" afterDir="false" />
     </list>
@@ -249,12 +242,12 @@
       <map>
         <entry key="com.example.hanoi_local_hub">
           <value>
-            <CheckInfo lastCheckTimestamp="1748965907303" />
+            <CheckInfo lastCheckTimestamp="1749120337063" />
           </value>
         </entry>
         <entry key="com.example.hanoi_local_hub.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1748965907304" />
+            <CheckInfo lastCheckTimestamp="1749120337063" />
           </value>
         </entry>
       </map>

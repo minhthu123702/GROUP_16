@@ -56,5 +56,10 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
     public int getItemCount() {
         return serviceList.size();
     }
+    public void updateData(List<ServiceItem> newList) {
+        this.serviceList = newList;
+        notifyDataSetChanged();
+    }
+
 }
 
