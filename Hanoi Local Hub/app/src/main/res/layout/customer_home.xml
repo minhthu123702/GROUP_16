@@ -13,7 +13,7 @@
         android:id="@+id/headerLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#0E5BAF"
+        android:background="#286291"
         android:padding="16dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
