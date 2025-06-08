@@ -1,6 +1,8 @@
 package com.example.hanoi_local_hub;
 
 import com.example.hanoi_local_hub.ServiceItem;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,7 +35,6 @@ public class MainCustomer extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewServices);
         spinner = findViewById(R.id.spinnerCategory);
-
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
         // Danh sách danh mục
@@ -43,25 +44,133 @@ public class MainCustomer extends AppCompatActivity {
         spinner.setAdapter(spinnerAdapter);
 
         // Danh sách dịch vụ (đầy đủ)
-        allServices.add(new ServiceItem(R.drawable.image33, "Gia sư Tiếng Anh", "150.000đ", "4.5", "102", "Gia sư"));
-        allServices.add(new ServiceItem(R.drawable.image33, "Gia sư Toán", "130.000đ", "4.3", "271", "Gia sư"));
-        allServices.add(new ServiceItem(R.drawable.image33, "Gia sư Văn", "130.000đ", "4.4", "67", "Gia sư"));
-        allServices.add(new ServiceItem(R.drawable.image33, "Thiết kế", "Liên hệ", "4.7", "50", "Thiết kế"));
-        allServices.add(new ServiceItem(R.drawable.image33, "Sửa chữa tủ lạnh", "Liên hệ", "4.3", "58", "Sửa chữa"));
-        allServices.add(new ServiceItem(R.drawable.image33, "Chụp ảnh", "300.000đ", "4.4", "364", "Chụp Ảnh"));
-        allServices.add(new ServiceItem(R.drawable.image33, "Makeup", "Liên hệ", "4.8", "207", "Khác"));
-        allServices.add(new ServiceItem(R.drawable.image33, "Sửa điều hòa", "Liên hệ", "4.8", "9", "Sửa chữa"));
+        allServices.add(new ServiceItem(
+                R.drawable.image33,
+                "Gia sư Tiếng Anh",
+                "150.000đ",
+                "4.5",
+                "102",
+                "Gia sư",
+                "Dạy tiếng Anh cho học sinh cấp 2, luyện thi vào 10, giao tiếp cơ bản. Kinh nghiệm 3 năm, tận tâm, hỗ trợ bài tập về nhà.",
+                "Quận Thanh Xuân, Hà Nội",
+                "Các buổi tối trong tuần, 18h-21h",
+                "20"
+        ));
 
-        // Gán tất cả dịch vụ ban đầu
-        adapter = new ServiceAdapter(this, new ArrayList<>(allServices));
+        allServices.add(new ServiceItem(
+                R.drawable.image33,
+                "Gia sư Toán",
+                "130.000đ",
+                "4.3",
+                "271",
+                "Gia sư",
+                "Gia sư Toán từ lớp 6-12, chuyên luyện thi chuyển cấp, giải toán tư duy logic. Có giáo trình riêng phù hợp từng học sinh.",
+                "Quận Cầu Giấy, Hà Nội",
+                "Thứ 2-6, 17h-20h",
+                "35"
+        ));
+
+        allServices.add(new ServiceItem(
+                R.drawable.image33,
+                "Gia sư Văn",
+                "130.000đ",
+                "4.4",
+                "67",
+                "Gia sư",
+                "Ôn luyện Văn theo chương trình phổ thông, dạy viết văn nghị luận, văn sáng tạo, hỗ trợ soạn bài và làm đề.",
+                "Quận Đống Đa, Hà Nội",
+                "Thứ 7 & Chủ nhật, 8h-11h",
+                "18"
+        ));
+
+        allServices.add(new ServiceItem(
+                R.drawable.image33,
+                "Thiết kế",
+                "Liên hệ",
+                "4.7",
+                "50",
+                "Thiết kế",
+                "Thiết kế poster, banner, logo, chỉnh sửa ảnh/video chuyên nghiệp cho doanh nghiệp và cá nhân.",
+                "Toàn Hà Nội (Làm online hoặc tại văn phòng)",
+                "Làm việc giờ hành chính hoặc theo yêu cầu",
+                "22"
+        ));
+
+        allServices.add(new ServiceItem(
+                R.drawable.image33,
+                "Sửa chữa tủ lạnh",
+                "Liên hệ",
+                "4.3",
+                "58",
+                "Sửa chữa",
+                "Sửa chữa, bảo dưỡng tủ lạnh các hãng. Cam kết sửa đúng bệnh, có bảo hành và hỗ trợ 24/7.",
+                "Khu vực nội thành Hà Nội",
+                "Từ 7h00 đến 21h00 hàng ngày",
+                "17"
+        ));
+
+        allServices.add(new ServiceItem(
+                R.drawable.image33,
+                "Chụp ảnh",
+                "300.000đ",
+                "4.4",
+                "364",
+                "Chụp Ảnh",
+                "Nhận chụp ảnh cá nhân, gia đình, sự kiện, khai trương, kỷ yếu. Ảnh chỉnh sửa chuyên nghiệp, giao file nhanh.",
+                "Toàn Hà Nội",
+                "Linh hoạt theo lịch khách hàng",
+                "49"
+        ));
+
+        allServices.add(new ServiceItem(
+                R.drawable.image33,
+                "Makeup",
+                "Liên hệ",
+                "4.8",
+                "207",
+                "Khác",
+                "Makeup dự tiệc, cưới hỏi, chụp ảnh, trang điểm cá nhân. Đến tận nhà theo yêu cầu.",
+                "Quận Hai Bà Trưng, Hoàn Kiếm, Đống Đa",
+                "Từ 6h00 đến 22h00 hàng ngày",
+                "33"
+        ));
+
+        allServices.add(new ServiceItem(
+                R.drawable.image33,
+                "Sửa điều hòa",
+                "Liên hệ",
+                "4.8",
+                "9",
+                "Sửa chữa",
+                "Sửa chữa điều hòa tại nhà, vệ sinh, nạp gas, thay thế linh kiện chính hãng. Có mặt nhanh trong 60 phút.",
+                "Khu vực Cầu Giấy, Thanh Xuân, Hoàng Mai",
+                "Từ 8h00 đến 20h00",
+                "5"
+        ));
+
+        // Tạo adapter có click
+        adapter = new ServiceAdapter(this, new ArrayList<>(allServices), service -> {
+            Intent intent = new Intent(MainCustomer.this, ServiceDetailActivity.class);
+            intent.putExtra("imageResId", service.getImageResId());
+            intent.putExtra("title", service.getTitle());
+            intent.putExtra("desc", service.getDesc());
+            intent.putExtra("category", service.getCategory());
+            intent.putExtra("area", service.getArea());
+            intent.putExtra("price", service.getPrice());
+            intent.putExtra("time", service.getWorkTime());
+            intent.putExtra("contact", service.getContact());
+            intent.putExtra("rating", service.getRating());
+            intent.putExtra("count", service.getReviewCount());
+            startActivity(intent);
+        });
+
         recyclerView.setAdapter(adapter);
 
-        // Xử lý chọn danh mục
+        // Lọc theo spinner
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedCategory = parent.getItemAtPosition(position).toString();
-
                 if (selectedCategory.equals("Tất cả")) {
                     adapter.updateData(new ArrayList<>(allServices));
                 } else {
@@ -79,6 +188,6 @@ public class MainCustomer extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
-}
 
+}
 

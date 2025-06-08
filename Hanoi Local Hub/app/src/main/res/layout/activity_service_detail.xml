@@ -32,7 +32,6 @@
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="12dp"
-            android:background="@drawable/bg_image_placeholder"
             android:scaleType="centerInside"/>
 
         <TextView
