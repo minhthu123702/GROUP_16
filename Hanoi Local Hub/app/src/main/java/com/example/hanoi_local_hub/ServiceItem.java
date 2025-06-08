@@ -11,6 +11,8 @@ public class ServiceItem {
     private final String area;        // Khu vực phục vụ
     private final String workTime;    // Giờ làm việc
     private final String reviewCount; // Số người đánh giá
+    private final String phone;       // Số điện thoại liên hệ
+    private final String email;       // Email liên hệ
 
     public ServiceItem(
             int imageResId,
@@ -22,7 +24,9 @@ public class ServiceItem {
             String desc,
             String area,
             String workTime,
-            String reviewCount
+            String reviewCount,
+            String phone,
+            String email
     ) {
         this.imageResId = imageResId;
         this.title = title;
@@ -34,6 +38,8 @@ public class ServiceItem {
         this.area = area;
         this.workTime = workTime;
         this.reviewCount = reviewCount;
+        this.phone = phone;
+        this.email = email;
     }
 
     // Getter methods
@@ -47,4 +53,6 @@ public class ServiceItem {
     public String getArea() { return area; }
     public String getWorkTime() { return workTime; }
     public String getReviewCount() { return reviewCount; }
+    public String getPhone() { return phone; }
+    public String getEmail() { return email; }
 }
