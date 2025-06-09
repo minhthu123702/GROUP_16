@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainAdmin extends ComponentActivity {
-//hi
+
     private RecyclerView recyclerView;
     private UserAdapter adapter;
     private List<User> userList;
@@ -48,7 +48,7 @@ public class MainAdmin extends ComponentActivity {
                 adapter.removeUser(position);
             }
         });
-
+//hi
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
