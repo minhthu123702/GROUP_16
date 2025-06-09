@@ -54,7 +54,9 @@ public class MainCustomer extends AppCompatActivity {
                 "Dạy tiếng Anh cho học sinh cấp 2, luyện thi vào 10, giao tiếp cơ bản. Kinh nghiệm 3 năm, tận tâm, hỗ trợ bài tập về nhà.",
                 "Quận Thanh Xuân, Hà Nội",
                 "Các buổi tối trong tuần, 18h-21h",
-                "20"
+                "20",
+                "0987654321",                 // Số điện thoại
+                "tienganh@localhub.vn"        // Email
         ));
 
         allServices.add(new ServiceItem(
@@ -67,7 +69,9 @@ public class MainCustomer extends AppCompatActivity {
                 "Gia sư Toán từ lớp 6-12, chuyên luyện thi chuyển cấp, giải toán tư duy logic. Có giáo trình riêng phù hợp từng học sinh.",
                 "Quận Cầu Giấy, Hà Nội",
                 "Thứ 2-6, 17h-20h",
-                "35"
+                "35",
+                "0911223344",
+                "toan@localhub.vn"
         ));
 
         allServices.add(new ServiceItem(
@@ -80,7 +84,9 @@ public class MainCustomer extends AppCompatActivity {
                 "Ôn luyện Văn theo chương trình phổ thông, dạy viết văn nghị luận, văn sáng tạo, hỗ trợ soạn bài và làm đề.",
                 "Quận Đống Đa, Hà Nội",
                 "Thứ 7 & Chủ nhật, 8h-11h",
-                "18"
+                "18",
+                "0977554433",
+                "van@localhub.vn"
         ));
 
         allServices.add(new ServiceItem(
@@ -93,7 +99,9 @@ public class MainCustomer extends AppCompatActivity {
                 "Thiết kế poster, banner, logo, chỉnh sửa ảnh/video chuyên nghiệp cho doanh nghiệp và cá nhân.",
                 "Toàn Hà Nội (Làm online hoặc tại văn phòng)",
                 "Làm việc giờ hành chính hoặc theo yêu cầu",
-                "22"
+                "22",
+                "0933888777",
+                "thietke@localhub.vn"
         ));
 
         allServices.add(new ServiceItem(
@@ -106,7 +114,9 @@ public class MainCustomer extends AppCompatActivity {
                 "Sửa chữa, bảo dưỡng tủ lạnh các hãng. Cam kết sửa đúng bệnh, có bảo hành và hỗ trợ 24/7.",
                 "Khu vực nội thành Hà Nội",
                 "Từ 7h00 đến 21h00 hàng ngày",
-                "17"
+                "17",
+                "0966888999",
+                "tulanh@localhub.vn"
         ));
 
         allServices.add(new ServiceItem(
@@ -119,7 +129,9 @@ public class MainCustomer extends AppCompatActivity {
                 "Nhận chụp ảnh cá nhân, gia đình, sự kiện, khai trương, kỷ yếu. Ảnh chỉnh sửa chuyên nghiệp, giao file nhanh.",
                 "Toàn Hà Nội",
                 "Linh hoạt theo lịch khách hàng",
-                "49"
+                "49",
+                "0944556677",
+                "chupanh@localhub.vn"
         ));
 
         allServices.add(new ServiceItem(
@@ -132,7 +144,9 @@ public class MainCustomer extends AppCompatActivity {
                 "Makeup dự tiệc, cưới hỏi, chụp ảnh, trang điểm cá nhân. Đến tận nhà theo yêu cầu.",
                 "Quận Hai Bà Trưng, Hoàn Kiếm, Đống Đa",
                 "Từ 6h00 đến 22h00 hàng ngày",
-                "33"
+                "33",
+                "0922334455",
+                "makeup@localhub.vn"
         ));
 
         allServices.add(new ServiceItem(
@@ -145,8 +159,11 @@ public class MainCustomer extends AppCompatActivity {
                 "Sửa chữa điều hòa tại nhà, vệ sinh, nạp gas, thay thế linh kiện chính hãng. Có mặt nhanh trong 60 phút.",
                 "Khu vực Cầu Giấy, Thanh Xuân, Hoàng Mai",
                 "Từ 8h00 đến 20h00",
-                "5"
+                "5",
+                "0977999666",
+                "dieuhoa@localhub.vn"
         ));
+
 
         // Tạo adapter có click
         adapter = new ServiceAdapter(this, new ArrayList<>(allServices), service -> {
@@ -161,6 +178,8 @@ public class MainCustomer extends AppCompatActivity {
             intent.putExtra("contact", service.getContact());
             intent.putExtra("rating", service.getRating());
             intent.putExtra("count", service.getReviewCount());
+            intent.putExtra("phone", service.getPhone());
+            intent.putExtra("email", service.getEmail());
             startActivity(intent);
         });
 
