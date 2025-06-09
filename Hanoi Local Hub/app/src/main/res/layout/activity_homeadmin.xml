@@ -4,6 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- THÔNG TIN USER (GHÉP VÀO ĐÂY) -->
+
+
     <!-- HEADER SEARCH -->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -40,11 +43,14 @@
             android:layout_height="match_parent"
             android:background="#296191"
             app:srcCompat="@drawable/vector" />
-    </RelativeLayout>
 
-    <!-- DANH SÁCH NGƯỜI DÙNG -->
+    </RelativeLayout>
+<!--    <include-->
+<!--        layout="@layout/item_user"-->
+<!--        android:id="@+id/itemUser"/>-->
+    <!-- DANH SÁCH NGƯỜI DÙNG (DÙNG 1 RECYCLERVIEW LÀ ĐỦ) -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rcvUser"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
