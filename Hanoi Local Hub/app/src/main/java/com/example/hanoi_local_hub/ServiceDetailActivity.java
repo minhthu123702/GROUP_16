@@ -1,6 +1,7 @@
 package com.example.hanoi_local_hub;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Button;
@@ -46,5 +47,29 @@ public class ServiceDetailActivity extends AppCompatActivity {
         textContact.setText("Đã có " + (contact != null ? contact : "0") + " người liên hệ");
         textRating.setText(rating + " ★");
         textCount.setText(count + " người đánh giá");
+        ImageView btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
+        Button btnContact = findViewById(R.id.btnContact);
+        btnContact.setOnClickListener(v -> showContactDialog());
     }
+    private void showContactDialog() {
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_contact_info, null);
+
+        TextView txtContactDetail = dialogView.findViewById(R.id.txtContactDetail);
+
+        // Lấy phone, email từ intent truyền qua
+        String phone = getIntent().getStringExtra("phone");
+        String email = getIntent().getStringExtra("email");
+
+        txtContactDetail.setText(
+                "• Thông tin liên hệ:\nSố điện thoại: " + phone + "\nEmail: " + email
+        );
+
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setCancelable(true)
+                .show();
+    }
+
 }
+
