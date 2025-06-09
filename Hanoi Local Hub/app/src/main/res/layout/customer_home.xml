@@ -58,7 +58,6 @@
 
     <!-- RecyclerView -->
 
-    <!-- Bottom Navigation -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewServices"
         android:layout_width="0dp"
