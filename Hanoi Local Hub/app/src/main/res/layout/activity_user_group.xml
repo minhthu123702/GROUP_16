@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF">
+
+    <!-- Thanh tiêu đề hoặc nút menu, avatar như frame 2 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#296191"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="32dp" />
+
+    <Button
+        android:id="@+id/btnSupplier"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_button_group"
+        android:backgroundTint="#F6F5F5"
+        android:text="Quản lý nhà cung cấp"
+        android:textColor="#296191"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnCustomer"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_button_group"
+        android:backgroundTint="#AED7F8"
+        android:text="Quản lý khách hàng"
+        android:textColor="#296191"
+        android:textSize="18sp" />
+</LinearLayout>
