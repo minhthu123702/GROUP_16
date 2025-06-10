@@ -12,7 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="#296191">
-
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Quay lại"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back" />
         <EditText
             android:id="@+id/edtSearch"
             android:layout_width="0dp"
@@ -32,16 +41,7 @@
             android:drawableEnd="@drawable/search"/>
 
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="Quay lại"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_search" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
