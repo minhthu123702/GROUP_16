@@ -8,27 +8,33 @@
     <!-- HEADER SEARCH -->
 
     <!-- DANH SÁCH NGƯỜI DÙNG -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="#296191">
+
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_width="40dp"
+            android:visibility="visible"
             android:layout_height="40dp"
-            android:background="@android:color/transparent"
+            android:layout_marginStart="10dp"
             android:contentDescription="Quay lại"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back" />
+            android:background="#296191"
+            android:src="@drawable/back" />
+<!--hi-->
         <EditText
             android:id="@+id/edtSearch"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="42dp"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="42dp"
             android:background="@android:color/white"
+            android:drawableEnd="@drawable/search"
             android:hint="Tìm kiếm"
             android:paddingLeft="16dp"
             android:paddingRight="8dp"
@@ -37,11 +43,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imageButton"
-            app:layout_constraintTop_toTopOf="parent"
-            android:drawableEnd="@drawable/search"/>
-
-
-
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
