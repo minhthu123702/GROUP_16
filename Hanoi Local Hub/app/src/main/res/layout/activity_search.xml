@@ -106,16 +106,16 @@
     </LinearLayout>
 
     <!-- Danh sách & Xem thêm -->
-<androidx.recyclerview.widget.RecyclerView
-android:id="@+id/recyclerHistory"
-android:layout_width="match_parent"
-android:layout_height="0dp"
-android:layout_weight="1"
-android:background="#FFF"
-android:paddingTop="4dp"
-android:paddingBottom="4dp"
-android:clipToPadding="false"
-android:overScrollMode="never"/>
+    <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerHistory"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:background="#FFF"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:clipToPadding="false"
+    android:overScrollMode="never"/>
 
 <TextView
 android:id="@+id/txtSeeMore"
