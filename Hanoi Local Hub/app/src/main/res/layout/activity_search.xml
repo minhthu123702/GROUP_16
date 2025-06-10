@@ -117,14 +117,14 @@
     android:clipToPadding="false"
     android:overScrollMode="never"/>
 
-<TextView
-android:id="@+id/txtSeeMore"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Xem thêm"
-android:textColor="#222"
-android:textSize="15sp"
-android:gravity="center"
-android:layout_gravity="center_horizontal"
-android:padding="12dp"/>
+    <TextView
+    android:id="@+id/txtSeeMore"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Xem thêm"
+    android:textColor="#222"
+    android:textSize="15sp"
+    android:gravity="center"
+    android:layout_gravity="center_horizontal"
+    android:padding="12dp"/>
     </LinearLayout>
