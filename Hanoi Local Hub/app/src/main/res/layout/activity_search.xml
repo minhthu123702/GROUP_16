@@ -107,7 +107,7 @@
 
     <!-- Danh sách & Xem thêm -->
     <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/recyclerHistory"
+        android:id="@+id/recyclerHistory"
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1"
@@ -118,7 +118,7 @@
     android:overScrollMode="never"/>
 
     <TextView
-    android:id="@+id/txtSeeMore"
+        android:id="@+id/txtSeeMore"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Xem thêm"
