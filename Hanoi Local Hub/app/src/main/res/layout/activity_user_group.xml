@@ -19,8 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="16dp"
-        android:background="@drawable/vector"
-        android:backgroundTint="#F6F5F5"
+        android:backgroundTint="#AED7F8"
         android:text="Quản lý nhà cung cấp"
         android:textColor="#296191"
         android:textSize="18sp" />
@@ -30,7 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="16dp"
-        android:background="@drawable/vector"
         android:backgroundTint="#AED7F8"
         android:text="Quản lý khách hàng"
         android:textColor="#296191"
