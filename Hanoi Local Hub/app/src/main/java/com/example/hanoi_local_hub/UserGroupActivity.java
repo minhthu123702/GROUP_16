@@ -20,7 +20,7 @@ public class UserGroupActivity extends AppCompatActivity {
 
         btnCustomer.setOnClickListener(v -> {
             // Chuyển sang activity quản lý khách hàng
-            Intent intent = new Intent(UserGroupActivity.this, AdminManagerActivity.class);
+            Intent intent = new Intent(UserGroupActivity.this, AdminManagerCustomersActivity.class);
             startActivity(intent);
         });
     }

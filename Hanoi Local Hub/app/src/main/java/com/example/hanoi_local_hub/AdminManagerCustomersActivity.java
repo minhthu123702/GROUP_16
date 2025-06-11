@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminManagerActivity extends ComponentActivity {
+public class AdminManagerCustomersActivity extends ComponentActivity {
 
     private RecyclerView recyclerView;
     private UserAdapter adapter;
@@ -20,7 +20,7 @@ public class AdminManagerActivity extends ComponentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_manager_admin);
+        setContentView(R.layout.activity_manager_customers_admin);
 
 
         recyclerView = findViewById(R.id.rcvUser);
