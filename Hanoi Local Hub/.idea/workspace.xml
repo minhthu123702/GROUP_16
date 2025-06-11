@@ -20,7 +20,7 @@
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_manager_admin.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_manager_customers_admin.xml">
         <config>
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
         </config>
@@ -42,7 +42,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a16d3b34-89fd-4307-8cb0-2856bc3e1075" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/AdminProfileActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/MainMenuActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/UserGroupActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/UserGroupActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_group.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_group.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,7 +284,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/AdminManagerActivity.java</url>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/AdminManagerCustomersActivity.java</url>
           <line>37</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>

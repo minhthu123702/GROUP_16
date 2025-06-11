@@ -1,36 +1,45 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF">
-
-    <!-- Thanh tiêu đề hoặc nút menu, avatar như frame 2 -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="#296191"/>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="32dp" />
+    android:background="#FFFFFF">
 
     <Button
-        android:id="@+id/btnSupplier"
-        android:layout_width="match_parent"
+        android:id="@+id/btnManagerCustomers"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_margin="16dp"
-        android:backgroundTint="#AED7F8"
-        android:text="Quản lý nhà cung cấp"
-        android:textColor="#296191"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/btnCustomer"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="16dp"
-        android:backgroundTint="#AED7F8"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#275F8A"
         android:text="Quản lý khách hàng"
-        android:textColor="#296191"
-        android:textSize="18sp" />
-</LinearLayout>
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="136dp" />
+
+    <Button
+        android:id="@+id/btnManagerStaff"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="#275F8A"
+        android:text="Quản lý nhân viên"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="@id/btnManagerCustomers"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/btnManagerCustomers"
+        app:layout_constraintTop_toBottomOf="@id/btnManagerCustomers" />
+
+    <!-- Nút Quản lý Admin -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
