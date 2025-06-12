@@ -1,4 +1,5 @@
 package com.example.hanoi_local_hub;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,40 +9,46 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    Button btnQuanLyNguoiDung, btnBaoCaoThongKe, btnQuanLyDichVu;
-    ImageView imgProfile;
+    Button btnUserManagement, btnStatistics, btnServiceManagement;
+    ImageView ivUserProfile, ivMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu); // Layout bạn gửi lúc đầu tiên
+        setContentView(R.layout.activity_main_menu);
 
-        // Ánh xạ các button từ layout
-        btnQuanLyNguoiDung = findViewById(R.id.button8);
-        btnBaoCaoThongKe = findViewById(R.id.button9);
-        btnQuanLyDichVu = findViewById(R.id.button7);
-        imgProfile = findViewById(R.id.imageView2);
+        // Ánh xạ các views theo đúng ID layout mới nhất
+        btnUserManagement = findViewById(R.id.buttonUserManagement);
+        btnStatistics = findViewById(R.id.buttonStatistics);
+        btnServiceManagement = findViewById(R.id.buttonServiceManagement);
+        ivUserProfile = findViewById(R.id.ivUser);
+        ivMenu = findViewById(R.id.ivMenu);
 
-        // Ấn Quản lý người dùng sang UserGroupActivity
-        btnQuanLyNguoiDung.setOnClickListener(v -> {
+        // Chuyển đến trang Quản lý người dùng
+        btnUserManagement.setOnClickListener(v -> {
             Intent intent = new Intent(MainMenuActivity.this, UserGroupActivity.class);
             startActivity(intent);
         });
 
-        // Ấn Báo cáo thống kê (nếu bạn muốn xử lý sau)
-        btnBaoCaoThongKe.setOnClickListener(v -> {
-            // TODO: thêm xử lý màn hình báo cáo thống kê
+        // Chuyển đến trang Báo cáo thống kê
+        btnStatistics.setOnClickListener(v -> {
+            // TODO: thêm logic chuyển sang trang Báo cáo thống kê
         });
 
-        // Ấn Quản lý danh mục dịch vụ (nếu bạn muốn xử lý sau)
-        btnQuanLyDichVu.setOnClickListener(v -> {
-            // TODO: thêm xử lý màn hình danh mục dịch vụ
+        // Chuyển đến trang Quản lý danh mục dịch vụ
+        btnServiceManagement.setOnClickListener(v -> {
+            // TODO: thêm logic chuyển sang trang Quản lý danh mục dịch vụ
         });
 
-        // Ấn vào icon profile (avatar), sang AdminProfileActivity
-        imgProfile.setOnClickListener(v -> {
+        // Chuyển đến trang Admin profile khi ấn vào avatar người dùng
+        ivUserProfile.setOnClickListener(v -> {
             Intent intent = new Intent(MainMenuActivity.this, AdminProfileActivity.class);
             startActivity(intent);
+        });
+
+        // Hiển thị menu (3 gạch)
+        ivMenu.setOnClickListener(v -> {
+            // TODO: thêm xử lý hiển thị navigation drawer hoặc menu
         });
     }
 }

@@ -1,12 +1,12 @@
 package com.example.hanoi_local_hub;
 
-
-
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.activity.ComponentActivity;
 import androidx.activity.EdgeToEdge;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +21,6 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_manager_customers_admin);
-
 
         recyclerView = findViewById(R.id.rcvUser);
 
@@ -39,17 +38,25 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
         userList.add(new User("Đặng Văn K", "778899", R.drawable.avatar1, false));
         userList.add(new User("Bùi Thị X", "556677", R.drawable.avatar1, true));
         userList.add(new User("Đặng Văn Z", "778899", R.drawable.avatar1, false));
-        // Thêm user khác nếu cần
 
-        // Khởi tạo adapter
+        // Khởi tạo adapter với sự kiện xóa
         adapter = new UserAdapter(userList, new UserAdapter.OnUserClickListener() {
             @Override
             public void onDeleteClick(User user, int position) {
                 adapter.removeUser(position);
             }
         });
-//hi
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Chuyển về MainMenuActivity khi ấn nút back
+        Intent intent = new Intent(AdminManagerCustomersActivity.this, MainMenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
     }
 }
