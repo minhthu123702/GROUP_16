@@ -14,7 +14,7 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admindashboard); // Layout bạn gửi lúc đầu tiên
+        setContentView(R.layout.activity_main_menu); // Layout bạn gửi lúc đầu tiên
 
         // Ánh xạ các button từ layout
         btnQuanLyNguoiDung = findViewById(R.id.button8);
