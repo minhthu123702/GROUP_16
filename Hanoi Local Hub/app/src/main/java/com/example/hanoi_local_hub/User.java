@@ -1,26 +1,64 @@
 package com.example.hanoi_local_hub;
 
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable {
     private String name;
     private String code;
-    private int avatarResId;   // Resource ID của ảnh avatar, ví dụ: R.drawable.avatar1
-    private boolean isOnline;  // Trạng thái online: true = online, false = offline
+    private String birth;
+    private String gender;
+    private String address;
+    private String email;
+    private String phone;
+    private String registerDate;
+    private int avatarResId;
+    private boolean isOnline;
 
-    public User(String name, String code, int avatarResId, boolean isOnline) {
+    public User(String name, String code, String birth, String gender, String address,
+                String email, String phone, String registerDate, int avatarResId, boolean isOnline) {
         this.name = name;
         this.code = code;
+        this.birth = birth;
+        this.gender = gender;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.registerDate = registerDate;
         this.avatarResId = avatarResId;
         this.isOnline = isOnline;
     }
 
-    // Getter
+    // Getters
     public String getName() {
         return name;
     }
 
     public String getCode() {
         return code;
+    }
+
+    public String getBirth() {
+        return birth;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getRegisterDate() {
+        return registerDate;
     }
 
     public int getAvatarResId() {
@@ -31,13 +69,37 @@ public class User {
         return isOnline;
     }
 
-    // Setter nếu cần
+    // Setters
     public void setName(String name) {
         this.name = name;
     }
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public void setBirth(String birth) {
+        this.birth = birth;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setRegisterDate(String registerDate) {
+        this.registerDate = registerDate;
     }
 
     public void setAvatarResId(int avatarResId) {

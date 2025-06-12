@@ -4,41 +4,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFF">
 
     <!-- Header -->
     <TextView
         android:id="@+id/tvHeader"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:background="#276C91"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Hồ sơ khách hàng"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textColor="#00070F"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:gravity="center"
+        android:textAlignment="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
     <!-- Nút back -->
     <ImageView
         android:id="@+id/btnBack"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/back"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="36dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Quay lại"
+        android:padding="8dp"
+        android:src="@drawable/back1"
         app:layout_constraintStart_toStartOf="parent"
-        app:tint="#FFFFFF" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Nội dung chính -->
+    <!-- Avatar -->
+    <ImageView
+        android:id="@+id/imgAvatar"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:src="@drawable/avatar_admin"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Nội dung -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/tvHeader"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgAvatar"
+        app:layout_constraintBottom_toTopOf="@id/imgWave"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -46,287 +59,126 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_horizontal"
             android:padding="20dp">
 
-            <!-- Avatar -->
-            <ImageView
-                android:id="@+id/imgAvatar"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/avatar1"
-                android:scaleType="centerCrop"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/avatar1" />
-
-            <!-- Tên dưới avatar -->
+            <!-- Họ và tên -->
             <TextView
                 android:id="@+id/tvFullName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="David Trần"
+                android:text="Nguyễn Văn A"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Họ và tên -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Họ và tên:"
-                    android:textSize="14sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="David Trần"
-                    android:textSize="14sp"
-                    android:textColor="#000000"
-                    android:background="@drawable/bg_field_light"
-                    android:padding="8dp"
-                    android:layout_marginStart="8dp"/>
-            </LinearLayout>
-
-            <!-- Giới tính -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Giới tính:"
-                    android:textSize="14sp"
-                    android:textColor="#000000" />
-
-                <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/radioMale"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nam" />
-
-                    <RadioButton
-                        android:id="@+id/radioFemale"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nữ"
-                        android:layout_marginStart="16dp" />
-                </RadioGroup>
-            </LinearLayout>
+                android:textColor="#222"
+                android:padding="10dp"
+                android:background="#FFF2F2"/>
 
             <!-- Ngày sinh -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvBirth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Ngày sinh:"
-                    android:textSize="14sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="10/9/2002"
-                    android:textSize="14sp"
-                    android:textColor="#000000"
-                    android:background="@drawable/bg_field_light"
-                    android:padding="8dp"
-                    android:layout_marginStart="8dp"/>
-            </LinearLayout>
+                android:text="10/9/2002"
+                android:textSize="16sp"
+                android:textColor="#222"
+                android:padding="10dp"
+                android:background="#FFF2F2"/>
 
             <!-- Quê quán -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Quê quán:"
-                    android:textSize="14sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Hà Nội"
-                    android:textSize="14sp"
-                    android:textColor="#000000"
-                    android:background="@drawable/bg_field_light"
-                    android:padding="8dp"
-                    android:layout_marginStart="8dp"/>
-            </LinearLayout>
+                android:text="Hà Nội"
+                android:textSize="16sp"
+                android:textColor="#222"
+                android:padding="10dp"
+                android:background="#FFF2F2"/>
 
             <!-- Email -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Email:"
-                    android:textSize="14sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="lkt@gmail.com"
-                    android:textSize="14sp"
-                    android:textColor="#000000"
-                    android:background="@drawable/bg_field_light"
-                    android:padding="8dp"
-                    android:layout_marginStart="8dp"/>
-            </LinearLayout>
+                android:text="email@example.com"
+                android:textSize="16sp"
+                android:textColor="#222"
+                android:padding="10dp"
+                android:background="#FFF2F2"/>
 
             <!-- Số điện thoại -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Số điện thoại:"
-                    android:textSize="14sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0123456789"
-                    android:textSize="14sp"
-                    android:textColor="#000000"
-                    android:background="@drawable/bg_field_light"
-                    android:padding="8dp"
-                    android:layout_marginStart="8dp"/>
-            </LinearLayout>
+                android:text="0123456789"
+                android:textSize="16sp"
+                android:textColor="#222"
+                android:padding="10dp"
+                android:background="#FFF2F2"/>
 
             <!-- Mã khách hàng -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Mã khách hàng:"
-                    android:textSize="14sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="111111"
-                    android:textSize="14sp"
-                    android:textColor="#000000"
-                    android:background="@drawable/bg_field_light"
-                    android:padding="8dp"
-                    android:layout_marginStart="8dp"/>
-            </LinearLayout>
+                android:text="KH001"
+                android:textSize="16sp"
+                android:textColor="#222"
+                android:padding="10dp"
+                android:background="#FFF2F2"/>
 
             <!-- Ngày đăng ký -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:gravity="center_vertical">
+                android:text="22/2/2025"
+                android:textSize="16sp"
+                android:textColor="#222"
+                android:padding="10dp"
+                android:background="#FFF2F2"/>
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Ngày đăng ký:"
-                    android:textSize="14sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="22/2/2025"
-                    android:textSize="14sp"
-                    android:textColor="#000000"
-                    android:background="@drawable/bg_field_light"
-                    android:padding="8dp"
-                    android:layout_marginStart="8dp"/>
-            </LinearLayout>
-
-            <!-- Nút Ẩn và Xoá -->
-            <LinearLayout
+            <!-- Giới tính -->
+            <RadioGroup
+                android:id="@+id/rgGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="24dp">
-
-                <Button
-                    android:id="@+id/btnHide"
-                    android:layout_width="100dp"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/radioMale"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ẩn"
-                    android:backgroundTint="#4CAEF8"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginEnd="16dp" />
-
-                <Button
-                    android:id="@+id/btnDelete"
-                    android:layout_width="100dp"
+                    android:text="Nam" />
+                <RadioButton
+                    android:id="@+id/radioFemale"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Xoá"
-                    android:backgroundTint="#FF4444"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
+                    android:text="Nữ"
+                    android:layout_marginStart="16dp"/>
+            </RadioGroup>
 
-            <!-- Sóng dưới -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="32dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/bg_wave" />
+            <!-- Nút chức năng -->
+            <Button
+                android:id="@+id/btnHide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ẩn" />
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xoá" />
         </LinearLayout>
     </ScrollView>
+
+    <!-- Hình nền sóng -->
+    <ImageView
+        android:id="@+id/imgWave"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_wave"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
