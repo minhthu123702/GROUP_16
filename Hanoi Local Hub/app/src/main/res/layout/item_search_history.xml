@@ -33,7 +33,7 @@
         android:contentDescription="Xoá" />
 </LinearLayout>
     <!-- Gạch ngang mờ dưới item -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#D0D0D0"/>
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="#D0D0D0"/>-->
