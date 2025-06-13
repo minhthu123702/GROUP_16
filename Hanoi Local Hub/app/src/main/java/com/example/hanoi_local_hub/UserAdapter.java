@@ -1,5 +1,7 @@
 package com.example.hanoi_local_hub;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.net.CookieHandler;
 import java.util.List;
 
 // UserAdapter.java
@@ -48,7 +51,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.imgStatus.setImageResource(
                 user.isOnline() ? R.drawable.green_dot : R.drawable.red_dot
         );
-
+        holder.btnDisplay.setOnClickListener(v -> {
+            Context context = null;
+            Intent intent = new Intent(context, CustomerProfileActivity.class);
+            CookieHandler userList = null;
+            intent.putExtra("user", userList.get(position));
+            context.startActivity(intent);
+        });
         // Xử lý nút xóa
         holder.btnDelete.setOnClickListener(v -> {
             if (onUserClickListener != null) {
@@ -72,7 +81,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         ImageView imgAvatar, imgStatus;
         TextView txtName, txtCode;
         ImageButton btnDelete;
-
+        ImageButton btnDisplay;
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             imgAvatar = itemView.findViewById(R.id.imgAvatar);
@@ -80,6 +89,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             txtName = itemView.findViewById(R.id.txtName);
             txtCode = itemView.findViewById(R.id.txtCode);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            btnDisplay = itemView.findViewById(R.id.btnDisplay);
         }
     }
 }
