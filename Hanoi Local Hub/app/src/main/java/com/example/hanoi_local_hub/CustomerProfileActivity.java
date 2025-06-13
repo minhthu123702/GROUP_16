@@ -1,10 +1,12 @@
 package com.example.hanoi_local_hub;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -17,8 +19,10 @@ public class CustomerProfileActivity extends AppCompatActivity {
     private RadioButton rbMale, rbFemale;
     private ImageView btnBack, imgAvatar;
     private TextView tvName;
-    private Button btnHide, btnDelete;
+    private ImageButton btnDisplay, btnDelete;
+    private Button btnHide;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +41,9 @@ public class CustomerProfileActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         imgAvatar = findViewById(R.id.imgAvatar);
         tvName = findViewById(R.id.tvName);
-//        btnHide = findViewById(R.id.btnHide);
-//        btnDelete = findViewById(R.id.btnDelete);
+        btnDisplay = findViewById(R.id.btnDisplay);
+        btnDelete = findViewById(R.id.btnDelete);
+        btnHide = findViewById(R.id.btnHide);
 
         // Nhận dữ liệu User từ Intent
         Intent intent = getIntent();

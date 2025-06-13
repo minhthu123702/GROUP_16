@@ -129,9 +129,6 @@ public class User implements Serializable {
     }
     public interface OnUserClickListener {
         void onUserClick(User user);
-        holder.itemView.setOnClickListener(v -> {
-            listener.onUserClick(userList.get(position));
-        });
     }
 
 }

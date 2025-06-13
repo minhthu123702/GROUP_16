@@ -1,3 +1,4 @@
+// AdminManagerCustomersActivity.java
 package com.example.hanoi_local_hub;
 
 import android.content.Intent;
@@ -39,8 +40,15 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
         userList.add(new User("Bùi Thị X", "556677", R.drawable.avatar1, true));
         userList.add(new User("Đặng Văn Z", "778899", R.drawable.avatar1, false));
 
-        // Khởi tạo adapter với sự kiện xóa
-        adapter = new UserAdapter(userList, new UserAdapter.OnUserClickListener() {
+        // Khởi tạo adapter với sự kiện hiển thị và xóa
+        adapter = new UserAdapter(this, userList, new UserAdapter.OnUserClickListener() {
+            @Override
+            public void onUserClick(User user) {
+                Intent intent = new Intent(AdminManagerCustomersActivity.this, CustomerProfileActivity.class);
+                intent.putExtra("user", user); // phải đúng khóa "user"
+                startActivity(intent);
+            }
+
             @Override
             public void onDeleteClick(User user, int position) {
                 adapter.removeUser(position);
@@ -53,7 +61,6 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
 
     @Override
     public void onBackPressed() {
-        // Chuyển về MainMenuActivity khi ấn nút back
         Intent intent = new Intent(AdminManagerCustomersActivity.this, MainMenuActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
