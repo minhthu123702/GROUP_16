@@ -14,8 +14,10 @@ public class User implements Serializable {
     private int avatarResId;
     private boolean isOnline;
 
+    // Full constructor
     public User(String name, String code, String birth, String gender, String address,
-                String email, String phone, String registerDate, int avatarResId, boolean isOnline) {
+                String email, String phone, String registerDate,
+                int avatarResId, boolean isOnline) {
         this.name = name;
         this.code = code;
         this.birth = birth;
@@ -26,6 +28,22 @@ public class User implements Serializable {
         this.registerDate = registerDate;
         this.avatarResId = avatarResId;
         this.isOnline = isOnline;
+    }
+
+    // Optional: constructor rút gọn (nếu bạn chỉ cần tên, mã, avatar, trạng thái)
+    public User(String name, String code, int avatarResId, boolean isOnline) {
+        this.name = name;
+        this.code = code;
+        this.avatarResId = avatarResId;
+        this.isOnline = isOnline;
+
+        // Gán giá trị mặc định để tránh lỗi null
+        this.birth = "";
+        this.gender = "";
+        this.address = "";
+        this.email = "";
+        this.phone = "";
+        this.registerDate = "";
     }
 
     // Getters
@@ -109,4 +127,11 @@ public class User implements Serializable {
     public void setOnline(boolean online) {
         isOnline = online;
     }
+    public interface OnUserClickListener {
+        void onUserClick(User user);
+        holder.itemView.setOnClickListener(v -> {
+            listener.onUserClick(userList.get(position));
+        });
+    }
+
 }
