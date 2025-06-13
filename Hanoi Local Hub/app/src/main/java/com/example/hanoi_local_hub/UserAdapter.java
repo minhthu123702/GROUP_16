@@ -1,7 +1,6 @@
 package com.example.hanoi_local_hub;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,14 +48,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 user.isOnline() ? R.drawable.green_dot : R.drawable.red_dot
         );
 
-        // Xử lý nút hiển thị chi tiết
+        // Nút hiển thị thông tin người dùng (nút con mắt)
         holder.btnDisplay.setOnClickListener(v -> {
             if (onUserClickListener != null) {
-                onUserClickListener.onUserClick(user);
+                onUserClickListener.onUserClick(users.get(position));
             }
         });
 
-        // Xử lý nút xóa
+        // Nút xoá người dùng
         holder.btnDelete.setOnClickListener(v -> {
             if (onUserClickListener != null) {
                 onUserClickListener.onDeleteClick(user, holder.getAdapterPosition());

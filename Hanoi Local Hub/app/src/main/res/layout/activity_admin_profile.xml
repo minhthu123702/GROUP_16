@@ -279,7 +279,8 @@
         app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/btnlogout"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:contentDescription="Đăng xuất"

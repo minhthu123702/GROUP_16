@@ -1,6 +1,5 @@
 package com.example.hanoi_local_hub;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,16 +18,16 @@ public class CustomerProfileActivity extends AppCompatActivity {
     private RadioButton rbMale, rbFemale;
     private ImageView btnBack, imgAvatar;
     private TextView tvName;
-    private ImageButton btnDisplay, btnDelete;
+    private Button btnDelete;
+
     private Button btnHide;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_profile);
 
-        // Ánh xạ các thành phần giao diện
+        // Ánh xạ giao diện
         tvFullName = findViewById(R.id.tvFullName);
         tvBirth = findViewById(R.id.tvBirth);
         tvHome = findViewById(R.id.tvHome);
@@ -41,11 +40,10 @@ public class CustomerProfileActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         imgAvatar = findViewById(R.id.imgAvatar);
         tvName = findViewById(R.id.tvName);
-        btnDisplay = findViewById(R.id.btnDisplay);
         btnDelete = findViewById(R.id.btnDelete);
         btnHide = findViewById(R.id.btnHide);
 
-        // Nhận dữ liệu User từ Intent
+        // Nhận dữ liệu từ Intent
         Intent intent = getIntent();
         User user = (User) intent.getSerializableExtra("user");
 
@@ -67,10 +65,15 @@ public class CustomerProfileActivity extends AppCompatActivity {
             }
         }
 
-        // Xử lý nút quay lại
-        btnBack.setOnClickListener(v -> finish());
+        // Nút quay lại
+        btnBack.setOnClickListener(v -> {
+            Intent intent1 = new Intent(CustomerProfileActivity.this, AdminManagerCustomersActivity.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent1);
+            finish();
+        });
 
-        // Xử lý nút Ẩn (ẩn số điện thoại)
+        // Nút ẩn/hiện số điện thoại
         btnHide.setOnClickListener(v -> {
             if (tvPhone.getVisibility() == View.VISIBLE) {
                 tvPhone.setVisibility(View.GONE);
@@ -81,7 +84,7 @@ public class CustomerProfileActivity extends AppCompatActivity {
             }
         });
 
-        // Xử lý nút Xoá (trả kết quả xoá về activity trước)
+        // Nút xoá người dùng
         btnDelete.setOnClickListener(v -> {
             Intent result = new Intent();
             result.putExtra("deleted", true);

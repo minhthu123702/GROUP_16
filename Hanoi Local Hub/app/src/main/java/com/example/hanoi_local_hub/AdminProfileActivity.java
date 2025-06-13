@@ -2,18 +2,20 @@ package com.example.hanoi_local_hub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AdminProfileActivity extends AppCompatActivity {
-
+private ImageButton btnlogout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_profile);
-
+        btnlogout=findViewById(R.id.btnlogout);
         // Xử lý nút back
         ImageView btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(v -> onBackPressed());
@@ -28,6 +30,12 @@ public class AdminProfileActivity extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             // Có thể gọi finishAffinity() nếu muốn đóng hết activity
+        });
+        btnlogout.setOnClickListener(v -> {
+            Intent intent1 = new Intent(AdminProfileActivity.this, AdminManagerCustomersActivity.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent1);
+            finish();
         });
     }
 }

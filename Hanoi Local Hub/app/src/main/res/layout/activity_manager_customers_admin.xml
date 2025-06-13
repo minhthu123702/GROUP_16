@@ -15,7 +15,7 @@
         android:background="#296191">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/btnBack1"
             android:layout_width="40dp"
             android:visibility="visible"
             android:layout_height="40dp"
@@ -42,7 +42,7 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageButton"
+            app:layout_constraintStart_toEndOf="@id/btnBack1"
             app:layout_constraintTop_toTopOf="parent" />
 
 

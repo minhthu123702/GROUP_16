@@ -30,6 +30,7 @@
         <activity android:name=".AdminProfileActivity" />
         <activity android:name=".UserGroupActivity" />
         <activity android:name=".AdminManagerCustomersActivity" />
+        <activity android:name=".CustomerProfileActivity" />
 
     </application>
 

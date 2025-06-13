@@ -3,6 +3,10 @@ package com.example.hanoi_local_hub;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+
 import androidx.activity.ComponentActivity;
 import androidx.activity.EdgeToEdge;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +20,7 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
     private RecyclerView recyclerView;
     private UserAdapter adapter;
     private List<User> userList;
+    private ImageButton btnback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +29,7 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
         setContentView(R.layout.activity_manager_customers_admin);
 
         recyclerView = findViewById(R.id.rcvUser);
-
+        btnback = findViewById(R.id.btnBack1);
         // Khởi tạo danh sách user mẫu
         userList = new ArrayList<>();
         userList.add(new User("Nguyễn Văn A", "123456", R.drawable.avatar1, true));
@@ -44,11 +49,11 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
         adapter = new UserAdapter(this, userList, new UserAdapter.OnUserClickListener() {
             @Override
             public void onUserClick(User user) {
+                Log.d("DEBUG", "Click user: " + user.getName());
                 Intent intent = new Intent(AdminManagerCustomersActivity.this, CustomerProfileActivity.class);
-                intent.putExtra("user", user); // phải đúng khóa "user"
+                intent.putExtra("user", user);
                 startActivity(intent);
             }
-
             @Override
             public void onDeleteClick(User user, int position) {
                 adapter.removeUser(position);
@@ -57,6 +62,13 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        btnback.setOnClickListener(v -> {
+            Intent intent1 = new Intent(AdminManagerCustomersActivity.this, MainMenuActivity.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent1);
+            finish();
+        });
     }
 
     @Override
