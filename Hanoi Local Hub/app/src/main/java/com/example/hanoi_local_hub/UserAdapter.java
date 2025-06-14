@@ -48,14 +48,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 user.isOnline() ? R.drawable.green_dot : R.drawable.red_dot
         );
 
-        // Nút hiển thị thông tin người dùng (nút con mắt)
         holder.btnDisplay.setOnClickListener(v -> {
             if (onUserClickListener != null) {
-                onUserClickListener.onUserClick(users.get(position));
+                onUserClickListener.onUserClick(user);
             }
         });
 
-        // Nút xoá người dùng
         holder.btnDelete.setOnClickListener(v -> {
             if (onUserClickListener != null) {
                 onUserClickListener.onDeleteClick(user, holder.getAdapterPosition());
@@ -71,6 +69,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void removeUser(int position) {
         users.remove(position);
         notifyItemRemoved(position);
+    }
+
+    // ✅ Hàm này để cập nhật danh sách được lọc (ví dụ: tìm kiếm theo mã)
+    public void setFilteredList(List<User> filteredList) {
+        this.users = filteredList;
+        notifyDataSetChanged();
     }
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {

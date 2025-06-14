@@ -1,10 +1,11 @@
-// AdminManagerCustomersActivity.java
 package com.example.hanoi_local_hub;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.activity.ComponentActivity;
@@ -21,6 +22,7 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
     private UserAdapter adapter;
     private List<User> userList;
     private ImageButton btnback;
+    private EditText edtSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,9 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
 
         recyclerView = findViewById(R.id.rcvUser);
         btnback = findViewById(R.id.btnBack1);
-        // Khởi tạo danh sách user mẫu
+        edtSearch = findViewById(R.id.edtSearch);
+
+        // Danh sách user mẫu
         userList = new ArrayList<>();
         userList.add(new User("Nguyễn Văn A", "123456", R.drawable.avatar1, true));
         userList.add(new User("Trần Thị B", "654321", R.drawable.avatar1, false));
@@ -45,7 +49,7 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
         userList.add(new User("Bùi Thị X", "556677", R.drawable.avatar1, true));
         userList.add(new User("Đặng Văn Z", "778899", R.drawable.avatar1, false));
 
-        // Khởi tạo adapter với sự kiện hiển thị và xóa
+        // Adapter và sự kiện click/xóa
         adapter = new UserAdapter(this, userList, new UserAdapter.OnUserClickListener() {
             @Override
             public void onUserClick(User user) {
@@ -54,21 +58,45 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
                 intent.putExtra("user", user);
                 startActivity(intent);
             }
+
             @Override
             public void onDeleteClick(User user, int position) {
                 adapter.removeUser(position);
             }
         });
 
-        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
 
+        // Tìm kiếm theo mã khách hàng
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterUsersByCode(s.toString());
+            }
+
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void afterTextChanged(Editable s) {}
+        });
+
+        // Nút quay về
         btnback.setOnClickListener(v -> {
-            Intent intent1 = new Intent(AdminManagerCustomersActivity.this, MainMenuActivity.class);
-            intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent1);
+            Intent intent = new Intent(AdminManagerCustomersActivity.this, MainMenuActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
             finish();
         });
+    }
+
+    // Lọc user theo mã
+    private void filterUsersByCode(String query) {
+        List<User> filteredList = new ArrayList<>();
+        for (User user : userList) {
+            if (user.getCode().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(user);
+            }
+        }
+        adapter.setFilteredList(filteredList);
     }
 
     @Override
