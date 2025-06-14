@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
             String email = edtEmail.getText().toString().trim();
             String password = edtPassword.getText().toString().trim();
 
-            // Kiểm tra thông tin (ví dụ đơn giản)
             if (email.equals("admin@gmail.com") && password.equals("123456")) {
                 // Đăng nhập thành công → chuyển sang MainMenuActivity
                 Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
