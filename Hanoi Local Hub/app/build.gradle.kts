@@ -40,6 +40,14 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.firebase.storage)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
+    androidTestImplementation(libs.ext.junit)// Google Sign-In (for authentication with Google accounts)
+    implementation("com.google.android.gms:play-services-auth:21.1.1")
+
+    // (Optional) For using Firebase UI Auth (pre-built UI for authentication)
+    implementation("com.firebaseui:firebase-ui-auth:8.0.2")
     androidTestImplementation(libs.espresso.core)
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    implementation("com.google.firebase:firebase-auth")
+    // Firebase Bill of Materials (BoM) - Quản lý phiên bản các thư viện Firebase
+
 }
