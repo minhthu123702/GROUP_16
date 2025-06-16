@@ -16,7 +16,7 @@
 
         <!-- Activity đầu tiên chạy ứng dụng, thường là màn hình đăng nhập -->
         <activity
-            android:name=".MainCustomer"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,13 +25,13 @@
         </activity>
 
         <!-- Khai báo đầy đủ các Activity còn lại -->
-     <activity android:name=".MainMenuActivity" />-->
+     <activity android:name=".MainMenuActivity" />
 <!--        <activity android:name=".MainAdmin" />-->
         <activity android:name=".AdminProfileActivity" />
         <activity android:name=".UserGroupActivity" />
         <activity android:name=".AdminManagerCustomersActivity" />
         <activity android:name=".CustomerProfileActivity" />
-
+<activity android:name=".MainCustomer"/>
         <activity android:name=".ServiceDetailActivity" />
         <activity android:name=".SearchActivity" />
     </application>

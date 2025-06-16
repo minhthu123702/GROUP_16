@@ -28,11 +28,15 @@ public class MainActivity extends AppCompatActivity {
             String password = edtPassword.getText().toString().trim();
 
             if (email.equals("admin@gmail.com") && password.equals("123456")) {
-                // Đăng nhập thành công → chuyển sang MainMenuActivity
+                // Admin account
                 Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
                 startActivity(intent);
-                finish(); // không cho quay lại login
-            } else {
+                finish();
+            } else if (email.equals("user") && password.equals("123")) {
+                Intent intent = new Intent(MainActivity.this, MainCustomer.class);
+                startActivity(intent);
+                finish();
+            } {
                 Toast.makeText(MainActivity.this, "Sai email hoặc mật khẩu!", Toast.LENGTH_SHORT).show();
             }
         });
