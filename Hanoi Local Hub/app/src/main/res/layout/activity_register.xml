@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Đăng ký"
+        android:text="Tạo tài khoản"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -32,61 +32,67 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Phone Number Input -->
+    <!-- Email Input -->
     <EditText
-        android:id="@+id/phoneEditText"
+        android:id="@+id/emailEditText"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/rounded_edittext_background"
-        android:hint="Nhập số điện thoại"
-        android:inputType="number"
+        android:hint="Nhập email"
+        android:inputType="textEmailAddress"
         android:padding="12dp"
-        android:textIsSelectable="true"
-        android:focusable="true"
-        android:clickable="true"
         android:textColorHint="#A0A0A0"
         app:layout_constraintTop_toBottomOf="@id/registerTitleTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
-
-    <!-- Bottom Buttons -->
-    <Button
-        android:id="@+id/backButton"
+    <!-- Password Input -->
+    <EditText
+        android:id="@+id/passwordEditText"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginStart="48dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="48dp"
-        android:backgroundTint="#A8D8FF"
-        android:text="Quay lại"
-        android:textAllCaps="false"
-        android:textColor="#1976D2"
-        android:textSize="16sp"
-        app:cornerRadius="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/rounded_edittext_background"
+        android:hint="Nhập mật khẩu"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:textColorHint="#A0A0A0"
+        app:layout_constraintTop_toBottomOf="@id/emailEditText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/sendCodeButton" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Register Button -->
     <Button
-        android:id="@+id/sendCodeButton"
+        android:id="@+id/registerButton"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#42A5F5"
-        android:text="Gửi mã"
+        android:text="Đăng ký"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:cornerRadius="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/backButton"
+        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
+        app:layout_constraintStart_toStartOf="@id/passwordEditText"
+        app:layout_constraintEnd_toEndOf="@id/passwordEditText"/>
+
+    <!-- Back to Login Text -->
+    <TextView
+        android:id="@+id/backToLoginTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đã có tài khoản? Đăng nhập"
+        android:layout_marginTop="24dp"
+        android:textColor="#1976D2"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/registerButton"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

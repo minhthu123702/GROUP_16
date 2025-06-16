@@ -1,129 +1,101 @@
-package com.example.hanoi_local_hub.auth; // Thay thế bằng package của bạn
+package com.example.hanoi_local_hub.auth;// Đảm bảo package của bạn là đúng
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hanoi_local_hub.R;
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthOptions;
-import com.google.firebase.auth.PhoneAuthProvider;
-
-import java.util.concurrent.TimeUnit;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText phoneEditText;
-    private Button sendCodeButton;
+    private EditText emailEditText, passwordEditText;
+    private Button registerButton;
+    private TextView backToLoginTextView;
     private FirebaseAuth mAuth;
-    private String mVerificationId;
-    private PhoneAuthProvider.ForceResendingToken mResendToken;
-    private static final String TAG = "RegisterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        phoneEditText = findViewById(R.id.phoneEditText);
-        sendCodeButton = findViewById(R.id.sendCodeButton);
-        Button backButton = findViewById(R.id.backButton);
-        phoneEditText.setOnClickListener(v -> {
-            phoneEditText.requestFocus();
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(phoneEditText, InputMethodManager.SHOW_IMPLICIT);
-        });
         // Khởi tạo Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        sendCodeButton.setOnClickListener(v -> {
-            String phoneNumber = phoneEditText.getText().toString().trim();
+        // Ánh xạ các thành phần giao diện
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        registerButton = findViewById(R.id.registerButton);
+        backToLoginTextView = findViewById(R.id.backToLoginTextView);
 
-            // Kiểm tra xem số điện thoại có hợp lệ không
-            // Thêm mã quốc gia (+84) nếu người dùng chưa nhập
-            if (phoneNumber.isEmpty() || phoneNumber.length() < 9) {
-                phoneEditText.setError("Số điện thoại không hợp lệ");
-                phoneEditText.requestFocus();
-                return;
-            }
-            if (!phoneNumber.startsWith("+84")) {
-                phoneNumber = "+84" + phoneNumber.substring(phoneNumber.length() - 9);
-            }
-
-            // Bắt đầu quá trình xác thực số điện thoại
-            sendVerificationCode(phoneNumber);
+        registerButton.setOnClickListener(v -> {
+            // Gọi hàm để xử lý đăng ký
+            registerUser();
         });
 
-        backButton.setOnClickListener(v -> finish());
+        backToLoginTextView.setOnClickListener(v -> {
+            // Đóng activity hiện tại để quay về màn hình đăng nhập
+            finish();
+        });
     }
 
-    private void sendVerificationCode(String phoneNumber) {
-        // Hiển thị loading, vô hiệu hóa nút bấm
-        sendCodeButton.setEnabled(false);
-        Toast.makeText(this, "Đang gửi mã xác thực...", Toast.LENGTH_SHORT).show();
+    private void registerUser() {
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
 
-        PhoneAuthOptions options =
-                PhoneAuthOptions.newBuilder(mAuth)
-                        .setPhoneNumber(phoneNumber)       // Số điện thoại cần xác thực
-                        .setTimeout(60L, TimeUnit.SECONDS) // Thời gian chờ
-                        .setActivity(this)                 // Activity hiện tại
-                        .setCallbacks(mVerificationCallbacks) // Callback xử lý kết quả
-                        .build();
-        PhoneAuthProvider.verifyPhoneNumber(options);
+        // --- Kiểm tra đầu vào ---
+        if (TextUtils.isEmpty(email)) {
+            emailEditText.setError("Email không được để trống.");
+            emailEditText.requestFocus();
+            return;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailEditText.setError("Vui lòng nhập email hợp lệ.");
+            emailEditText.requestFocus();
+            return;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            passwordEditText.setError("Mật khẩu không được để trống.");
+            passwordEditText.requestFocus();
+            return;
+        }
+
+        if (password.length() < 6) {
+            passwordEditText.setError("Mật khẩu phải có ít nhất 6 ký tự.");
+            passwordEditText.requestFocus();
+            return;
+        }
+
+        // --- Bắt đầu tạo tài khoản với Firebase ---
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Đăng ký thành công
+                        Toast.makeText(RegisterActivity.this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
+
+                        // Bạn có thể gửi email xác thực tại đây (tùy chọn)
+                        // FirebaseUser user = mAuth.getCurrentUser();
+                        // user.sendEmailVerification();
+
+                        // Chuyển người dùng đến màn hình chính hoặc màn hình đăng nhập
+                        // Ví dụ: chuyển về màn hình đăng nhập để họ đăng nhập lại
+                        finish();
+
+                    } else {
+                        // Đăng ký thất bại, hiển thị thông báo lỗi
+                        Toast.makeText(RegisterActivity.this, "Tạo tài khoản thất bại: " + task.getException().getMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
     }
-
-    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks
-            mVerificationCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-        @Override
-        public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
-            // Callback này được gọi khi xác thực thành công tự động (hiếm gặp)
-            // Hoặc sau khi người dùng nhập đúng mã OTP ở màn hình tiếp theo
-            Log.d(TAG, "onVerificationCompleted:" + credential);
-            // Bạn có thể đăng nhập người dùng tại đây
-            // signInWithPhoneAuthCredential(credential);
-        }
-
-        @Override
-        public void onVerificationFailed(@NonNull FirebaseException e) {
-            // Callback này được gọi khi có lỗi xảy ra
-            Log.w(TAG, "onVerificationFailed", e);
-            Toast.makeText(RegisterActivity.this, "Xác thực thất bại: " + e.getMessage(), Toast.LENGTH_LONG).show();
-            // Kích hoạt lại nút bấm
-            sendCodeButton.setEnabled(true);
-        }
-
-        @Override
-        public void onCodeSent(@NonNull String verificationId,
-                               @NonNull PhoneAuthProvider.ForceResendingToken token) {
-            // Callback này được gọi khi mã OTP đã được gửi thành công
-            Log.d(TAG, "onCodeSent:" + verificationId);
-            Toast.makeText(RegisterActivity.this, "Đã gửi mã xác thực.", Toast.LENGTH_SHORT).show();
-
-            // Lưu lại verificationId và token để sử dụng ở màn hình xác thực OTP
-            mVerificationId = verificationId;
-            mResendToken = token;
-
-            // Kích hoạt lại nút bấm
-            sendCodeButton.setEnabled(true);
-
-            // Chuyển sang màn hình nhập OTP
-            // Bạn cần tạo một Activity mới (ví dụ: VerifyOtpActivity)
-            Intent intent = new Intent(RegisterActivity.this, VerifyOtpActivity.class);
-            intent.putExtra("verificationId", mVerificationId);
-            startActivity(intent);
-        }
-    };
 }
