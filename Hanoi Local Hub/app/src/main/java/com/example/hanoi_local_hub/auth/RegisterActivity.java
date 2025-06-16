@@ -1,9 +1,11 @@
 package com.example.hanoi_local_hub.auth; // Thay thế bằng package của bạn
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -38,7 +40,11 @@ public class RegisterActivity extends AppCompatActivity {
         phoneEditText = findViewById(R.id.phoneEditText);
         sendCodeButton = findViewById(R.id.sendCodeButton);
         Button backButton = findViewById(R.id.backButton);
-
+        phoneEditText.setOnClickListener(v -> {
+            phoneEditText.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(phoneEditText, InputMethodManager.SHOW_IMPLICIT);
+        });
         // Khởi tạo Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 

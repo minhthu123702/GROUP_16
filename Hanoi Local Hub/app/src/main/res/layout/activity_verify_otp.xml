@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".auth.RegisterActivity">
+    tools:context=".VerifyOtpActivity">
 
     <!-- Logo -->
     <ImageView
@@ -18,9 +18,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Title "Đăng ký" -->
+    <!-- Title "Nhập mã xác thực" -->
     <TextView
-        android:id="@+id/registerTitleTextView"
+        android:id="@+id/verifyTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -32,23 +32,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Phone Number Input -->
+    <!-- OTP Input -->
     <EditText
-        android:id="@+id/phoneEditText"
+        android:id="@+id/otpEditText"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/rounded_edittext_background"
-        android:hint="Nhập số điện thoại"
+        android:hint="Nhập mã OTP"
         android:inputType="number"
         android:padding="12dp"
         android:textIsSelectable="true"
         android:focusable="true"
         android:clickable="true"
         android:textColorHint="#A0A0A0"
-        app:layout_constraintTop_toBottomOf="@id/registerTitleTextView"
+        android:textAlignment="center"
+        android:letterSpacing="0.2"
+        app:layout_constraintTop_toBottomOf="@id/verifyTitleTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -70,17 +72,17 @@
         app:cornerRadius="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/sendCodeButton" />
+        app:layout_constraintEnd_toStartOf="@id/verifyButton" />
 
     <Button
-        android:id="@+id/sendCodeButton"
+        android:id="@+id/verifyButton"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="48dp"
         android:backgroundTint="#42A5F5"
-        android:text="Gửi mã"
+        android:text="Xác nhận"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="16sp"

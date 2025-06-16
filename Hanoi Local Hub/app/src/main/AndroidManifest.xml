@@ -31,6 +31,10 @@
         <activity android:name=".UserGroupActivity" />
         <activity android:name=".AdminManagerCustomersActivity" />
         <activity android:name=".CustomerProfileActivity" />
+        <activity android:name=".auth.RegisterActivity" />
+
+
+        <activity android:name=".auth.VerifyOtpActivity" />
 <activity android:name=".MainCustomer"/>
         <activity android:name=".ServiceDetailActivity" />
         <activity android:name=".SearchActivity" />
