@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@android:color/white"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="8dp"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imgAvatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/avatar1"
+        android:scaleType="centerCrop"
+        android:background="@drawable/backrgound" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên User"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+            <ImageView
+                android:id="@+id/imgStatus"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/green_dot"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/txtCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mã: 123456"
+            android:textSize="13sp"/>
+    </LinearLayout>
+    <ImageButton
+        android:id="@+id/btnDisplay"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_eye"
+        android:contentDescription="Xem thông tin"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent" />
+
+
+    <ImageButton
+        android:id="@+id/btnDelete"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/delete"/>
+
+</LinearLayout>

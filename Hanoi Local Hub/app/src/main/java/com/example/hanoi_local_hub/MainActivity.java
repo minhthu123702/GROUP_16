@@ -1,24 +1,40 @@
 package com.example.hanoi_local_hub;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText edtEmail, edtPassword;
+    private Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        setContentView(R.layout.activity_login); // Đây là layout bạn vừa gửi
+
+        // Ánh xạ
+        edtEmail = findViewById(R.id.editTextText);
+        edtPassword = findViewById(R.id.editTextNumberPassword);
+        btnLogin = findViewById(R.id.button);
+
+        btnLogin.setOnClickListener(v -> {
+            String email = edtEmail.getText().toString().trim();
+            String password = edtPassword.getText().toString().trim();
+
+            if (email.equals("admin@gmail.com") && password.equals("123456")) {
+                // Đăng nhập thành công → chuyển sang MainMenuActivity
+                Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
+                startActivity(intent);
+                finish(); // không cho quay lại login
+            } else {
+                Toast.makeText(MainActivity.this, "Sai email hoặc mật khẩu!", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
