@@ -14,6 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.hanoi_local_hub.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -21,14 +25,16 @@ public class RegisterActivity extends AppCompatActivity {
     private Button registerButton;
     private TextView backToLoginTextView;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db; // Thêm biến cho Firestore
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Khởi tạo Firebase Auth
+        // Khởi tạo Firebase Auth và Firestore
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         // Ánh xạ các thành phần giao diện
         emailEditText = findViewById(R.id.emailEditText);
@@ -80,17 +86,33 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Đăng ký thành công
-                        Toast.makeText(RegisterActivity.this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
+                        // Đăng ký thành công, bây giờ lưu thông tin người dùng vào Firestore
+                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                        if (firebaseUser != null) {
+                            String userId = firebaseUser.getUid();
 
-                        // Bạn có thể gửi email xác thực tại đây (tùy chọn)
-                        // FirebaseUser user = mAuth.getCurrentUser();
-                        // user.sendEmailVerification();
+                            // Tạo một đối tượng Map để lưu thông tin
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("uid", userId);
+                            user.put("email", email);
+                            // Bạn có thể thêm các trường mặc định khác ở đây
+                            // user.put("name", "New User");
+                            // user.put("createdAt", FieldValue.serverTimestamp());
 
-                        // Chuyển người dùng đến màn hình chính hoặc màn hình đăng nhập
-                        // Ví dụ: chuyển về màn hình đăng nhập để họ đăng nhập lại
-                        finish();
-
+                            // Lưu thông tin người dùng vào collection "users"
+                            db.collection("users").document(userId)
+                                    .set(user)
+                                    .addOnSuccessListener(aVoid -> {
+                                        // Lưu vào database thành công
+                                        Toast.makeText(RegisterActivity.this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
+                                        // Chuyển về màn hình đăng nhập
+                                        finish();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        // Lưu vào database thất bại
+                                        Toast.makeText(RegisterActivity.this, "Lỗi khi lưu thông tin: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                    });
+                        }
                     } else {
                         // Đăng ký thất bại, hiển thị thông báo lỗi
                         Toast.makeText(RegisterActivity.this, "Tạo tài khoản thất bại: " + task.getException().getMessage(),
