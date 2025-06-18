@@ -5,10 +5,10 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,11 +17,14 @@ import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerHistory;
+    private RecyclerView recyclerHistory, recyclerResults;
     private TextView txtSeeMore;
     private EditText edtKeyword;
     private SearchHistoryAdapter adapter;
+    private SearchResultAdapter resultAdapter;
     private List<String> historyList;
+    private List<ServiceItem> allServices;      // Lấy từ ServiceDataHolder
+    private List<ServiceItem> resultList = new ArrayList<>();
     private boolean isShowAll = false;
 
     @Override
@@ -30,19 +33,23 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         recyclerHistory = findViewById(R.id.recyclerHistory);
+        recyclerResults = findViewById(R.id.recyclerResults);
         txtSeeMore = findViewById(R.id.txtSeeMore);
         edtKeyword = findViewById(R.id.edtKeyword);
 
         // Nút back
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
 
-        // Demo lịch sử, có thể lấy từ SharedPreferences/DB
+        // Lấy danh sách dịch vụ chung
+        allServices = ServiceDataHolder.allServices;
+
+        // Lịch sử tìm kiếm mẫu
         historyList = new ArrayList<>();
         historyList.add("Thiết kế logo");
         historyList.add("Chụp ảnh");
         historyList.add("Sửa chữa");
 
-        // Khởi tạo adapter
+        // Adapter cho lịch sử
         adapter = new SearchHistoryAdapter(historyList, new SearchHistoryAdapter.OnDeleteClickListener() {
             @Override
             public void onDelete(int pos) {
@@ -53,18 +60,23 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onKeywordClick(int pos) {
-                // Khi bấm vào một dòng lịch sử, nhập lại vào EditText
                 edtKeyword.setText(historyList.get(pos));
-                edtKeyword.setSelection(edtKeyword.getText().length());
+                edtKeyword.setSelection(historyList.get(pos).length());
+                searchService(historyList.get(pos));
             }
         });
 
         recyclerHistory.setAdapter(adapter);
         recyclerHistory.setLayoutManager(new LinearLayoutManager(this));
 
+        // Adapter cho kết quả tìm kiếm (grid 2 cột)
+        recyclerResults.setLayoutManager(new GridLayoutManager(this, 2));
+        resultAdapter = new SearchResultAdapter(resultList);
+        recyclerResults.setAdapter(resultAdapter);
+
         updateSeeMore();
 
-        // Sự kiện tìm kiếm khi nhấn enter trên bàn phím
+        // Sự kiện tìm kiếm khi nhấn enter
         edtKeyword.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                     actionId == EditorInfo.IME_ACTION_DONE ||
@@ -73,7 +85,7 @@ public class SearchActivity extends AppCompatActivity {
                 String keyword = edtKeyword.getText().toString().trim();
                 if (!TextUtils.isEmpty(keyword)) {
                     addKeywordToHistory(keyword);
-                    // TODO: Xử lý tìm kiếm thực tế ở đây (ví dụ: load kết quả, chuyển màn...)
+                    searchService(keyword);
                 }
                 return true;
             }
@@ -95,20 +107,42 @@ public class SearchActivity extends AppCompatActivity {
 
     // Thêm từ khóa mới vào đầu lịch sử, không trùng nhau
     private void addKeywordToHistory(String keyword) {
-        historyList.remove(keyword); // Xóa nếu đã có (để tránh trùng)
-        historyList.add(0, keyword); // Thêm lên đầu
+        historyList.remove(keyword);
+        historyList.add(0, keyword);
         adapter.notifyDataSetChanged();
         updateSeeMore();
     }
 
-    // Ẩn/hiện "Xem thêm" tùy độ dài list
+    // Ẩn/hiện "Xem thêm" tùy độ dài list (chuẩn là > 3)
     private void updateSeeMore() {
-        txtSeeMore.setVisibility(historyList.size() > 10 ? TextView.VISIBLE : TextView.GONE);
-        // Khi xóa đến còn <=10 , thì luôn thu gọn lại
-        if (historyList.size() <= 10 && isShowAll) {
+        txtSeeMore.setVisibility(historyList.size() > 3 ? TextView.VISIBLE : TextView.GONE);
+        if (historyList.size() <= 3 && isShowAll) {
             isShowAll = false;
             adapter.setShowAll(false);
             txtSeeMore.setText("Xem thêm");
+        }
+    }
+
+    // Lọc & hiển thị danh sách kết quả tìm kiếm
+    private void searchService(String keyword) {
+        resultList.clear();
+        for (ServiceItem item : allServices) {
+            if (item.getTitle().toLowerCase().contains(keyword.toLowerCase())
+                    || item.getCategory().toLowerCase().contains(keyword.toLowerCase())) {
+                resultList.add(item);
+            }
+        }
+        resultAdapter.notifyDataSetChanged();
+
+        // Hiện kết quả, ẩn lịch sử nếu có kết quả
+        if (!resultList.isEmpty()) {
+            recyclerResults.setVisibility(RecyclerView.VISIBLE);
+            recyclerHistory.setVisibility(RecyclerView.GONE);
+            txtSeeMore.setVisibility(TextView.GONE);
+        } else {
+            recyclerResults.setVisibility(RecyclerView.GONE);
+            recyclerHistory.setVisibility(RecyclerView.VISIBLE);
+            updateSeeMore();
         }
     }
 }
