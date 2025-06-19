@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_user"
+        android:title="Quản lý người dùng"
+        android:icon="@drawable/profile"/>
+    <item android:id="@+id/nav_services"
+        android:title="Quản lý danh mục dịch vụ"
+        android:icon="@drawable/path_group"/>
+    <item android:id="@+id/nav_stats"
+        android:title="Thống kê"
+        android:icon="@drawable/chart"/>
+</menu>

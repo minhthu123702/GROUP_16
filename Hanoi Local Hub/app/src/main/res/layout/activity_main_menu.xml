@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Màn hình chính -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <!-- Thanh header màu xanh -->
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:background="#276C91"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Icon menu (3 gạch) -->
+        <ImageView
+            android:id="@+id/ivMenu"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:srcCompat="@drawable/menu"
+            android:padding="8dp"
+            app:tint="#FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/header"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp" />
+
+        <!-- Icon user -->
+        <ImageView
+            android:id="@+id/ivUser"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:srcCompat="@drawable/user"
+            android:padding="8dp"
+            app:tint="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/header"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="18dp" />
+
+        <!-- Nút Quản lý người dùng -->
+        <Button
+            android:id="@+id/buttonUserManagement"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:text="Quản lý người dùng"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:drawableTop="@drawable/profile"
+            android:drawablePadding="4dp"
+            android:backgroundTint="#AFD9FB"
+            app:cornerRadius="30dp"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="60dp" />
+
+        <!-- Nút Quản lý danh mục dịch vụ -->
+        <Button
+            android:id="@+id/buttonServiceManagement"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:text="Quản lý danh mục dịch vụ"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:drawableTop="@drawable/path_group"
+            android:drawablePadding="4dp"
+            android:backgroundTint="#AFD9FB"
+            app:cornerRadius="30dp"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="60dp" />
+
+        <!-- Nút Thống kê -->
+        <Button
+            android:id="@+id/buttonStatistics"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:text="Thống Kê"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:drawableTop="@drawable/chart"
+            android:drawablePadding="4dp"
+            android:backgroundTint="#AFD9FB"
+            app:cornerRadius="30dp"
+            app:layout_constraintTop_toBottomOf="@id/buttonUserManagement"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="40dp" />
+
+        <!-- Sóng nước -->
+        <ImageView
+            android:id="@+id/imgWave"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/bg_wave"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Menu trượt bên trái -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/menu_drawer"
+        android:background="#FFFFFF" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
