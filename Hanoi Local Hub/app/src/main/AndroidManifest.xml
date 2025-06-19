@@ -39,6 +39,4 @@
         <activity android:name=".SearchActivity" />
     </application>
 
-
-
 </manifest>
