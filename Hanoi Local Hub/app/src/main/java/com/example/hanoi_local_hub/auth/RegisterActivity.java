@@ -1,4 +1,4 @@
-package com.example.hanoi_local_hub.auth;// Đảm bảo package của bạn là đúng
+package com.example.hanoi_local_hub.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,30 +25,26 @@ public class RegisterActivity extends AppCompatActivity {
     private Button registerButton;
     private TextView backToLoginTextView;
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db; // Thêm biến cho Firestore
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Khởi tạo Firebase Auth và Firestore
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // Ánh xạ các thành phần giao diện
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         registerButton = findViewById(R.id.registerButton);
         backToLoginTextView = findViewById(R.id.backToLoginTextView);
 
         registerButton.setOnClickListener(v -> {
-            // Gọi hàm để xử lý đăng ký
             registerUser();
         });
 
         backToLoginTextView.setOnClickListener(v -> {
-            // Đóng activity hiện tại để quay về màn hình đăng nhập
             finish();
         });
     }
@@ -57,7 +53,6 @@ public class RegisterActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
-        // --- Kiểm tra đầu vào ---
         if (TextUtils.isEmpty(email)) {
             emailEditText.setError("Email không được để trống.");
             emailEditText.requestFocus();
@@ -82,11 +77,9 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        // --- Bắt đầu tạo tài khoản với Firebase ---
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Đăng ký thành công, bây giờ lưu thông tin người dùng vào Firestore
                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
                         if (firebaseUser != null) {
                             String userId = firebaseUser.getUid();
@@ -95,26 +88,24 @@ public class RegisterActivity extends AppCompatActivity {
                             Map<String, Object> user = new HashMap<>();
                             user.put("uid", userId);
                             user.put("email", email);
-                            // Bạn có thể thêm các trường mặc định khác ở đây
-                            // user.put("name", "New User");
-                            // user.put("createdAt", FieldValue.serverTimestamp());
+                            // === CÁC DÒNG ĐƯỢC THÊM VÀO ===
+                            user.put("role", "user"); // Vai trò mặc định là 'user'
+                            user.put("providerStatus", "none"); // Trạng thái mặc định là 'none'
+                            // =============================
 
                             // Lưu thông tin người dùng vào collection "users"
                             db.collection("users").document(userId)
                                     .set(user)
                                     .addOnSuccessListener(aVoid -> {
-                                        // Lưu vào database thành công
                                         Toast.makeText(RegisterActivity.this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
-                                        // Chuyển về màn hình đăng nhập
+                                        // Tự động chuyển về màn hình đăng nhập sau khi thành công
                                         finish();
                                     })
                                     .addOnFailureListener(e -> {
-                                        // Lưu vào database thất bại
                                         Toast.makeText(RegisterActivity.this, "Lỗi khi lưu thông tin: " + e.getMessage(), Toast.LENGTH_LONG).show();
                                     });
                         }
                     } else {
-                        // Đăng ký thất bại, hiển thị thông báo lỗi
                         Toast.makeText(RegisterActivity.this, "Tạo tài khoản thất bại: " + task.getException().getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }
