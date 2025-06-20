@@ -1,5 +1,6 @@
 package com.example.hanoi_local_hub;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -40,7 +41,7 @@ public class SearchActivity extends AppCompatActivity {
         // Nút back
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
 
-        // Lấy danh sách dịch vụ chung
+        // Lấy danh sách dịch vụ
         allServices = ServiceDataHolder.allServices;
 
         // Lịch sử tìm kiếm mẫu
@@ -49,7 +50,7 @@ public class SearchActivity extends AppCompatActivity {
         historyList.add("Chụp ảnh");
         historyList.add("Sửa chữa");
 
-        // Adapter cho lịch sử
+        // Adapter cho lịch sử tìm kiếm
         adapter = new SearchHistoryAdapter(historyList, new SearchHistoryAdapter.OnDeleteClickListener() {
             @Override
             public void onDelete(int pos) {
@@ -60,33 +61,44 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onKeywordClick(int pos) {
-                edtKeyword.setText(historyList.get(pos));
-                edtKeyword.setSelection(historyList.get(pos).length());
-                searchService(historyList.get(pos));
+                String kw = historyList.get(pos);
+                edtKeyword.setText(kw);
+                edtKeyword.setSelection(kw.length());
+                searchService(kw);
             }
         });
-
         recyclerHistory.setAdapter(adapter);
         recyclerHistory.setLayoutManager(new LinearLayoutManager(this));
 
         // Adapter cho kết quả tìm kiếm (grid 2 cột)
         recyclerResults.setLayoutManager(new GridLayoutManager(this, 2));
-        resultAdapter = new SearchResultAdapter(resultList);
+        resultAdapter = new SearchResultAdapter(resultList, item -> {
+            // Xử lý khi click vào kết quả (chuyển sang ServiceDetailActivity)
+            Intent intent = new Intent(this, ServiceDetailActivity.class);
+            intent.putExtra("imageResId", item.getImageResId());
+            intent.putExtra("title", item.getTitle());
+            intent.putExtra("desc", item.getDesc());
+            intent.putExtra("category", item.getCategory());
+            intent.putExtra("area", item.getArea());
+            intent.putExtra("price", item.getPrice());
+            intent.putExtra("time", item.getWorkTime());
+            intent.putExtra("contact", item.getContact());
+            intent.putExtra("rating", item.getRating());
+            intent.putExtra("count", item.getReviewCount());
+            intent.putExtra("phone", item.getPhone());
+            intent.putExtra("email", item.getEmail());
+            startActivity(intent);
+        });
         recyclerResults.setAdapter(resultAdapter);
 
         updateSeeMore();
 
-        // Sự kiện tìm kiếm khi nhấn enter
+        // Sự kiện tìm kiếm khi nhấn enter hoặc click nút tìm
         edtKeyword.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                     actionId == EditorInfo.IME_ACTION_DONE ||
                     (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
-
-                String keyword = edtKeyword.getText().toString().trim();
-                if (!TextUtils.isEmpty(keyword)) {
-                    addKeywordToHistory(keyword);
-                    searchService(keyword);
-                }
+                triggerSearch();
                 return true;
             }
             return false;
@@ -94,7 +106,7 @@ public class SearchActivity extends AppCompatActivity {
 
         // Sự kiện lọc (nếu cần)
         findViewById(R.id.btnFilter).setOnClickListener(v -> {
-            // TODO: Hiển thị dialog lọc
+            // TODO: Hiển thị dialog lọc nâng cao
         });
 
         // Sự kiện "Xem thêm"
@@ -103,6 +115,18 @@ public class SearchActivity extends AppCompatActivity {
             adapter.setShowAll(isShowAll);
             txtSeeMore.setText(isShowAll ? "Thu gọn" : "Xem thêm");
         });
+    }
+
+    // Gọi khi muốn tìm kiếm theo keyword hiện tại
+    private void triggerSearch() {
+        String keyword = edtKeyword.getText().toString().trim();
+        if (!TextUtils.isEmpty(keyword)) {
+            addKeywordToHistory(keyword);
+            searchService(keyword);
+        } else {
+            // Nếu bỏ trống thì show lại lịch sử
+            showHistory();
+        }
     }
 
     // Thêm từ khóa mới vào đầu lịch sử, không trùng nhau
@@ -127,8 +151,11 @@ public class SearchActivity extends AppCompatActivity {
     private void searchService(String keyword) {
         resultList.clear();
         for (ServiceItem item : allServices) {
+            // Lọc theo tiêu đề, category, khu vực, mô tả,...
             if (item.getTitle().toLowerCase().contains(keyword.toLowerCase())
-                    || item.getCategory().toLowerCase().contains(keyword.toLowerCase())) {
+                    || item.getCategory().toLowerCase().contains(keyword.toLowerCase())
+                    || item.getDesc().toLowerCase().contains(keyword.toLowerCase())
+                    || item.getArea().toLowerCase().contains(keyword.toLowerCase())) {
                 resultList.add(item);
             }
         }
@@ -140,9 +167,15 @@ public class SearchActivity extends AppCompatActivity {
             recyclerHistory.setVisibility(RecyclerView.GONE);
             txtSeeMore.setVisibility(TextView.GONE);
         } else {
-            recyclerResults.setVisibility(RecyclerView.GONE);
-            recyclerHistory.setVisibility(RecyclerView.VISIBLE);
-            updateSeeMore();
+            // Nếu không có kết quả, hiện lại lịch sử
+            showHistory();
         }
+    }
+
+    // Hiện lại lịch sử tìm kiếm và ẩn kết quả
+    private void showHistory() {
+        recyclerResults.setVisibility(RecyclerView.GONE);
+        recyclerHistory.setVisibility(RecyclerView.VISIBLE);
+        updateSeeMore();
     }
 }
