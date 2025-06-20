@@ -25,7 +25,7 @@
         </activity>
 
         <!-- Khai báo đầy đủ các Activity còn lại -->
-     <activity android:name=".MainMenuActivity" />
+     <activity android:name=".MainAdminActivity" />
 <!--        <activity android:name=".MainAdmin" />-->
         <activity android:name=".AdminProfileActivity" />
         <activity android:name=".UserGroupActivity" />

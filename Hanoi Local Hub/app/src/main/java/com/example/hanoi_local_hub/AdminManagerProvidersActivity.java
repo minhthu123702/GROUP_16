@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminManagerCustomersActivity extends ComponentActivity {
+public class AdminManagerProvidersActivity extends ComponentActivity {
 
     private RecyclerView recyclerView;
     private UserAdapter adapter;
@@ -28,7 +28,7 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_manager_customers_admin);
+        setContentView(R.layout.activity_manager_providers_admin);
 
         recyclerView = findViewById(R.id.rcvUser);
         btnback = findViewById(R.id.btnBack1);
@@ -54,7 +54,7 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
             @Override
             public void onUserClick(User user) {
                 Log.d("DEBUG", "Click user: " + user.getName());
-                Intent intent = new Intent(AdminManagerCustomersActivity.this, CustomerProfileActivity.class);
+                Intent intent = new Intent(AdminManagerProvidersActivity.this, CustomerProfileActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
             }
@@ -81,7 +81,7 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
 
         // Nút quay về
         btnback.setOnClickListener(v -> {
-            Intent intent = new Intent(AdminManagerCustomersActivity.this, MainMenuActivity.class);
+            Intent intent = new Intent(AdminManagerProvidersActivity.this, MainAdminActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
             finish();
@@ -101,7 +101,8 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(AdminManagerCustomersActivity.this, MainMenuActivity.class);
+        super.onBackPressed();
+        Intent intent = new Intent(AdminManagerProvidersActivity.this, MainAdminActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
         finish();

@@ -2,7 +2,6 @@ package com.example.hanoi_local_hub;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,7 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainAdminActivity extends AppCompatActivity {
 
     Button btnUserManagement, btnStatistics, btnServiceManagement;
     ImageView ivUserProfile, ivMenu;
@@ -46,7 +45,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 int id = item.getItemId();
 
                 if (id == R.id.nav_user) {
-                    startActivity(new Intent(MainMenuActivity.this, UserGroupActivity.class));
+                    startActivity(new Intent(MainAdminActivity.this, UserGroupActivity.class));
                     return true;
                 }
 
@@ -65,7 +64,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         // Button chức năng chính: Quản lý người dùng
         btnUserManagement.setOnClickListener(v -> {
-            Intent intent = new Intent(MainMenuActivity.this, UserGroupActivity.class);
+            Intent intent = new Intent(MainAdminActivity.this, UserGroupActivity.class);
             startActivity(intent);
         });
 
