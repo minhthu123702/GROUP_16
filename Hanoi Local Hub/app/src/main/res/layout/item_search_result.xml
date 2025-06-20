@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="0dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     card_view:cardCornerRadius="18dp"
@@ -13,17 +14,22 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:padding="12dp">
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:background="@android:color/white">
 
-        <ImageView
+        <!-- Avatar bo tròn, dùng ShapeableImageView cho bo góc đẹp -->
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgAvatar"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
             android:src="@drawable/image33"
             android:scaleType="centerCrop"
+            />
 
-            android:clipToOutline="true" />
-        <!--            android:background="@drawable/bg_round_avatar" -->
+        <!-- Tiêu đề -->
         <TextView
             android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
@@ -33,24 +39,29 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:gravity="center"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="10dp"
+            android:maxLines="2"
+            android:ellipsize="end" />
 
+        <!-- Giá -->
         <TextView
             android:id="@+id/txtPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="150.000đ"
-            android:textColor="#444"
+            android:textColor="#276C91"
             android:textSize="14sp"
+            android:textStyle="bold"
             android:gravity="center"
-            android:layout_marginTop="2dp"/>
+            android:layout_marginTop="2dp" />
 
+        <!-- Đánh giá và lượt liên hệ + đánh giá -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="4dp">
+            android:layout_marginTop="6dp">
 
             <TextView
                 android:id="@+id/txtRating"
@@ -59,17 +70,18 @@
                 android:text="4.5 ★"
                 android:textColor="#F9A825"
                 android:textSize="13sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:drawablePadding="2dp"/>
 
             <TextView
                 android:id="@+id/txtContact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Đã liên lạc 102"
+                android:text="Đã liên lạc 102 | 20 đánh giá"
                 android:textColor="#888"
                 android:textSize="12sp"
-                android:layout_marginStart="8dp"/>
+                android:layout_marginStart="10dp"/>
         </LinearLayout>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>
-
