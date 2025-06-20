@@ -54,7 +54,7 @@ public class AdminManagerProvidersActivity extends ComponentActivity {
             @Override
             public void onUserClick(User user) {
                 Log.d("DEBUG", "Click user: " + user.getName());
-                Intent intent = new Intent(AdminManagerProvidersActivity.this, CustomerProfileActivity.class);
+                Intent intent = new Intent(AdminManagerProvidersActivity.this, ProviderProfileActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
             }

@@ -1,39 +1,42 @@
 package com.example.hanoi_local_hub;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ProviderProfileActivity {
+public class ProviderProfileActivity extends AppCompatActivity {
 
-    private EditText tvFullName, tvBirth, tvHome, tvEmail, tvPhone, tvCode, tvDate;
+    private EditText edtFullName, edtBirth, edtHome, edtEmail, edtPhone, edtCode, edtService, edtApproveDate, edtDegree;
     private RadioButton rbMale, rbFemale;
     private ImageView btnBack, imgAvatar;
     private TextView tvName;
-    private Button btnDelete;
+    private Button btnDelete, btnHide, btnCancelService;
 
-    private Button btnHide;
+    private boolean isPhoneVisible = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_profile);
+        setContentView(R.layout.activity_provider_profile);
 
         // Ánh xạ giao diện
-        tvFullName = findViewById(R.id.tvFullName);
-        tvBirth = findViewById(R.id.tvBirth);
-        tvHome = findViewById(R.id.tvHome);
-        tvEmail = findViewById(R.id.tvEmail);
-        tvPhone = findViewById(R.id.tvPhone);
-        tvCode = findViewById(R.id.tvCode);
-        tvDate = findViewById(R.id.tvDate);
+        edtFullName = findViewById(R.id.tvFullName);
+        edtBirth = findViewById(R.id.tvBirth);
+        edtHome = findViewById(R.id.tvHome);
+        edtEmail = findViewById(R.id.tvEmail);
+        edtPhone = findViewById(R.id.tvPhone);
+        edtCode = findViewById(R.id.tvCode);
+        edtService = findViewById(R.id.tvService);
+        edtApproveDate = findViewById(R.id.tvApproveDate);
+        edtDegree = findViewById(R.id.edtDegree);
+
         rbMale = findViewById(R.id.rbMale);
         rbFemale = findViewById(R.id.rbFemale);
         btnBack = findViewById(R.id.btnBack);
@@ -41,19 +44,22 @@ public class ProviderProfileActivity {
         tvName = findViewById(R.id.tvName);
         btnDelete = findViewById(R.id.btnDelete);
         btnHide = findViewById(R.id.btnHide);
+        btnCancelService = findViewById(R.id.btnCancelService);
 
         // Nhận dữ liệu từ Intent
         Intent intent = getIntent();
         User user = (User) intent.getSerializableExtra("user");
 
         if (user != null) {
-            tvFullName.setText(user.getName());
-            tvBirth.setText(user.getBirth());
-            tvHome.setText(user.getAddress());
-            tvEmail.setText(user.getEmail());
-            tvPhone.setText(user.getPhone());
-            tvCode.setText(user.getCode());
-            tvDate.setText(user.getRegisterDate());
+            edtFullName.setText(user.getName());
+            edtBirth.setText(user.getBirth());
+            edtHome.setText(user.getAddress());
+            edtEmail.setText(user.getEmail());
+            edtPhone.setText(user.getPhone());
+            edtCode.setText(user.getCode());
+            edtService.setText(user.getService());
+            edtApproveDate.setText(user.getApproveDate());
+            edtDegree.setText(user.getDegreeInfo());
             tvName.setText(user.getName());
             imgAvatar.setImageResource(user.getAvatarResId());
 
@@ -66,29 +72,44 @@ public class ProviderProfileActivity {
 
         // Nút quay lại
         btnBack.setOnClickListener(v -> {
-            Intent intent1 = new Intent(CustomerProfileActivity.this, AdminManagerCustomersActivity.class);
-            intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent1);
-            finish();
+            finish(); // Quay lại trang trước (AdminManagerProvidersActivity)
         });
 
         // Nút ẩn/hiện số điện thoại
         btnHide.setOnClickListener(v -> {
-            if (tvPhone.getVisibility() == View.VISIBLE) {
-                tvPhone.setVisibility(View.GONE);
+            if (isPhoneVisible) {
+                edtPhone.setVisibility(View.GONE);
                 btnHide.setText("Hiện");
+                isPhoneVisible = false;
             } else {
-                tvPhone.setVisibility(View.VISIBLE);
+                edtPhone.setVisibility(View.VISIBLE);
                 btnHide.setText("Ẩn");
+                isPhoneVisible = true;
             }
         });
 
         // Nút xoá người dùng
         btnDelete.setOnClickListener(v -> {
+            // Có thể gọi API xoá ở đây, hoặc gửi kết quả về activity trước
             Intent result = new Intent();
             result.putExtra("deleted", true);
             setResult(RESULT_OK, result);
             finish();
         });
+
+        // Nút huỷ đăng kí dịch vụ
+        btnCancelService.setOnClickListener(v -> {
+            edtService.setText(""); // Xoá dịch vụ (tuỳ nghiệp vụ bạn có thể show dialog xác nhận)
+        });
+    }
+
+    // Nếu muốn xử lý nút back cứng trên điện thoại
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        // Nếu cần chuyển về activity cụ thể, bỏ finish() ở btnBack và thêm ở đây:
+        // Intent intent = new Intent(this, AdminManagerProvidersActivity.class);
+        // startActivity(intent);
+        // finish();
     }
 }

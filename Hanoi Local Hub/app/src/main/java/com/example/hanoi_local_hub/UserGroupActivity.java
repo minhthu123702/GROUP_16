@@ -26,7 +26,8 @@ public class UserGroupActivity extends AppCompatActivity {
 
         // Mở trang quản lý nhà cung cấp (bạn thêm activity sau)
         btnManagerSupplier.setOnClickListener(v -> {
-            // TODO: thêm xử lý Quản lý nhà cung cấp
+            Intent intent = new Intent(UserGroupActivity.this, AdminManagerProvidersActivity.class);
+            startActivity(intent);
         });
     }
 }

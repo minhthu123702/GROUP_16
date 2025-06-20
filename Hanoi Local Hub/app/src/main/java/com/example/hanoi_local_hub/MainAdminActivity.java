@@ -23,7 +23,7 @@ public class MainAdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+        setContentView(R.layout.activity_main);
 
         // Ánh xạ view
         drawerLayout = findViewById(R.id.drawer_layout);

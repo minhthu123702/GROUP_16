@@ -30,6 +30,9 @@
         <activity android:name=".AdminProfileActivity" />
         <activity android:name=".UserGroupActivity" />
         <activity android:name=".AdminManagerCustomersActivity" />
+        <activity android:name=".AdminManagerProvidersActivity"/>
+        <activity android:name=".ProviderProfileActivity"/>
+
         <activity android:name=".CustomerProfileActivity" />
         <activity android:name=".auth.RegisterActivity" />
 

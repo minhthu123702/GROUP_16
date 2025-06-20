@@ -101,6 +101,7 @@ public class AdminManagerCustomersActivity extends ComponentActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         Intent intent = new Intent(AdminManagerCustomersActivity.this, MainAdminActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
