@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -77,14 +78,12 @@ public class ProviderProfileActivity extends AppCompatActivity {
 
         // Nút ẩn/hiện số điện thoại
         btnHide.setOnClickListener(v -> {
-            if (isPhoneVisible) {
-                edtPhone.setVisibility(View.GONE);
+            if (edtCode.getVisibility() == View.VISIBLE) {
+                edtCode.setVisibility(View.GONE);
                 btnHide.setText("Hiện");
-                isPhoneVisible = false;
             } else {
-                edtPhone.setVisibility(View.VISIBLE);
+                edtCode.setVisibility(View.VISIBLE);
                 btnHide.setText("Ẩn");
-                isPhoneVisible = true;
             }
         });
 
