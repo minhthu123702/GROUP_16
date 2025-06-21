@@ -16,7 +16,7 @@
 
         <!-- Activity đầu tiên chạy ứng dụng, thường là màn hình đăng nhập -->
         <activity
-            android:name=".MainActivity"
+            android:name=".auth.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +32,7 @@
         <activity android:name=".AdminManagerCustomersActivity" />
         <activity android:name=".CustomerProfileActivity" />
         <activity android:name=".auth.RegisterActivity" />
+        <activity android:name=".MainActivity" />
 
 
 <activity android:name=".MainCustomer"/>

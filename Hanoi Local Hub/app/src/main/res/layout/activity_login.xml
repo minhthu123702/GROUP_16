@@ -34,9 +34,10 @@
 
     <TextView
         android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="298dp"
+        android:layout_height="77dp"
         android:layout_marginTop="28dp"
+        android:gravity="center"
         android:text="Chưa có tài khoản? Tạo tài khoản ngay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,9 +48,10 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="105dp"
-        android:layout_height="22dp"
+        android:layout_width="134dp"
+        android:layout_height="27dp"
         android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="Quên mật khẩu ?"
         app:layout_constraintEnd_toEndOf="@+id/register"
         app:layout_constraintHorizontal_bias="0.459"
@@ -76,7 +78,7 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Nhập mật khẩu"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/button"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/button"

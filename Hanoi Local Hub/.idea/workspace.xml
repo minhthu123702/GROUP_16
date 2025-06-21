@@ -66,7 +66,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a16d3b34-89fd-4307-8cb0-2856bc3e1075" name="Changes" comment="first commit" />
+    <list default="true" id="a16d3b34-89fd-4307-8cb0-2856bc3e1075" name="Changes" comment="first commit">
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/auth/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/auth/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,8 +109,8 @@
       <list>
         <option value="Kotlin Script" />
         <option value="resourceFile" />
-        <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -308,6 +314,11 @@
           <line>46</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/auth/LoginActivity.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -316,12 +327,12 @@
       <map>
         <entry key="com.example.hanoi_local_hub">
           <value>
-            <CheckInfo lastCheckTimestamp="1750045735598" />
+            <CheckInfo lastCheckTimestamp="1750432270842" />
           </value>
         </entry>
         <entry key="com.example.hanoi_local_hub.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1750045735598" />
+            <CheckInfo lastCheckTimestamp="1750432270850" />
           </value>
         </entry>
         <entry key="com.example.hanoilocalhub">
