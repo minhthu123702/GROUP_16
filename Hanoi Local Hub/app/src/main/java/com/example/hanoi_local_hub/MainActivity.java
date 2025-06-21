@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (email.equals("admin@gmail.com") && password.equals("123456")) {
                 // Admin account
-                Intent intent = new Intent(MainActivity.this, MainAdminActivity.class);
+                Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
                 startActivity(intent);
                 finish();
             } else if (email.equals("user") && password.equals("123")) {
