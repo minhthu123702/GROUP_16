@@ -32,6 +32,7 @@
         <activity android:name=".AdminManagerCustomersActivity" />
         <activity android:name=".CustomerProfileActivity" />
         <activity android:name=".auth.RegisterActivity" />
+        <activity android:name=".auth.LoginActivity" />
 
 
 <activity android:name=".MainCustomer"/>
