@@ -63,11 +63,12 @@ public class CustomerProfile extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
-                startActivity(new Intent(CustomerProfile.this, MainCustomer.class));
+                startActivity(new Intent(this, MainCustomer.class));
                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_notification) {
-                // TODO: Chuyển sang activity thông báo nếu có
+                startActivity(new Intent(this, CustomerNotification.class)); // Đúng class
+                overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_profile) {
                 // Đã ở trang này rồi
@@ -75,7 +76,6 @@ public class CustomerProfile extends AppCompatActivity {
             }
             return false;
         });
-
     }
 
     // Hàm gán label và value cho từng row
