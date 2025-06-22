@@ -35,11 +35,12 @@
         <activity android:name=".MainActivity" />
 
 
-<activity android:name=".MainCustomer"/>
+        <activity android:name=".MainCustomer"/>
         <activity android:name=".ServiceDetailActivity" />
         <activity android:name=".SearchActivity" />
+        <activity android:name=".CustomerNotification" />
+        <activity android:name=".CustomerProfile" />
+
     </application>
-
-
 
 </manifest>
