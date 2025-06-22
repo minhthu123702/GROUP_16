@@ -1,6 +1,5 @@
 package com.example.hanoi_local_hub;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,21 +18,26 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CustomerProfile extends AppCompatActivity {
 
-    // Các trường thông tin
+    // --- Xem/Chỉnh sửa avatar/họ tên ---
+    private LinearLayout profileHeaderView, profileEditHeader;
+
+    private ImageView imgAvatarBig, imgAvatarSmall;
+    private TextView txtName;
+    private EditText edtFullName;
+
+    // --- Các trường thông tin ---
     private EditText edtUserId, edtCCCD, edtEmail, edtPhone, edtBirthday;
     private RadioGroup radioGender;
     private RadioButton radioMale, radioFemale;
-    private TextView txtName;
 
-    // Các nút chức năng
-    private LinearLayout actionContainer;        // Nhóm Đăng xuất & Quản lý dịch vụ
-    private LinearLayout btnLogout, btnManageService;
-    private ImageButton btnEdit;
+    // --- Nhóm nút dưới cùng ---
+    private LinearLayout actionContainer, btnLogout, btnManageService;
+    private LinearLayout editButtonContainer;
     private Button btnCancel, btnSave;
-    private LinearLayout editButtonContainer;    // Nhóm Bỏ qua & Cập nhật
+    private ImageButton btnEdit;
 
-    // Biến lưu lại dữ liệu ban đầu (phục hồi nếu bỏ qua)
-    private String originalEmail, originalPhone, originalBirthday;
+    // --- Lưu trạng thái ban đầu để "Bỏ qua" ---
+    private String originalFullName, originalEmail, originalPhone, originalBirthday;
     private boolean originalIsMale;
 
     @Override
@@ -41,7 +45,16 @@ public class CustomerProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_profile);
 
-        // Ánh xạ view
+        // --- Ánh xạ view ---
+        profileHeaderView = findViewById(R.id.profile_header_view);
+        profileEditHeader = findViewById(R.id.profile_edit_header);
+
+        imgAvatarBig = findViewById(R.id.imgAvatarBig);
+        imgAvatarSmall = findViewById(R.id.imgAvatarSmall);
+
+        txtName = findViewById(R.id.txtName);
+        edtFullName = findViewById(R.id.edtFullName);
+
         edtUserId = findViewById(R.id.edtUserId);
         edtCCCD = findViewById(R.id.edtCCCD);
         edtEmail = findViewById(R.id.edtEmail);
@@ -50,19 +63,19 @@ public class CustomerProfile extends AppCompatActivity {
         radioGender = findViewById(R.id.radioGender);
         radioMale = findViewById(R.id.radioMale);
         radioFemale = findViewById(R.id.radioFemale);
-        txtName = findViewById(R.id.txtName);
 
         actionContainer = findViewById(R.id.action_container);
         btnLogout = findViewById(R.id.btnLogout);
         btnManageService = findViewById(R.id.btnManageService);
-        btnEdit = findViewById(R.id.btnEdit);
 
         editButtonContainer = findViewById(R.id.edit_button_container);
         btnCancel = findViewById(R.id.btnCancel);
         btnSave = findViewById(R.id.btnSave);
+        btnEdit = findViewById(R.id.btnEdit);
 
-        // Gán dữ liệu mẫu (hoặc lấy từ server/Firebase)
+        // --- Gán dữ liệu mẫu ---
         txtName.setText("Trần Đăng Dương");
+        edtFullName.setText("Trần Đăng Dương");
         edtUserId.setText("111111");
         edtCCCD.setText("001200356741");
         edtEmail.setText("customer@gmail.com");
@@ -70,55 +83,46 @@ public class CustomerProfile extends AppCompatActivity {
         edtBirthday.setText("19/12/2000");
         radioMale.setChecked(true);
 
-        // Chỉ xem lúc đầu
+        // --- Ban đầu là chế độ xem ---
         setEditable(false);
-        editButtonContainer.setVisibility(View.GONE);
+        showViewMode();
 
-        // Sự kiện nút Sửa
+        // --- Sự kiện nút Sửa ---
         btnEdit.setOnClickListener(v -> {
             saveOriginalValues();
             setEditable(true);
-            actionContainer.setVisibility(View.GONE);
-            editButtonContainer.setVisibility(View.VISIBLE);
-            btnEdit.setVisibility(View.GONE);
+            showEditMode();
         });
 
-        // Sự kiện Bỏ qua
+        // --- Sự kiện Bỏ qua ---
         btnCancel.setOnClickListener(v -> {
             restoreOriginalValues();
             setEditable(false);
-            actionContainer.setVisibility(View.VISIBLE);
-            editButtonContainer.setVisibility(View.GONE);
-            btnEdit.setVisibility(View.VISIBLE);
+            showViewMode();
         });
 
-        // Sự kiện Cập nhật
+        // --- Sự kiện Cập nhật ---
         btnSave.setOnClickListener(v -> {
-            // TODO: Validate dữ liệu, cập nhật lên server nếu cần
+            // TODO: validate và cập nhật lên server/Firebase nếu muốn
+            txtName.setText(edtFullName.getText().toString()); // Cập nhật tên lớn
             setEditable(false);
-            actionContainer.setVisibility(View.VISIBLE);
-            editButtonContainer.setVisibility(View.GONE);
-            btnEdit.setVisibility(View.VISIBLE);
-            // Cập nhật lại tên lớn trên cùng (nếu muốn)
-            txtName.setText(edtEmail.getText().toString());
+            showViewMode();
             Toast.makeText(this, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
         });
 
-        // Sự kiện Đăng xuất
+        // --- Sự kiện Đăng xuất ---
         btnLogout.setOnClickListener(v -> {
-            // TODO: Xóa session, về màn hình đăng nhập
             Toast.makeText(this, "Đã đăng xuất!", Toast.LENGTH_SHORT).show();
-            // finish();
+            // TODO: Đăng xuất thật (xóa session, chuyển sang LoginActivity...)
         });
 
-        // Sự kiện Quản lý dịch vụ
+        // --- Sự kiện Quản lý dịch vụ ---
         btnManageService.setOnClickListener(v -> {
-            // TODO: Chuyển sang activity quản lý dịch vụ
             Toast.makeText(this, "Chuyển sang quản lý dịch vụ!", Toast.LENGTH_SHORT).show();
-            // startActivity(new Intent(this, ManageServiceActivity.class));
+            // TODO: startActivity(new Intent(this, ManageServiceActivity.class));
         });
 
-        // Bottom navigation
+        // --- Bottom navigation ---
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_profile);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -138,30 +142,50 @@ public class CustomerProfile extends AppCompatActivity {
         });
     }
 
-    // Bật/tắt chế độ chỉnh sửa
+    // Bật/tắt chế độ chỉnh sửa cho từng trường
     private void setEditable(boolean editable) {
-        edt.setEnabled(editable);
+        edtFullName.setEnabled(editable);
         edtEmail.setEnabled(editable);
         edtPhone.setEnabled(editable);
         edtBirthday.setEnabled(editable);
         radioMale.setEnabled(editable);
         radioFemale.setEnabled(editable);
 
-        // Không bao giờ cho sửa mã người dùng, CCCD
+        // Không cho sửa mã người dùng và CCCD
         edtUserId.setEnabled(false);
         edtCCCD.setEnabled(false);
     }
 
-    // Lưu giá trị gốc khi bắt đầu sửa (để phục hồi nếu bấm Bỏ qua)
+    // Chuyển sang chế độ xem (ẩn header chỉnh sửa, hiện header xem)
+    private void showViewMode() {
+        profileHeaderView.setVisibility(View.VISIBLE);
+        profileEditHeader.setVisibility(View.GONE);
+        actionContainer.setVisibility(View.VISIBLE);
+        editButtonContainer.setVisibility(View.GONE);
+        btnEdit.setVisibility(View.VISIBLE);
+    }
+
+    // Chuyển sang chế độ sửa (ẩn header xem, hiện header chỉnh sửa)
+    private void showEditMode() {
+        profileHeaderView.setVisibility(View.GONE);
+        profileEditHeader.setVisibility(View.VISIBLE);
+        actionContainer.setVisibility(View.GONE);
+        editButtonContainer.setVisibility(View.VISIBLE);
+        btnEdit.setVisibility(View.GONE);
+    }
+
+    // Lưu lại giá trị cũ khi bấm Sửa (phục hồi nếu bấm Bỏ qua)
     private void saveOriginalValues() {
+        originalFullName = edtFullName.getText().toString();
         originalEmail = edtEmail.getText().toString();
         originalPhone = edtPhone.getText().toString();
         originalBirthday = edtBirthday.getText().toString();
         originalIsMale = radioMale.isChecked();
     }
 
-    // Phục hồi giá trị nếu bấm Bỏ qua
+    // Phục hồi giá trị khi bấm Bỏ qua
     private void restoreOriginalValues() {
+        edtFullName.setText(originalFullName);
         edtEmail.setText(originalEmail);
         edtPhone.setText(originalPhone);
         edtBirthday.setText(originalBirthday);
