@@ -6,41 +6,36 @@
     android:orientation="vertical"
     android:background="@color/background_light">
 
-    <!-- Header Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/primary_blue"
         android:orientation="vertical">
 
-        <!-- Main Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="@dimen/margin_large"
-            android:paddingVertical="@dimen/margin_extra_large"
-            android:gravity="center_vertical">
+            android:paddingVertical="@dimen/margin_extra_large">
 
-            <!-- Back Icon -->
             <ImageView
+                android:id="@+id/img_back"
                 android:layout_width="@dimen/icon_medium"
                 android:layout_height="@dimen/icon_medium"
-                android:src="@drawable/ic_arrow_right" />
-
-            <!-- Title -->
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dịch vụ của tôi"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_large"
-                android:fontFamily="sans-serif-medium" />
+                android:src="@drawable/ic_arrow_right" /> <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:text="Dịch vụ của tôi"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_large"
+            android:layout_marginStart="16dp"/>
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Body Section with weight -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -49,7 +44,6 @@
         android:paddingHorizontal="@dimen/margin_medium"
         android:paddingTop="@dimen/margin_large">
 
-        <!-- Tabs Section -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,11 +53,10 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/margin_medium">
+                android:orientation="horizontal">
 
-                <!-- Tab: Đang hiển thị -->
                 <LinearLayout
+                    android:id="@+id/tab_showing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -71,23 +64,24 @@
                     android:minWidth="@dimen/tab_min_width">
 
                     <TextView
+                        android:id="@+id/text_showing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Đang hiển thị"
                         android:textColor="@color/accent_blue"
                         android:textSize="@dimen/text_medium"
-                        android:fontFamily="sans-serif-medium"
                         android:paddingBottom="@dimen/margin_small"
                         android:layout_gravity="center" />
 
                     <View
+                        android:id="@+id/line_showing"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:background="@color/accent_blue" />
                 </LinearLayout>
 
-                <!-- Tab: Đang chờ duyệt -->
                 <LinearLayout
+                    android:id="@+id/tab_pending"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -95,23 +89,24 @@
                     android:minWidth="@dimen/tab_min_width">
 
                     <TextView
+                        android:id="@+id/text_pending"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Đang chờ duyệt"
                         android:textColor="@color/text_secondary"
                         android:textSize="@dimen/text_medium"
-                        android:fontFamily="sans-serif-medium"
                         android:paddingBottom="@dimen/margin_small"
                         android:layout_gravity="center" />
 
                     <View
+                        android:id="@+id/line_pending"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:background="@android:color/transparent" />
                 </LinearLayout>
 
-                <!-- Tab: Bị từ chối -->
                 <LinearLayout
+                    android:id="@+id/tab_rejected"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -119,39 +114,41 @@
                     android:minWidth="@dimen/tab_min_width">
 
                     <TextView
+                        android:id="@+id/text_rejected"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bị từ chối"
                         android:textColor="@color/text_secondary"
                         android:textSize="@dimen/text_medium"
-                        android:fontFamily="sans-serif-medium"
                         android:paddingBottom="@dimen/margin_small"
                         android:layout_gravity="center" />
 
                     <View
+                        android:id="@+id/line_rejected"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:background="@android:color/transparent" />
                 </LinearLayout>
 
-                <!-- Tab: Đã xóa -->
                 <LinearLayout
+                    android:id="@+id/tab_deleted"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:minWidth="@dimen/tab_min_width">
 
                     <TextView
+                        android:id="@+id/text_deleted"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Đã xóa"
+                        android:text="Đã ẩn"
                         android:textColor="@color/text_secondary"
                         android:textSize="@dimen/text_medium"
-                        android:fontFamily="sans-serif-medium"
                         android:paddingBottom="@dimen/margin_small"
                         android:layout_gravity="center" />
 
                     <View
+                        android:id="@+id/line_deleted"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:background="@android:color/transparent" />
@@ -159,14 +156,12 @@
             </LinearLayout>
         </HorizontalScrollView>
 
-        <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/divider_color"
             android:layout_marginBottom="@dimen/margin_large" />
 
-        <!-- Content Section with FAB overlay -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -177,6 +172,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
+            <TextView
+                android:id="@+id/tv_empty_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Không có dịch vụ nào."
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
@@ -186,7 +189,7 @@
                 android:src="@drawable/ic_add"
                 app:backgroundTint="@color/accent_blue"
                 app:tint="@color/white"
-                android:contentDescription="Add new service"/>
+                android:contentDescription="Thêm dịch vụ mới"/>
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

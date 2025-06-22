@@ -32,8 +32,8 @@
         <activity android:name=".AdminManagerCustomersActivity" />
         <activity android:name=".CustomerProfileActivity" />
         <activity android:name=".auth.RegisterActivity" />
-        <activity android:name=".MainActivity" />
-
+        <activity android:name=".ServiceManagement.MyServicesActivity" />
+<activity android:name=".ServiceManagement.AddServiceActivity" ></activity>
 
         <activity android:name=".MainCustomer"/>
         <activity android:name=".ServiceDetailActivity" />
