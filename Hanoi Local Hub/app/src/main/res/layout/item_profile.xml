@@ -24,7 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="38dp"
         android:layout_weight="1"
-        android:background="@drawable/bg_profile_input"
+        android:background="@drawable/bg_input"
         android:inputType="text"
         android:textColor="#222"
         android:textSize="15sp"
