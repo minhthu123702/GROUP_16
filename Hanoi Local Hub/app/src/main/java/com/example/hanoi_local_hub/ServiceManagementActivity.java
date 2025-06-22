@@ -1,6 +1,7 @@
-package com.example.hanoi_local_hub; // Giữ nguyên package của bạn
+package com.example.hanoi_local_hub; // Gói của bạn
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,11 +52,20 @@ public class ServiceManagementActivity extends AppCompatActivity {
         }
 
         setupRecyclerView();
-        loadCategoriesFromFirestore();
 
         buttonThem.setOnClickListener(v -> {
-            Toast.makeText(ServiceManagementActivity.this, "Chức năng Thêm mới!", Toast.LENGTH_SHORT).show();
+            // Mở màn hình AddCategoryActivity
+            Intent intent = new Intent(ServiceManagementActivity.this, AddCategoryActivity.class);
+            startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Luôn tải lại dữ liệu khi người dùng quay lại màn hình này
+        // để đảm bảo danh sách được cập nhật sau khi thêm hoặc sửa.
+        loadCategoriesFromFirestore();
     }
 
     private void setupRecyclerView() {
@@ -66,11 +76,28 @@ public class ServiceManagementActivity extends AppCompatActivity {
 
         categoryAdapter.setOnItemClickListener(new CategoryAdapter.OnItemClickListener() {
             @Override
-            public void onViewClick(int position) { Toast.makeText(ServiceManagementActivity.this, "Xem: " + categoryList.get(position).getName(), Toast.LENGTH_SHORT).show(); }
+            public void onViewClick(int position) {
+                Toast.makeText(ServiceManagementActivity.this, "Xem: " + categoryList.get(position).getName(), Toast.LENGTH_SHORT).show();
+            }
+
             @Override
-            public void onDeleteClick(int position) { Toast.makeText(ServiceManagementActivity.this, "Xóa: " + categoryList.get(position).getName(), Toast.LENGTH_SHORT).show(); }
+            public void onDeleteClick(int position) {
+                // Thêm logic xóa ở đây
+                Toast.makeText(ServiceManagementActivity.this, "Xóa: " + categoryList.get(position).getName(), Toast.LENGTH_SHORT).show();
+            }
+
             @Override
-            public void onEditClick(int position) { Toast.makeText(ServiceManagementActivity.this, "Sửa: " + categoryList.get(position).getName(), Toast.LENGTH_SHORT).show(); }
+            public void onEditClick(int position) {
+                ServiceCategory selectedCategory = categoryList.get(position);
+                Intent intent = new Intent(ServiceManagementActivity.this, EditCategoryActivity.class);
+
+                // Gửi dữ liệu của mục cần sửa sang màn hình Edit
+                intent.putExtra("CATEGORY_ID", selectedCategory.getId());
+                intent.putExtra("CATEGORY_NAME", selectedCategory.getName());
+                intent.putExtra("CATEGORY_DESC", selectedCategory.getDescription());
+
+                startActivity(intent);
+            }
         });
     }
 
@@ -82,6 +109,8 @@ public class ServiceManagementActivity extends AppCompatActivity {
                         categoryList.clear();
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             ServiceCategory category = document.toObject(ServiceCategory.class);
+                            // Lấy ID của document và gán vào đối tượng
+                            category.setId(document.getId());
                             categoryList.add(category);
                         }
                         categoryAdapter.notifyDataSetChanged();
@@ -102,19 +131,26 @@ public class ServiceManagementActivity extends AppCompatActivity {
     }
 
     // ===================================================================
-    // LỚP MODEL (Đã được đơn giản hóa)
+    // LỚP MODEL (Đã cập nhật để chứa ID và description)
     // ===================================================================
     public static class ServiceCategory {
+        private String id;
         private String name;
+        private String description;
 
         public ServiceCategory() { /* Constructor rỗng cho Firestore */ }
+
+        public String getId() { return id; }
+        public void setId(String id) { this.id = id; }
         public String getName() { return name; }
         public void setName(String name) { this.name = name; }
+        public String getDescription() { return description; }
+        public void setDescription(String description) { this.description = description; }
     }
 
 
     // ===================================================================
-    // LỚP ADAPTER (Đã được đơn giản hóa)
+    // LỚP ADAPTER (Sử dụng avatar mặc định)
     // ===================================================================
     public static class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 

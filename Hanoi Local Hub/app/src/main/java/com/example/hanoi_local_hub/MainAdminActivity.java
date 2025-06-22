@@ -73,9 +73,9 @@ public class MainAdminActivity extends AppCompatActivity {
         });
 
         // Các nút chưa dùng sẽ xử lý sau khi tạo Activity tương ứng
-//        btnStatistics.setOnClickListener(v -> {
-//            startActivity(new Intent(MainMenuActivity.this, StatisticsActivity.class));
-//        });
+        btnStatistics.setOnClickListener(v -> {
+            startActivity(new Intent(MainAdminActivity.this, StatisticsActivity.class));
+        });
 
         btnServiceManagement.setOnClickListener(v -> {
             startActivity(new Intent(MainAdminActivity.this, ServiceManagementActivity.class));

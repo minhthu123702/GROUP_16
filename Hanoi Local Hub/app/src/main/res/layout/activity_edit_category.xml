@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#F7FBFF">
 
-    <!-- HEADER: luôn ở trên cùng, không scroll -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="0dp"
@@ -43,7 +42,6 @@
             app:layout_constraintHorizontal_bias="0.5"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- PHẦN NỘI DUNG CUỘN ĐƯỢC (dưới header, trên sóng) -->
     <ScrollView
         android:id="@+id/contentScroll"
         android:layout_width="0dp"
@@ -58,21 +56,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Tiêu đề -->
-
-            <!-- Nhãn "Thêm hình ảnh" và nút + cùng hàng -->
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:text="Thêm danh mục"
-                android:textColor="#333333"
-                android:textSize="18sp"
+                android:layout_marginTop="28dp"
+                android:text="Sửa danh mục"
+                android:textColor="#222"
                 android:textStyle="bold"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/tvAddImage"
@@ -87,26 +82,34 @@
                 app:layout_constraintTop_toBottomOf="@id/tvTitle"
                 app:layout_constraintBottom_toBottomOf="@+id/btnAddImage"/>
 
-            <!-- Tên danh mục -->
-
             <ImageButton
                 android:id="@+id/btnAddImage"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="36dp"
                 android:background="@drawable/bg_rounded_edittext"
                 android:contentDescription="Thêm hình ảnh"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_add_photo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvAddImage" />
+                app:layout_constraintStart_toEndOf="@id/tvAddImage"
+                app:layout_constraintTop_toTopOf="@id/tvAddImage"
+                android:layout_marginStart="16dp"/>
+
+            <ImageView
+                android:id="@+id/imgCategory"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_clean"
+                android:contentDescription="Ảnh danh mục"
+                app:layout_constraintStart_toEndOf="@id/btnAddImage"
+                app:layout_constraintTop_toTopOf="@id/tvAddImage"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="8dp"/>
 
             <EditText
                 android:id="@+id/edtCategoryName"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
-                android:hint="Tên danh mục"
+                android:hint="Dọn dẹp"
                 android:background="@drawable/bg_rounded_edittext"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
@@ -116,16 +119,15 @@
                 app:layout_constraintTop_toBottomOf="@id/btnAddImage"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="22dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"/>
 
-            <!-- Mô tả chi tiết -->
             <EditText
                 android:id="@+id/edtCategoryDesc"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
-                android:hint="Mô tả chi tiết"
+                android:hint="Đảm bảo vệ sinh sạch sẽ, gọn gàng..."
                 android:background="@drawable/bg_rounded_edittext"
                 android:padding="16dp"
                 android:textColor="#222"
@@ -139,7 +141,6 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"/>
 
-            <!-- Ngày tạo -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clDate"
                 android:layout_width="0dp"
@@ -159,7 +160,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
-                    android:hint="Ngày tạo"
+                    android:hint="20/5/2025"
                     android:focusable="false"
                     android:textColor="#222"
                     android:textSize="15sp"
@@ -181,11 +182,9 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <!-- Sóng ở đáy màn hình (không scroll, luôn nằm dưới) -->
     <ImageView
         android:id="@+id/wave"
         android:layout_width="0dp"
@@ -196,21 +195,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Nút Thêm mới ở góc phải dưới (nổi trên sóng) -->
-    <!-- Nút Thêm mới ở góc phải dưới (nổi trên sóng) -->
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnAddCategory"
+        android:id="@+id/btnUpdateCategory"
         android:layout_width="140dp"
         android:layout_height="48dp"
         android:background="@drawable/bg_btn_blue"
-        android:text="Thêm"
+        android:text="Sửa"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="18dp"
         android:layout_marginEnd="24dp"/>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
