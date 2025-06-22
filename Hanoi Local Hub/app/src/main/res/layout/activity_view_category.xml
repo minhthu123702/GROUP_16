@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F7FBFF">
 
+    <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="0dp"
@@ -31,7 +32,7 @@
             android:id="@+id/tvHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Xem danh mục"
+            android:text="Xem chi tiết danh mục"
             android:textColor="#FFF"
             android:textStyle="bold"
             android:textSize="19sp"
@@ -42,6 +43,7 @@
             app:layout_constraintHorizontal_bias="0.5"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Nội dung chi tiết -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"

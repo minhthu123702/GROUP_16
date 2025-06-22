@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ViewCategoryActivity extends AppCompatActivity {
 
@@ -16,49 +17,64 @@ public class ViewCategoryActivity extends AppCompatActivity {
     private ImageView imgCategory;
     private ImageButton btnBack;
 
-    private String categoryId, categoryName, categoryDesc, categoryDate, categoryImageUrl;
+    private FirebaseFirestore db;
+    private String categoryId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_category);
+        setContentView(R.layout.activity_view_category); // Đúng tên file xml của bạn
 
         // Ánh xạ View
         tvCategoryName = findViewById(R.id.tvCategoryName);
         tvCategoryDesc = findViewById(R.id.tvCategoryDesc);
-        tvCreateDate   = findViewById(R.id.tvCreateDate);
-        imgCategory    = findViewById(R.id.imgCategory);
-        btnBack        = findViewById(R.id.btnBack);
+        tvCreateDate = findViewById(R.id.tvCreateDate);
+        imgCategory = findViewById(R.id.imgCategory);
+        btnBack = findViewById(R.id.btnBack);
 
-        // Nhận dữ liệu từ Intent
-        loadDataFromIntent();
+        db = FirebaseFirestore.getInstance();
 
-        // Sự kiện click nút quay lại
+        // Lấy ID danh mục từ Intent
+        categoryId = getIntent().getStringExtra("CATEGORY_ID");
+        if (categoryId == null || categoryId.isEmpty()) {
+            Toast.makeText(this, "Không tìm thấy ID danh mục!", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
         btnBack.setOnClickListener(v -> finish());
+
+        // Lấy dữ liệu từ Firestore
+        loadCategoryDetail();
     }
 
-    private void loadDataFromIntent() {
-        if (getIntent().getExtras() != null) {
-            categoryId      = getIntent().getStringExtra("CATEGORY_ID");
-            categoryName    = getIntent().getStringExtra("CATEGORY_NAME");
-            categoryDesc    = getIntent().getStringExtra("CATEGORY_DESC");
-            categoryDate    = getIntent().getStringExtra("CATEGORY_DATE");
-            categoryImageUrl = getIntent().getStringExtra("CATEGORY_IMAGE_URL");
+    private void loadCategoryDetail() {
+        db.collection("categories").document(categoryId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String name = documentSnapshot.getString("name");
+                        String desc = documentSnapshot.getString("description");
+                        String imageUrl = documentSnapshot.getString("imageUrl");
+                        String createDate = documentSnapshot.getString("creationDate");
 
-            // Hiển thị dữ liệu lên các trường TextView
-            tvCategoryName.setText(categoryName != null ? categoryName : "Tên danh mục");
-            tvCategoryDesc.setText(categoryDesc != null ? categoryDesc : "Chưa có mô tả");
-            tvCreateDate.setText("Ngày tạo: " + (categoryDate != null ? categoryDate : "Không rõ"));
+                        tvCategoryName.setText(name != null ? name : "Tên danh mục");
+                        tvCategoryDesc.setText(desc != null ? desc : "Chưa có mô tả");
+                        tvCreateDate.setText("Ngày tạo: " + (createDate != null ? createDate : "Không rõ"));
 
-            // Hiển thị ảnh (nếu có truyền link ảnh)
-            if (categoryImageUrl != null && !categoryImageUrl.isEmpty()) {
-                Glide.with(this).load(categoryImageUrl).into(imgCategory);
-            } else {
-                imgCategory.setImageResource(R.drawable.ic_clean);
-            }
-        } else {
-            Toast.makeText(this, "Lỗi: Không có dữ liệu danh mục.", Toast.LENGTH_SHORT).show();
-            finish();
-        }
+                        if (imageUrl != null && !imageUrl.isEmpty()) {
+                            Glide.with(this).load(imageUrl).into(imgCategory);
+                        } else {
+                            imgCategory.setImageResource(R.drawable.ic_clean);
+                        }
+                    } else {
+                        Toast.makeText(this, "Không tìm thấy dữ liệu!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    finish();
+                });
     }
 }

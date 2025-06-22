@@ -77,14 +77,43 @@ public class ServiceManagementActivity extends AppCompatActivity {
         categoryAdapter.setOnItemClickListener(new CategoryAdapter.OnItemClickListener() {
             @Override
             public void onViewClick(int position) {
-                Toast.makeText(ServiceManagementActivity.this, "Xem: " + categoryList.get(position).getName(), Toast.LENGTH_SHORT).show();
+                ServiceCategory selectedCategory = categoryList.get(position);
+                Intent intent = new Intent(ServiceManagementActivity.this, ViewCategoryActivity.class);
+                intent.putExtra("CATEGORY_ID", selectedCategory.getId());
+                // Nếu muốn truyền thêm:
+                intent.putExtra("CATEGORY_NAME", selectedCategory.getName());
+                intent.putExtra("CATEGORY_DESC", selectedCategory.getDescription());
+                startActivity(intent);
             }
+
 
             @Override
             public void onDeleteClick(int position) {
-                // Thêm logic xóa ở đây
-                Toast.makeText(ServiceManagementActivity.this, "Xóa: " + categoryList.get(position).getName(), Toast.LENGTH_SHORT).show();
+                ServiceCategory selectedCategory = categoryList.get(position);
+
+                // Xác nhận xóa (tùy, nếu không muốn xác nhận thì bỏ dòng này)
+                new android.app.AlertDialog.Builder(ServiceManagementActivity.this)
+                        .setTitle("Xóa danh mục")
+                        .setMessage("Bạn có chắc chắn muốn xóa \"" + selectedCategory.getName() + "\" không?")
+                        .setPositiveButton("Xóa", (dialog, which) -> {
+                            // Xóa trên Firestore
+                            db.collection("categories").document(selectedCategory.getId())
+                                    .delete()
+                                    .addOnSuccessListener(aVoid -> {
+                                        Toast.makeText(ServiceManagementActivity.this, "Đã xóa!", Toast.LENGTH_SHORT).show();
+                                        categoryList.remove(position);
+                                        categoryAdapter.notifyItemRemoved(position);
+                                        // Nếu muốn chắc chắn, gọi lại loadCategoriesFromFirestore()
+                                        // loadCategoriesFromFirestore();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(ServiceManagementActivity.this, "Xóa thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    });
+                        })
+                        .setNegativeButton("Hủy", null)
+                        .show();
             }
+
 
             @Override
             public void onEditClick(int position) {
@@ -98,6 +127,7 @@ public class ServiceManagementActivity extends AppCompatActivity {
 
                 startActivity(intent);
             }
+
         });
     }
 
