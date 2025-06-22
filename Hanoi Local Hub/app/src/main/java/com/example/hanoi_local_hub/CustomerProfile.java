@@ -3,61 +3,76 @@ package com.example.hanoi_local_hub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.hanoi_local_hub.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CustomerProfile extends AppCompatActivity {
+
+    private EditText edtUserId, edtCCCD, edtEmail, edtPhone, edtBirthday;
+    private TextView txtName;
+    private RadioGroup radioGender;
+    private RadioButton radioMale, radioFemale;
+    private TextView btnLogout, btnManageService;
+    private ImageButton btnEdit;
+    private ImageView imgAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_profile);
 
-        // Lấy info_container
-        LinearLayout infoContainer = findViewById(R.id.info_container);
+        // Khởi tạo view
+        txtName = findViewById(R.id.txtName);
+        edtUserId = findViewById(R.id.edtUserId);
+        edtCCCD = findViewById(R.id.edtCCCD);
+        edtEmail = findViewById(R.id.edtEmail);
+        edtPhone = findViewById(R.id.edtPhone);
+        edtBirthday = findViewById(R.id.edtBirthday);
+        radioGender = findViewById(R.id.radioGender);
+        radioMale = findViewById(R.id.radioMale);
+        radioFemale = findViewById(R.id.radioFemale);
+        btnLogout = findViewById(R.id.btnLogout);
+        btnManageService = findViewById(R.id.btnManageService);
+        btnEdit = findViewById(R.id.btnEdit);
+        imgAvatar = findViewById(R.id.imgAvatar);
 
-        // Lấy từng dòng (theo thứ tự include trong xml)
-        setProfileRow(infoContainer.getChildAt(0), "Mã người dùng:", "111111");
-        setProfileRow(infoContainer.getChildAt(1), "Tên đăng nhập:", "customer");
-        setProfileRow(infoContainer.getChildAt(2), "CCCD:", "001200356741");
-        setProfileRow(infoContainer.getChildAt(3), "Email:", "customer@gmail.com");
-        setProfileRow(infoContainer.getChildAt(4), "Số điện thoại:", "0123456789");
-        setProfileRow(infoContainer.getChildAt(5), "Ngày sinh:", "19/12/2000");
-        EditText etBirthday = infoContainer.getChildAt(5).findViewById(R.id.etValue);
-        etBirthday.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_calendar, 0);
-
-        // Tên người dùng lớn ở trên cùng
-        TextView txtName = findViewById(R.id.txtName);
+        // Gán dữ liệu ví dụ (sau này lấy từ Firebase/UserProfile)
         txtName.setText("Trần Đăng Dương");
-
-        // Giới tính
-        LinearLayout genderRow = (LinearLayout) infoContainer.getChildAt(6);
-        RadioGroup radioGender = genderRow.findViewById(R.id.radioGender);
-        RadioButton radioMale = genderRow.findViewById(R.id.radioMale);
-        RadioButton radioFemale = genderRow.findViewById(R.id.radioFemale);
+        edtUserId.setText("111111");
+        edtCCCD.setText("001200356741");
+        edtEmail.setText("customer@gmail.com");
+        edtPhone.setText("0123456789");
+        edtBirthday.setText("19/12/2000");
         radioMale.setChecked(true);
 
+        // Đặt EditText chỉ đọc
+        setEditable(false);
+
+        // Sửa thông tin
+        btnEdit.setOnClickListener(v -> {
+            boolean editable = !edtUserId.isEnabled(); // Toggle
+            setEditable(editable);
+        });
+
         // Đăng xuất
-        TextView btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(v -> {
-            // TODO: Đăng xuất (ví dụ: xóa session, quay về login)
+            // TODO: Xóa session, quay về màn hình đăng nhập nếu cần
             finish();
         });
 
         // Quản lý dịch vụ
-        TextView btnManageService = findViewById(R.id.btnManageService);
         btnManageService.setOnClickListener(v -> {
-            // TODO: Chuyển sang activity quản lý dịch vụ nếu cần
+            // TODO: Chuyển sang activity quản lý dịch vụ
         });
 
-        // Thanh điều hướng
+        // Thanh điều hướng dưới cùng
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_profile);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -67,22 +82,25 @@ public class CustomerProfile extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_notification) {
-                startActivity(new Intent(this, CustomerNotification.class)); // Đúng class
+                startActivity(new Intent(this, CustomerNotification.class));
                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_profile) {
-                // Đã ở trang này rồi
                 return true;
             }
             return false;
         });
     }
 
-    // Hàm gán label và value cho từng row
-    private void setProfileRow(android.view.View row, String label, String value) {
-        TextView tvLabel = row.findViewById(R.id.tvLabel);
-        EditText etValue = row.findViewById(R.id.etValue);
-        tvLabel.setText(label);
-        etValue.setText(value);
+    // Bật/tắt chỉnh sửa các trường
+    private void setEditable(boolean editable) {
+        edtUserId.setEnabled(editable);
+        edtCCCD.setEnabled(editable);
+        edtEmail.setEnabled(editable);
+        edtPhone.setEnabled(editable);
+        edtBirthday.setEnabled(editable);
+        radioMale.setEnabled(editable);
+        radioFemale.setEnabled(editable);
+        // Nếu muốn đổi màu viền có thể set background ở đây
     }
 }
