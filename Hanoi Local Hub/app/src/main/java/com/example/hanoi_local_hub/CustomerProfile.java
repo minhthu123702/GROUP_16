@@ -1,5 +1,6 @@
 package com.example.hanoi_local_hub;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -153,7 +154,16 @@ public class CustomerProfile extends AppCompatActivity {
 
         // Không cho sửa mã người dùng và CCCD
         edtUserId.setEnabled(false);
+        edtUserId.setBackgroundResource(R.drawable.bg_input_disabled);
         edtCCCD.setEnabled(false);
+        edtCCCD.setBackgroundResource(R.drawable.bg_input_disabled);
+        edtUserId.setTextColor(Color.parseColor("#888888"));
+        edtCCCD.setTextColor(Color.parseColor("#888888"));
+        int bgNormal = R.drawable.bg_input;
+        edtFullName.setBackgroundResource(bgNormal);
+        edtEmail.setBackgroundResource(bgNormal);
+        edtPhone.setBackgroundResource(bgNormal);
+        edtBirthday.setBackgroundResource(bgNormal);
     }
 
     // Chuyển sang chế độ xem (ẩn header chỉnh sửa, hiện header xem)
