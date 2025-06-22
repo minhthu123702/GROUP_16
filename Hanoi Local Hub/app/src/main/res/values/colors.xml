@@ -9,11 +9,12 @@
     <!-- Text Colors -->
     <color name="text_primary">#1d1b20</color>
     <color name="text_secondary">#49454f</color>
-
+    <color name="text_hint">#8d8888</color>
     <!-- UI Colors -->
     <color name="white">#ffffff</color>
     <color name="divider_color">#cac4d0</color>
     <color name="icon_background">#cac4d0</color>
     <color name="icon_color">#49454f</color>
     <color name="star_color">#ffd900</color>
+    <color name="transparent">#00000000</color>
 </resources>
