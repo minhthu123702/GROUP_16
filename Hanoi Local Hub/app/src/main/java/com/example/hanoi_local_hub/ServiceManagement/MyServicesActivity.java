@@ -1,5 +1,6 @@
-package com.example.hanoi_local_hub.ServiceManagement;
+package com.example.hanoi_local_hub.ServiceManagement; // Thay bằng package của bạn
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -7,11 +8,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hanoi_local_hub.R;
+import com.example.hanoi_local_hub.ServiceManagement.ServiceModel; // Đảm bảo bạn có file Model này
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,32 +25,32 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import com.example.hanoi_local_hub.R;
-
 
 public class MyServicesActivity extends AppCompatActivity implements ServiceAdapter.OnItemClickListener {
 
+    private static final String TAG = "MyServicesActivity";
+
     private RecyclerView recyclerView;
-    private FloatingActionButton fab;
+    private FloatingActionButton fabAddService;
+    private TextView tvEmptyList;
     private ServiceAdapter serviceAdapter;
     private List<ServiceModel> serviceList;
 
-    private LinearLayout tabShowing, tabPending, tabRejected, tabDeleted;
-    private TextView textShowing, textPending, textRejected, textDeleted;
-    private View lineShowing, linePending, lineRejected, lineDeleted;
+    private LinearLayout tabShowing, tabPending, tabRejected, tabPaused;
+    private TextView textShowing, textPending, textRejected, textPaused;
+    private View lineShowing, linePending, lineRejected, linePaused;
 
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
+    private String currentStatus = "approved"; // Trạng thái mặc định
 
-    // (Giả sử bạn có các file màu và dimen tương ứng)
     private int colorActive;
     private int colorInactive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service_home_management); // Dùng layout chính của bạn
+        setContentView(R.layout.activity_service_home_management);
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -55,28 +59,37 @@ public class MyServicesActivity extends AppCompatActivity implements ServiceAdap
         setupRecyclerView();
         setupTabs();
 
-        // Tải danh sách mặc định khi mở màn hình (Đang hiển thị)
-        loadServices("approved");
-        setActiveTab(tabShowing, textShowing, lineShowing);
+        // Tải danh sách mặc định khi mở màn hình
+        loadServices(currentStatus);
+        setActiveTab(textShowing, lineShowing);
     }
 
     private void setupViews() {
         recyclerView = findViewById(R.id.recyclerView);
-        fab = findViewById(R.id.fab);
+        fabAddService = findViewById(R.id.fab_add_service);
+        tvEmptyList = findViewById(R.id.tv_empty_list);
 
-        // Ánh xạ các Tabs (bạn cần đặt ID cho các layout và textview trong XML)
+        // Ánh xạ các LinearLayout của Tab
         tabShowing = findViewById(R.id.tab_showing);
         tabPending = findViewById(R.id.tab_pending);
         tabRejected = findViewById(R.id.tab_rejected);
-        tabDeleted = findViewById(R.id.tab_deleted);
+        tabPaused = findViewById(R.id.tab_paused);
 
-        // Giả sử bạn đặt ID cho TextView và View bên trong mỗi tab
-        textShowing = tabShowing.findViewWithTag("tab_text");
-        lineShowing = tabShowing.findViewWithTag("tab_line");
-        // ... Làm tương tự cho các tab khác
+        // Ánh xạ các TextView và View bên trong Tab
+        textShowing = findViewById(R.id.text_showing);
+        lineShowing = findViewById(R.id.line_showing);
+        textPending = findViewById(R.id.text_pending);
+        linePending = findViewById(R.id.line_pending);
+        textRejected = findViewById(R.id.text_rejected);
+        lineRejected = findViewById(R.id.line_rejected);
+        textPaused = findViewById(R.id.text_paused);
+        linePaused = findViewById(R.id.line_paused);
 
+        // Lấy màu từ resources
         colorActive = ContextCompat.getColor(this, R.color.accent_blue);
         colorInactive = ContextCompat.getColor(this, R.color.text_secondary);
+
+        findViewById(R.id.img_back).setOnClickListener(v -> finish());
     }
 
     private void setupRecyclerView() {
@@ -87,47 +100,51 @@ public class MyServicesActivity extends AppCompatActivity implements ServiceAdap
     }
 
     private void setupTabs() {
-        tabShowing.setOnClickListener(v -> {
-            loadServices("approved");
-            setActiveTab(tabShowing, textShowing, lineShowing);
-        });
-        tabPending.setOnClickListener(v -> {
-            loadServices("pending");
-            setActiveTab(tabPending, textPending, linePending);
-        });
-        tabRejected.setOnClickListener(v -> {
-            loadServices("rejected");
-            setActiveTab(tabRejected, textRejected, lineRejected);
-        });
-        tabDeleted.setOnClickListener(v -> {
-            Toast.makeText(this, "Chức năng này đang được phát triển", Toast.LENGTH_SHORT).show();
-            setActiveTab(tabDeleted, textDeleted, lineDeleted);
-        });
+        // Gán sự kiện click cho từng layout tab
+        tabShowing.setOnClickListener(v -> handleTabClick("approved", textShowing, lineShowing));
+        tabPending.setOnClickListener(v -> handleTabClick("pending", textPending, linePending));
+        tabRejected.setOnClickListener(v -> handleTabClick("rejected", textRejected, lineRejected));
+        tabPaused.setOnClickListener(v -> handleTabClick("paused", textPaused, linePaused));
+
+        fabAddService.setOnClickListener(v ->
+                startActivity(new Intent(this, AddServiceActivity.class))
+        );
     }
 
-    private void setActiveTab(LinearLayout activeTab, TextView activeText, View activeLine) {
-        // Reset tất cả các tab
-        // Cần đảm bảo các biến text... và line... không bị null
-        if(textShowing != null) textShowing.setTextColor(colorInactive);
-        if(lineShowing != null) lineShowing.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
-        // ... làm tương tự cho các tab khác
+    private void handleTabClick(String status, TextView activeText, View activeLine) {
+        currentStatus = status;
+        loadServices(currentStatus);
+        setActiveTab(activeText, activeLine);
+    }
+
+    private void setActiveTab(TextView activeText, View activeLine) {
+        // Reset tất cả các tab về trạng thái không active
+        textShowing.setTextColor(colorInactive);
+        lineShowing.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+        textPending.setTextColor(colorInactive);
+        linePending.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+        textRejected.setTextColor(colorInactive);
+        lineRejected.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+        textPaused.setTextColor(colorInactive);
+        linePaused.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
 
         // Kích hoạt tab được chọn
-        if(activeText != null) activeText.setTextColor(colorActive);
-        if(activeLine != null) activeLine.setBackgroundColor(colorActive);
+        activeText.setTextColor(colorActive);
+        activeLine.setBackgroundColor(colorActive);
     }
 
     private void loadServices(String status) {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
-            Toast.makeText(this, "Vui lòng đăng nhập để xem dịch vụ.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng đăng nhập.", Toast.LENGTH_SHORT).show();
             return;
         }
+
         String currentUserId = currentUser.getUid();
 
-        serviceList.clear(); // Xóa dữ liệu cũ
-        serviceAdapter.notifyDataSetChanged(); // Báo cho adapter biết dữ liệu đã thay đổi
-        // Có thể thêm ProgressBar ở đây
+        tvEmptyList.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+        serviceList.clear();
 
         db.collection("services")
                 .whereEqualTo("providerId", currentUserId)
@@ -136,15 +153,20 @@ public class MyServicesActivity extends AppCompatActivity implements ServiceAdap
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            ServiceModel service = document.toObject(ServiceModel.class);
-                            service.setServiceId(document.getId());
-                            serviceList.add(service);
+                        if(task.getResult().isEmpty()) {
+                            tvEmptyList.setVisibility(View.VISIBLE);
+                        } else {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ServiceModel service = document.toObject(ServiceModel.class);
+                                service.setServiceId(document.getId());
+                                serviceList.add(service);
+                            }
                         }
                         serviceAdapter.notifyDataSetChanged();
                     } else {
-                        Log.w("MyServicesActivity", "Error getting documents.", task.getException());
-                        Toast.makeText(this, "Lỗi khi tải dữ liệu.", Toast.LENGTH_SHORT).show();
+                        // In ra lỗi chi tiết trong Logcat với mức độ Error (màu đỏ)
+                        Log.e(TAG, "Lỗi khi thực hiện truy vấn Firestore: ", task.getException());
+                        Toast.makeText(this, "Lỗi khi tải dữ liệu. Hãy kiểm tra Logcat.", Toast.LENGTH_LONG).show();;
                     }
                 });
     }
@@ -153,20 +175,38 @@ public class MyServicesActivity extends AppCompatActivity implements ServiceAdap
     @Override
     public void onEditClick(ServiceModel service) {
         Toast.makeText(this, "Chỉnh sửa: " + service.getTitle(), Toast.LENGTH_SHORT).show();
-        // Intent intent = new Intent(this, AddEditServiceActivity.class);
+        // Intent intent = new Intent(this, AddServiceActivity.class);
         // intent.putExtra("SERVICE_ID", service.getServiceId());
         // startActivity(intent);
     }
 
     @Override
     public void onHideClick(ServiceModel service) {
-        Toast.makeText(this, "Ẩn: " + service.getTitle(), Toast.LENGTH_SHORT).show();
-        // Code để cập nhật status của service thành "paused"
+        // Nếu đang hiển thị thì đổi thành 'paused', nếu đang ẩn thì đổi lại thành 'approved'
+        String newStatus = service.getStatus().equals("approved") ? "paused" : "approved";
+        db.collection("services").document(service.getServiceId())
+                .update("status", newStatus)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(this, "Đã cập nhật trạng thái!", Toast.LENGTH_SHORT).show();
+                    loadServices(currentStatus); // Tải lại tab hiện tại để item biến mất
+                })
+                .addOnFailureListener(e -> Toast.makeText(this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
     @Override
     public void onDeleteClick(ServiceModel service) {
-        Toast.makeText(this, "Xóa: " + service.getTitle(), Toast.LENGTH_SHORT).show();
-        // Code để xóa service (hoặc cập nhật status thành 'deleted')
+        new AlertDialog.Builder(this)
+                .setTitle("Xác nhận xóa")
+                .setMessage("Bạn có chắc chắn muốn xóa vĩnh viễn dịch vụ '" + service.getTitle() + "' không? Hành động này không thể hoàn tác.")
+                .setPositiveButton("Xóa", (dialog, which) -> {
+                    db.collection("services").document(service.getServiceId()).delete()
+                            .addOnSuccessListener(aVoid -> {
+                                Toast.makeText(this, "Đã xóa dịch vụ.", Toast.LENGTH_SHORT).show();
+                                loadServices(currentStatus); // Tải lại tab hiện tại
+                            })
+                            .addOnFailureListener(e -> Toast.makeText(this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                })
+                .setNegativeButton("Hủy", null)
+                .show();
     }
 }
