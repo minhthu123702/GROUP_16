@@ -40,14 +40,14 @@
             android:paddingStart="24dp"
             android:paddingEnd="24dp">
 
-            <!-- Avatar + nút Sửa -->
-
-            <!-- Tên lớn căn giữa -->
+            <!-- CHẾ ĐỘ XEM: Avatar to + họ tên lớn căn giữa -->
             <LinearLayout
+                android:id="@+id/profile_header_view"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:gravity="center_horizontal"
+                android:visibility="visible">
 
                 <ImageButton
                     android:id="@+id/btnEdit"
@@ -63,37 +63,95 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal">
-
                     <ImageView
-                        android:id="@+id/imgAvatar"
+                        android:id="@+id/imgAvatarBig"
                         android:layout_width="84dp"
                         android:layout_height="84dp"
-                        android:layout_gravity="center"
+                        android:src="@drawable/image33"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image33" />
+                        android:layout_gravity="center"/>
 
                 </FrameLayout>
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trần Đăng Dương"
+                    android:textStyle="bold"
+                    android:textColor="#2769B3"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="16dp"/>
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/txtName"
+            <!-- CHẾ ĐỘ SỬA: Label "Ảnh đại diện", avatar nhỏ, họ tên input (ẩn mặc định) -->
+            <LinearLayout
+                android:id="@+id/profile_edit_header"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Trần Đăng Dương"
-                android:textStyle="bold"
-                android:textColor="#2769B3"
-                android:textSize="20sp"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="14dp"/>
+                android:visibility="gone">
 
-            <!-- Dãy thông tin (mỗi trường 1 dòng ngang) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:text="Ảnh đại diện:"
+                        android:textColor="#222"
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif-medium"/>
+                    <ImageView
+                        android:id="@+id/imgAvatarSmall"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:src="@drawable/image33"
+                        android:scaleType="centerCrop"
+                        android:layout_marginStart="10dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:text="Họ tên:"
+                        android:textColor="#222"
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif-medium"/>
+                    <EditText
+                        android:id="@+id/edtFullName"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input"
+                        android:text="Trần Đăng Dương"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#222"
+                        android:textSize="15sp"
+                        android:enabled="false"
+                        android:inputType="textPersonName"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- CÁC TRƯỜNG THÔNG TIN CHUNG (label trái, input phải, luôn luôn hiển thị) -->
+            <!-- Nếu muốn tách trạng thái enable/disable thì xử lý bằng code -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="4dp">
 
                 <!-- Mã người dùng -->
                 <LinearLayout
