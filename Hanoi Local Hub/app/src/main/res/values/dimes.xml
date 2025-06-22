@@ -18,6 +18,7 @@
     <dimen name="icon_small">16dp</dimen>
     <dimen name="icon_medium">24dp</dimen>
     <dimen name="button_height_small">32dp</dimen>
+    <dimen name="tab_min_width">80dp</dimen>
 
     <!-- Card Properties -->
     <dimen name="card_corner_radius">12dp</dimen>
