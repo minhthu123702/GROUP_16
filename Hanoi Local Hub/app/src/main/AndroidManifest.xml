@@ -13,36 +13,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hanoi_Local_Hub"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ServiceManagementActivity"
+            android:exported="false" />
         <!-- Activity đầu tiên chạy ứng dụng, thường là màn hình đăng nhập -->
         <activity
             android:name=".auth.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Khai báo đầy đủ các Activity còn lại -->
-     <activity android:name=".MainAdminActivity" />
-<!--        <activity android:name=".MainAdmin" />-->
+        </activity> <!-- Khai báo đầy đủ các Activity còn lại -->
+        <activity android:name=".MainAdminActivity" /> <!-- <activity android:name=".MainAdmin" /> -->
         <activity android:name=".AdminProfileActivity" />
         <activity android:name=".UserGroupActivity" />
         <activity android:name=".AdminManagerCustomersActivity" />
-        <activity android:name=".AdminManagerProvidersActivity"/>
-        <activity android:name=".ProviderProfileActivity"/>
-
+        <activity android:name=".AdminManagerProvidersActivity" />
+        <activity android:name=".ProviderProfileActivity" />
         <activity android:name=".CustomerProfileActivity" />
         <activity android:name=".auth.RegisterActivity" />
         <activity android:name=".MainActivity" />
-
-
-<activity android:name=".MainCustomer"/>
+        <activity android:name=".MainCustomer" />
         <activity android:name=".ServiceDetailActivity" />
         <activity android:name=".SearchActivity" />
     </application>
-
-
 
 </manifest>

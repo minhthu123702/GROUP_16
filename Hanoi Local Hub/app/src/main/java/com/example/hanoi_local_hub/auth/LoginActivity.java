@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.hanoi_local_hub.MainMenuActivity;
+import com.example.hanoi_local_hub.MainAdminActivity;
 import com.example.hanoi_local_hub.R;
 import com.example.hanoi_local_hub.MainCustomer; // Chú ý: Đảm bảo tên class này chính xác
 
@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                     String role = document.getString("role");
                     if ("admin".equals(role)) {
                         Toast.makeText(this, "Chào mừng Admin!", Toast.LENGTH_SHORT).show();
-                        navigateTo(MainMenuActivity.class);
+                        navigateTo(MainAdminActivity.class);
                     } else {
                         Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                         navigateTo(MainCustomer.class);

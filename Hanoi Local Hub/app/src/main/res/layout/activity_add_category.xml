@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7FBFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="0dp">
+
+        <!-- Header -->
+        <include
+            layout="@layout/layout_header_add_category"
+            android:id="@+id/header"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Tiêu đề thêm danh mục -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thêm danh mục"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"/>
+
+        <!-- Thêm hình ảnh -->
+        <TextView
+            android:id="@+id/tvAddImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thêm hình ảnh"
+            android:textColor="#333"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="32dp"/>
+
+        <ImageButton
+            android:id="@+id/btnAddImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_rounded_edittext"
+            android:src="@drawable/ic_add_photo"
+            android:scaleType="centerInside"
+            android:contentDescription="Thêm hình ảnh"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toEndOf="@id/tvAddImage"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Tên danh mục -->
+        <EditText
+            android:id="@+id/edtCategoryName"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:hint="Tên danh mục"
+            android:background="@drawable/bg_rounded_edittext"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#222"
+            android:textSize="16sp"
+            android:inputType="text"
+            app:layout_constraintTop_toBottomOf="@id/btnAddImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"/>
+
+        <!-- Mô tả chi tiết -->
+        <EditText
+            android:id="@+id/edtCategoryDesc"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:hint="Mô tả chi tiết"
+            android:background="@drawable/bg_rounded_edittext"
+            android:padding="16dp"
+            android:textColor="#222"
+            android:textSize="15sp"
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
+            app:layout_constraintTop_toBottomOf="@id/edtCategoryName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"/>
+
+        <!-- Ngày tạo với icon lịch -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clDate"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_rounded_edittext"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@id/edtCategoryDesc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
+
+            <EditText
+                android:id="@+id/edtCreateDate"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="Ngày tạo"
+                android:focusable="false"
+                android:textColor="#222"
+                android:textSize="15sp"
+                android:padding="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnPickDate"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="4dp"/>
+
+            <ImageButton
+                android:id="@+id/btnPickDate"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_calendar"
+                android:contentDescription="Chọn ngày"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Nút Thêm mới -->
+        <Button
+            android:id="@+id/btnAddCategory"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_rounded_button"
+            android:text="Thêm mới"
+            android:textAllCaps="false"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/clDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="28dp"/>
+
+        <!-- Đường cong sóng ở cuối, có thể là ImageView hoặc View vẽ SVG -->
+        <ImageView
+            android:id="@+id/wave"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_wave_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

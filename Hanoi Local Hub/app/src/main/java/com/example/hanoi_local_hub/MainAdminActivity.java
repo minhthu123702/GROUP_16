@@ -67,15 +67,19 @@ public class MainAdminActivity extends AppCompatActivity {
             Intent intent = new Intent(MainAdminActivity.this, UserGroupActivity.class);
             startActivity(intent);
         });
+        ivUserProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(MainAdminActivity.this, AdminProfileActivity.class);
+            startActivity(intent);
+        });
 
         // Các nút chưa dùng sẽ xử lý sau khi tạo Activity tương ứng
 //        btnStatistics.setOnClickListener(v -> {
 //            startActivity(new Intent(MainMenuActivity.this, StatisticsActivity.class));
 //        });
 
-//        btnServiceManagement.setOnClickListener(v -> {
-//            startActivity(new Intent(MainMenuActivity.this, ServiceManagementActivity.class));
-//        });
+        btnServiceManagement.setOnClickListener(v -> {
+            startActivity(new Intent(MainAdminActivity.this, ServiceManagementActivity.class));
+        });
 
 //        ivUserProfile.setOnClickListener(v -> {
 //            Intent intent = new Intent(MainMenuActivity.this, AdminProfileActivity.class);

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/item_category_bg.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#ADD6F7"/> <!-- Xanh nhạt, bạn có thể đổi -->
+    <corners android:radius="12dp"/>
+</shape>
