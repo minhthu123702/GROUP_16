@@ -5,6 +5,11 @@
       <config />
     </shared>
     <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_new_service.xml">
+        <config>
+          <theme>@style/Theme.Hanoi_Local_Hub</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin_profile.xml">
         <config>
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
@@ -55,7 +60,17 @@
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_service.xml">
+        <config>
+          <theme>@style/Theme.Hanoi_Local_Hub</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_user.xml">
+        <config>
+          <theme>@style/Theme.Hanoi_Local_Hub</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/services_item.xml">
         <config>
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
         </config>
@@ -73,7 +88,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a16d3b34-89fd-4307-8cb0-2856bc3e1075" name="Changes" comment="first commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/dimes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimes.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,8 +125,8 @@
       <list>
         <option value="Kotlin Script" />
         <option value="Class" />
-        <option value="layoutResourceFile" />
         <option value="resourceFile" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
