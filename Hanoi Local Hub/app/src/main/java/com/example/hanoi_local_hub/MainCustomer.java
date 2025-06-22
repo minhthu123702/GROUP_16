@@ -13,12 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainCustomer extends AppCompatActivity {
 
-    private List<ServiceItem> allServices;   // Không cần khởi tạo mới
+    private List<ServiceItem> allServices;
     private ServiceAdapter adapter;
     private RecyclerView recyclerView;
     private Spinner spinner;
@@ -42,7 +44,7 @@ public class MainCustomer extends AppCompatActivity {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
 
-        // Tạo adapter có click
+        // Adapter có click
         adapter = new ServiceAdapter(this, new ArrayList<>(allServices), service -> {
             Intent intent = new Intent(MainCustomer.this, ServiceDetailActivity.class);
             intent.putExtra("imageResId", service.getImageResId());
@@ -90,5 +92,25 @@ public class MainCustomer extends AppCompatActivity {
             startActivity(new Intent(MainCustomer.this, SearchActivity.class));
         });
 
+        // ===== BOTTOM NAVIGATION XỬ LÝ Ở ĐÂY =====
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_home);
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_home) {
+                // Đã ở Home
+                return true;
+            } else if (id == R.id.nav_notification) {
+                startActivity(new Intent(MainCustomer.this, CustomerNotification.class));
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (id == R.id.nav_profile) {
+                startActivity(new Intent(MainCustomer.this, CustomerProfile.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }
+            return false;
+        });
     }
 }
