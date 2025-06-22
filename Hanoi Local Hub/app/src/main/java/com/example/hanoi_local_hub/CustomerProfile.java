@@ -1,5 +1,7 @@
 package com.example.hanoi_local_hub;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.hanoi_local_hub.auth.LoginActivity;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -141,6 +145,18 @@ public class CustomerProfile extends AppCompatActivity {
             }
             return false;
         });
+        btnLogout.setOnClickListener(v -> {
+            // Xoá session đăng nhập (nếu bạn lưu login state bằng SharedPreferences)
+            SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
+            prefs.edit().clear().apply();
+
+            // Chuyển về LoginActivity, xóa hết history stack
+            Intent intent = new Intent(CustomerProfile.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
+
     }
 
     // Bật/tắt chế độ chỉnh sửa cho từng trường
