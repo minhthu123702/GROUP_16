@@ -17,12 +17,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.hanoi_local_hub.R;
 import com.example.hanoi_local_hub.ServiceManagement.ServiceModel; // Đảm bảo bạn có file Model này
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AddServiceActivity extends AppCompatActivity {
 
@@ -38,6 +40,8 @@ public class AddServiceActivity extends AppCompatActivity {
     private Button btnAddService, btnCancel;
     private ImageView imgBack;
     private TextView tvHeaderTitle;
+    private AutoCompleteTextView actDistrict, actWard;
+    private TextInputLayout layoutWard;
 
     // --- Khai báo các đối tượng Firebase ---
     private FirebaseAuth mAuth;
@@ -54,6 +58,7 @@ public class AddServiceActivity extends AppCompatActivity {
 
         setupViews();
         setupCategorySpinner();
+        setupLocationDropdowns();
         setupListeners();
 
         // Kiểm tra chế độ Thêm mới hay Chỉnh sửa
@@ -77,6 +82,9 @@ public class AddServiceActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btn_cancel);
         imgBack = findViewById(R.id.img_back_add);
         tvHeaderTitle = findViewById(R.id.tv_header_title);
+        actDistrict = findViewById(R.id.act_district);
+        actWard = findViewById(R.id.act_ward);
+        layoutWard = findViewById(R.id.layout_ward); // TextInputLayout cho Phường/Xã
     }
 
     private void setupCategorySpinner() {
@@ -123,12 +131,30 @@ public class AddServiceActivity extends AppCompatActivity {
     }
 
     private void populateForm(ServiceModel service) {
+        // Điền dữ liệu cho các trường văn bản như cũ
         edtServiceTitle.setText(service.getTitle());
         edtServiceDescription.setText(service.getDescription());
         actCategory.setText(service.getCategoryName(), false);
         edtServicePricing.setText(service.getPricingInfo());
         edtServiceHours.setText(service.getOperatingHours());
         edtServiceCertifications.setText(service.getCertifications());
+
+        // --- LOGIC MỚI ĐỂ ĐIỀN DỮ LIỆU KHU VỰC ---
+        List<String> serviceArea = service.getServiceArea();
+        if (serviceArea != null && !serviceArea.isEmpty()) {
+            // 1. Lấy và điền tên Quận/Huyện
+            String district = serviceArea.get(0);
+            actDistrict.setText(district, false);
+
+            // 2. Kích hoạt và điền danh sách Phường/Xã tương ứng
+            updateWardDropdown(district);
+
+            // 3. Nếu có dữ liệu Phường/Xã, điền nốt vào
+            if (serviceArea.size() > 1) {
+                String ward = serviceArea.get(1);
+                actWard.setText(ward, false);
+            }
+        }
     }
 
     private boolean validateInput() {
@@ -146,7 +172,34 @@ public class AddServiceActivity extends AppCompatActivity {
         }
         return true;
     }
+    // THAY THẾ TOÀN BỘ HÀM CŨ BẰNG HÀM MỚI NÀY
+    private void setupLocationDropdowns() {
+        List<String> districts = HanoiLocationData.getDistrictList();
+        ArrayAdapter<String> districtAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, districts);
+        actDistrict.setAdapter(districtAdapter);
 
+        // Khi người dùng chọn một quận, chỉ cần gọi hàm updateWardDropdown
+        actDistrict.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedDistrict = (String) parent.getItemAtPosition(position);
+            updateWardDropdown(selectedDistrict);
+        });
+    }
+    private void updateWardDropdown(String selectedDistrict) {
+        // Xóa lựa chọn phường cũ
+        actWard.setText("", false);
+
+        if (selectedDistrict.equals("Toàn bộ khu vực Hà Nội")) {
+            // Nếu người dùng chọn "Toàn bộ", hãy vô hiệu hóa dropdown Phường/Xã
+            layoutWard.setEnabled(false);
+        } else {
+            // Nếu người dùng chọn một quận cụ thể
+            List<String> wards = HanoiLocationData.getWardList(selectedDistrict);
+            ArrayAdapter<String> wardAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, wards);
+            actWard.setAdapter(wardAdapter);
+            // Kích hoạt lại dropdown Phường/Xã
+            layoutWard.setEnabled(true);
+        }
+    }
     private void saveServiceData() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
@@ -165,7 +218,22 @@ public class AddServiceActivity extends AppCompatActivity {
         String pricingInfo = edtServicePricing.getText().toString().trim();
         String operatingHours = edtServiceHours.getText().toString().trim();
         String certifications = edtServiceCertifications.getText().toString().trim();
+        String district = actDistrict.getText().toString().trim();
+        String ward = actWard.getText().toString().trim();
 
+        // 2. Tạo một danh sách (List) để lưu khu vực
+        List<String> serviceAreaList = new ArrayList<>();
+
+        // 3. Thêm quận/huyện vào danh sách nếu người dùng có chọn
+        if (!district.isEmpty()) {
+            serviceAreaList.add(district);
+        }
+
+        // 4. Thêm phường/xã vào danh sách nếu người dùng có chọn
+        // (Khi chọn "Toàn bộ khu vực Hà Nội", trường ward sẽ rỗng nên điều kiện này không được thực thi)
+        if (!ward.isEmpty()) {
+            serviceAreaList.add(ward);
+        }
         // Nếu là chế độ Sửa, dùng lại object cũ. Nếu là Thêm, tạo object mới.
         ServiceModel serviceToSave = (editingServiceId != null) ? currentService : new ServiceModel();
 
@@ -176,6 +244,7 @@ public class AddServiceActivity extends AppCompatActivity {
         serviceToSave.setPricingInfo(pricingInfo);
         serviceToSave.setOperatingHours(operatingHours);
         serviceToSave.setCertifications(certifications);
+        serviceToSave.setServiceArea(serviceAreaList);
 
         // Vì không có ảnh, chúng ta sẽ giữ nguyên danh sách ảnh cũ (nếu là chế độ sửa)
         // hoặc tạo một danh sách rỗng (nếu là chế độ thêm)
