@@ -1,5 +1,7 @@
 package com.example.hanoi_local_hub.ServiceManagement; // Thay bằng package của bạn
-
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,7 +37,7 @@ public class MyServicesActivity extends AppCompatActivity implements ServiceAdap
     private TextView tvEmptyList;
     private ServiceAdapter serviceAdapter;
     private List<ServiceModel> serviceList;
-
+    private ActivityResultLauncher<Intent> addEditServiceLauncher;
     private LinearLayout tabShowing, tabPending, tabRejected, tabPaused;
     private TextView textShowing, textPending, textRejected, textPaused;
     private View lineShowing, linePending, lineRejected, linePaused;
@@ -54,6 +56,19 @@ public class MyServicesActivity extends AppCompatActivity implements ServiceAdap
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+// KHỞI TẠO LAUNCHER
+        addEditServiceLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    // Kiểm tra xem kết quả trả về có phải là "OK" không
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // Nếu đúng, nghĩa là người dùng đã Thêm/Sửa thành công
+                        // Tải lại danh sách dịch vụ của tab hiện tại
+                        Toast.makeText(this, "Đang cập nhật danh sách...", Toast.LENGTH_SHORT).show();
+                        loadServices(currentStatus);
+                    }
+                }
+        );
 
         setupViews();
         setupRecyclerView();
@@ -97,6 +112,11 @@ public class MyServicesActivity extends AppCompatActivity implements ServiceAdap
         serviceAdapter = new ServiceAdapter(this, serviceList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(serviceAdapter);
+        fabAddService.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AddServiceActivity.class);
+            // Dùng launcher để mở
+            addEditServiceLauncher.launch(intent);
+        });
     }
 
     private void setupTabs() {
@@ -106,9 +126,6 @@ public class MyServicesActivity extends AppCompatActivity implements ServiceAdap
         tabRejected.setOnClickListener(v -> handleTabClick("rejected", textRejected, lineRejected));
         tabPaused.setOnClickListener(v -> handleTabClick("paused", textPaused, linePaused));
 
-        fabAddService.setOnClickListener(v ->
-                startActivity(new Intent(this, AddServiceActivity.class))
-        );
     }
 
     private void handleTabClick(String status, TextView activeText, View activeLine) {
@@ -170,14 +187,23 @@ public class MyServicesActivity extends AppCompatActivity implements ServiceAdap
                     }
                 });
     }
+    private void setupListeners() {
+        // ... các sự kiện click cho tab
+
+        fabAddService.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AddServiceActivity.class);
+            // Dùng launcher để mở
+            addEditServiceLauncher.launch(intent);
+        });
+    }
 
     // --- Xử lý sự kiện click từ Adapter ---
     @Override
     public void onEditClick(ServiceModel service) {
-        Toast.makeText(this, "Chỉnh sửa: " + service.getTitle(), Toast.LENGTH_SHORT).show();
-        // Intent intent = new Intent(this, AddServiceActivity.class);
-        // intent.putExtra("SERVICE_ID", service.getServiceId());
-        // startActivity(intent);
+        Intent intent = new Intent(this, AddServiceActivity.class);
+        intent.putExtra("SERVICE_ID_TO_EDIT", service.getServiceId());
+        // Dùng launcher để mở
+        addEditServiceLauncher.launch(intent);
     }
 
     @Override

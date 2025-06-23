@@ -19,7 +19,9 @@
             android:id="@+id/img_back_add"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_arrow_right" /> <TextView
+            android:src="@drawable/ic_arrow_right" />
+        <TextView
+        android:id="@+id/tv_header_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -117,7 +119,8 @@
                     android:id="@+id/act_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"/>
+                    android:inputType="none"
+                    android:contentDescription="Category"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
