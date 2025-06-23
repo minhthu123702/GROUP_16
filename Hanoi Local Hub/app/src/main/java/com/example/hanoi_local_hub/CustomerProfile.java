@@ -14,6 +14,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.hanoi_local_hub.ServiceManagement.MyServicesActivity;
 import com.example.hanoi_local_hub.auth.LoginActivity;
 
 
@@ -123,8 +125,8 @@ public class CustomerProfile extends AppCompatActivity {
 
         // --- Sự kiện Quản lý dịch vụ ---
         btnManageService.setOnClickListener(v -> {
-            Toast.makeText(this, "Chuyển sang quản lý dịch vụ!", Toast.LENGTH_SHORT).show();
-            // TODO: startActivity(new Intent(this, ManageServiceActivity.class));
+            Intent intent = new Intent(this, MyServicesActivity.class);
+            startActivity(intent);
         });
 
         // --- Bottom navigation ---

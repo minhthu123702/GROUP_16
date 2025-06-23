@@ -26,6 +26,7 @@ public class ServiceItem {
             String workTime,
             String reviewCount,
             String phone,
+
             String email
     ) {
         this.imageResId = imageResId;
@@ -52,6 +53,9 @@ public class ServiceItem {
     public String getDesc() { return desc; }
     public String getArea() { return area; }
     public String getWorkTime() { return workTime; }
+
+
+
     public String getReviewCount() { return reviewCount; }
     public String getPhone() { return phone; }
     public String getEmail() { return email; }

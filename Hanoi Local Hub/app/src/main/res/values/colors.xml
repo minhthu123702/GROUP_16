@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <!-- Primary Colors từ Figma -->
+    <color name="primary_blue">#286291</color>
+    <color name="accent_blue">#34a4ff</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#1d1b20</color>
+    <color name="text_secondary">#49454f</color>
+    <color name="text_hint">#8d8888</color>
+    <!-- UI Colors -->
+    <color name="divider_color">#cac4d0</color>
+    <color name="icon_background">#cac4d0</color>
+    <color name="icon_color">#49454f</color>
+    <color name="star_color">#ffd900</color>
+    <color name="transparent">#00000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#888888</color>
     <color name="profile_primary">#2769B3</color>
     <color name="profile_label">#90949C</color>
     <color name="profile_value">#222222</color>
     <color name="background_light">#F6F8FB</color>
-
 </resources>
