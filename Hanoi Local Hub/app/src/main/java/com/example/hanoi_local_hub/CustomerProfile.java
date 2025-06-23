@@ -79,14 +79,14 @@ public class CustomerProfile extends AppCompatActivity {
         btnEdit = findViewById(R.id.btnEdit);
 
         // --- Gán dữ liệu mẫu ---
-        txtName.setText("Trần Đăng Dương");
-        edtFullName.setText("Trần Đăng Dương");
+        txtName.setText("Nguyễn Quỳnh Anh");
+        edtFullName.setText("Nguyễn Quỳnh Anh");
         edtUserId.setText("111111");
         edtCCCD.setText("001200356741");
-        edtEmail.setText("customer@gmail.com");
+        edtEmail.setText("nguyenquynhanh2682k3@gmail.com");
         edtPhone.setText("0123456789");
         edtBirthday.setText("19/12/2000");
-        radioMale.setChecked(true);
+        radioFemale.setChecked(true);
 
         // --- Ban đầu là chế độ xem ---
         setEditable(false);
@@ -133,12 +133,12 @@ public class CustomerProfile extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
-                // startActivity(new Intent(this, MainCustomer.class));
-                // overridePendingTransition(0, 0);
+                 startActivity(new Intent(this, MainCustomer.class));
+                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_notification) {
-                // startActivity(new Intent(this, CustomerNotification.class));
-                // overridePendingTransition(0, 0);
+                 startActivity(new Intent(this, CustomerNotification.class));
+                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_profile) {
                 return true;
