@@ -20,9 +20,9 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_alignParentEnd="true"
+            android:contentDescription="Đóng"
             android:padding="8dp"
-            android:src="@drawable/ic_close"
-            android:contentDescription="Đóng" />
+            android:src="@drawable/ic_close" />
 
     </RelativeLayout>
 

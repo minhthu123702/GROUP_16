@@ -41,6 +41,8 @@
         <activity android:name=".CustomerNotification" />
         <activity android:name=".CustomerProfile" />
 
+
+
     </application>
 
 </manifest>

@@ -26,7 +26,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyServicesActivity extends AppCompatActivity implements ServiceAdapter.OnItemClickListener {
+public class MyServicesActivity extends AppCompatActivity implements ServiceAdapter.OnItemClickListener, DeleteConfirmationDialog.OnDeleteListener {
 
     private static final String TAG = "MyServicesActivity";
 
@@ -195,18 +195,22 @@ public class MyServicesActivity extends AppCompatActivity implements ServiceAdap
 
     @Override
     public void onDeleteClick(ServiceModel service) {
-        new AlertDialog.Builder(this)
-                .setTitle("Xác nhận xóa")
-                .setMessage("Bạn có chắc chắn muốn xóa vĩnh viễn dịch vụ '" + service.getTitle() + "' không? Hành động này không thể hoàn tác.")
-                .setPositiveButton("Xóa", (dialog, which) -> {
-                    db.collection("services").document(service.getServiceId()).delete()
-                            .addOnSuccessListener(aVoid -> {
-                                Toast.makeText(this, "Đã xóa dịch vụ.", Toast.LENGTH_SHORT).show();
-                                loadServices(currentStatus); // Tải lại tab hiện tại
-                            })
-                            .addOnFailureListener(e -> Toast.makeText(this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-                })
-                .setNegativeButton("Hủy", null)
-                .show();
+        // Sử dụng phương thức factory newInstance để tạo và truyền serviceId
+        DeleteConfirmationDialog dialogFragment = DeleteConfirmationDialog.newInstance(service.getServiceId());
+
+        // Hiển thị dialog bằng FragmentManager
+        dialogFragment.show(getSupportFragmentManager(), "DeleteConfirmationDialog");
+    }
+
+    // THÊM HÀM MỚI NÀY
+    // Đây là hàm sẽ được gọi từ DialogFragment sau khi xóa thành công
+    @Override
+    public void onDeleteSuccess() {
+        Toast.makeText(this, "Đã xóa dịch vụ thành công!", Toast.LENGTH_SHORT).show();
+
+        // Tải lại danh sách dịch vụ trên màn hình hiện tại
+        loadServices(currentStatus);
+
+
     }
 }
