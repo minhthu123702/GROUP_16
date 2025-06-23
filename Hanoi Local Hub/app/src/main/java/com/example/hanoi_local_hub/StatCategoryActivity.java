@@ -11,13 +11,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -30,7 +30,7 @@ public class StatCategoryActivity extends AppCompatActivity {
 
     private static final String TAG = "StatCategoryActivity";
     private ImageView btnBack;
-    private PieChart pieChart;
+    private BarChart barChart;
     private ProgressBar progressBar;
     private FirebaseFirestore db;
 
@@ -42,51 +42,33 @@ public class StatCategoryActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         setupViews();
-        setupPieChart();
+        setupBarChart();
         loadDataFromFirestore();
     }
 
     private void setupViews() {
         btnBack = findViewById(R.id.btnBack);
-        pieChart = findViewById(R.id.pieChart);
+        barChart = findViewById(R.id.barChart);
         progressBar = findViewById(R.id.progressBar);
 
         btnBack.setOnClickListener(v -> finish());
     }
 
-    private void setupPieChart() {
-        pieChart.setUsePercentValues(true);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5, 10, 5, 5);
-        pieChart.setDragDecelerationFrictionCoef(0.95f);
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.WHITE);
-        pieChart.setTransparentCircleRadius(61f);
-        pieChart.setHoleRadius(58f);
-        pieChart.setDrawCenterText(true);
-        pieChart.setCenterText("Tỷ lệ Danh mục");
-        pieChart.setCenterTextSize(16f);
-        pieChart.setEntryLabelColor(Color.BLACK);
-        pieChart.setEntryLabelTextSize(12f);
-
-        Legend l = pieChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
-        l.setTextSize(12f);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(2f);
-        l.setYOffset(0f);
-        l.setXOffset(0f); // Có thể thử -5f nếu muốn sát nữa
-
-// Đẩy xuống chút cho đẹp
+    private void setupBarChart() {
+        barChart.getDescription().setEnabled(false);
+        barChart.setDrawGridBackground(false);
+        barChart.setDrawBarShadow(false);
+        barChart.setDrawValueAboveBar(true);
+        barChart.setPinchZoom(false);
+        barChart.setScaleEnabled(false);
+        barChart.getAxisRight().setEnabled(false);
+        barChart.getLegend().setEnabled(false);
 
     }
 
     private void loadDataFromFirestore() {
         progressBar.setVisibility(View.VISIBLE);
-        pieChart.setVisibility(View.GONE);
+        barChart.setVisibility(View.GONE);
 
         db.collection("services")
                 .whereEqualTo("status", "approved")
@@ -104,18 +86,17 @@ public class StatCategoryActivity extends AppCompatActivity {
                         if (categoryName != null && !categoryName.isEmpty()) {
                             categoryName = categoryName.trim();
                             categoryName = categoryName.replaceAll("\\s+", " ");
-                            // categoryName = categoryName.toLowerCase(); // Nếu muốn không phân biệt hoa thường
                             int currentCount = categoryCounts.getOrDefault(categoryName, 0);
                             categoryCounts.put(categoryName, currentCount + 1);
                         }
                     }
 
                     Log.d(TAG, "Dữ liệu đếm được: " + categoryCounts.toString());
-                    drawChart(categoryCounts);
+                    drawBarChart(categoryCounts);
 
                     progressBar.setVisibility(View.GONE);
-                    pieChart.setVisibility(View.VISIBLE);
-                    pieChart.animateY(1000, Easing.EaseInOutCubic);
+                    barChart.setVisibility(View.VISIBLE);
+                    barChart.animateY(1000);
 
                 })
                 .addOnFailureListener(e -> {
@@ -125,8 +106,9 @@ public class StatCategoryActivity extends AppCompatActivity {
                 });
     }
 
-    private void drawChart(Map<String, Integer> categoryCounts) {
-        ArrayList<PieEntry> entries = new ArrayList<>();
+    private void drawBarChart(Map<String, Integer> categoryCounts) {
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        ArrayList<String> labels = new ArrayList<>();
         ArrayList<Integer> colors = new ArrayList<>();
 
         // Gán màu thủ công cho các danh mục chính, còn lại auto
@@ -137,33 +119,39 @@ public class StatCategoryActivity extends AppCompatActivity {
         categoryColorMap.put("Dạy năng khiếu", Color.parseColor("#2196F3"));  // Xanh dương
         categoryColorMap.put("Thiết kế Đồ họa", Color.parseColor("#AB47BC"));      // Tím
 
+        int i = 0;
         for (Map.Entry<String, Integer> entry : categoryCounts.entrySet()) {
-            String name = entry.getKey();
-            entries.add(new PieEntry(entry.getValue().floatValue(), name));
-            if (categoryColorMap.containsKey(name)) {
-                colors.add(categoryColorMap.get(name));
+            entries.add(new BarEntry(i, entry.getValue()));
+            labels.add(entry.getKey());
+            if (categoryColorMap.containsKey(entry.getKey())) {
+                colors.add(categoryColorMap.get(entry.getKey()));
             } else {
-                // Auto dùng màu của thư viện cho danh mục mới/chưa định nghĩa
                 colors.add(ColorTemplate.MATERIAL_COLORS[colors.size() % ColorTemplate.MATERIAL_COLORS.length]);
             }
+            i++;
         }
 
-        PieDataSet dataSet = new PieDataSet(entries, "");
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
+        BarDataSet dataSet = new BarDataSet(entries, "Danh mục");
         dataSet.setColors(colors);
+        dataSet.setValueTextColor(Color.DKGRAY);
+        dataSet.setValueTextSize(14f);
 
-        dataSet.setValueLinePart1OffsetPercentage(80.f);
-        dataSet.setValueLinePart1Length(0.5f);
-        dataSet.setValueLinePart2Length(0.5f);
-        dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        BarData barData = new BarData(dataSet);
+        barData.setBarWidth(0.7f);
+        barChart.setData(barData);
+        barChart.setFitBars(true);
 
-        PieData data = new PieData(dataSet);
-        data.setValueFormatter(new PercentFormatter(pieChart));
-        data.setValueTextSize(9f);
-        data.setValueTextColor(Color.DKGRAY);
+        // Hiển thị label dạng chữ dưới cột
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setGranularity(1f);
+        xAxis.setGranularityEnabled(true);
+        xAxis.setLabelRotationAngle(-25f); // Xoay chữ nếu bị dài
+        xAxis.setDrawGridLines(false);
 
-        pieChart.setData(data);
-        pieChart.invalidate();
+        barChart.getAxisLeft().setAxisMinimum(0f); // Đảm bảo luôn >= 0
+
+        barChart.invalidate(); // Vẽ lại
     }
 }
