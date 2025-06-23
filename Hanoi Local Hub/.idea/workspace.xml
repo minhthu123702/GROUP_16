@@ -163,9 +163,12 @@
   <component name="ChangeListManager">
     <list default="true" id="a16d3b34-89fd-4307-8cb0-2856bc3e1075" name="Changes" comment="first commitc">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ServiceManagementActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ServiceManagementActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ViewCategoryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ViewCategoryActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_view_category.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_view_category.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/MainAdminActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/MainAdminActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/StatAreaActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/StatAreaActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/StatCategoryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/StatCategoryActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_stat_area.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_stat_area.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_stat_category.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_stat_category.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -478,12 +481,12 @@
       <map>
         <entry key="com.example.hanoi_local_hub">
           <value>
-            <CheckInfo lastCheckTimestamp="1750605549069" />
+            <CheckInfo lastCheckTimestamp="1750693472118" />
           </value>
         </entry>
         <entry key="com.example.hanoi_local_hub.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1750605549069" />
+            <CheckInfo lastCheckTimestamp="1750693472119" />
           </value>
         </entry>
         <entry key="com.example.hanoilocalhub">

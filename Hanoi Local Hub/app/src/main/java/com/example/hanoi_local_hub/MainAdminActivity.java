@@ -50,13 +50,13 @@ public class MainAdminActivity extends AppCompatActivity {
                 }
 
                 // Các mục này bạn sẽ xử lý sau khi tạo các Activity tương ứng
-//                else if (id == R.id.nav_services) {
-//                    startActivity(new Intent(MainMenuActivity.this, ServiceManagementActivity.class));
-//                    return true;
-//                } else if (id == R.id.nav_stats) {
-//                    startActivity(new Intent(MainMenuActivity.this, StatisticsActivity.class));
-//                    return true;
-//                }
+                else if (id == R.id.nav_services) {
+                    startActivity(new Intent(MainAdminActivity.this, ServiceManagementActivity.class));
+                    return true;
+                } else if (id == R.id.nav_stats) {
+                    startActivity(new Intent(MainAdminActivity.this, StatisticsActivity.class));
+                    return true;
+                }
 
                 return false;
             }
