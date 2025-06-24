@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                             user.put("email", email);
                             // === CÁC DÒNG ĐƯỢC THÊM VÀO ===
                             user.put("role", "user"); // Vai trò mặc định là 'user'
-                            user.put("providerStatus", "none"); // Trạng thái mặc định là 'none'
+                            user.put("providerStatus", "false"); // Trạng thái mặc định là 'none'
                             // =============================
 
                             // Lưu thông tin người dùng vào collection "users"

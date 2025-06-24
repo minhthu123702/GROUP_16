@@ -20,8 +20,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private OnUserClickListener onUserClickListener;
 
     public interface OnUserClickListener {
-        void onUserClick(User user);
-        void onDeleteClick(User user, int position);
+        void onUserClick(User user);                // Xem chi tiết
+        void onDeleteClick(User user, int position); // Xoá user
     }
 
     public UserAdapter(Context context, List<User> users, OnUserClickListener listener) {
@@ -33,8 +33,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_user, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_user, parent, false);
         return new UserViewHolder(view);
     }
 
@@ -44,16 +43,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.txtName.setText(user.getName());
         holder.txtCode.setText("Mã: " + user.getCode());
         holder.imgAvatar.setImageResource(user.getAvatarResId());
-        holder.imgStatus.setImageResource(
-                user.isOnline() ? R.drawable.green_dot : R.drawable.red_dot
-        );
+        holder.imgStatus.setImageResource(user.isOnline() ? R.drawable.green_dot : R.drawable.red_dot);
 
+        // Nút Xem (btnDisplay)
         holder.btnDisplay.setOnClickListener(v -> {
             if (onUserClickListener != null) {
                 onUserClickListener.onUserClick(user);
             }
         });
 
+        // Nút Xoá
         holder.btnDelete.setOnClickListener(v -> {
             if (onUserClickListener != null) {
                 onUserClickListener.onDeleteClick(user, holder.getAdapterPosition());
@@ -71,7 +70,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         notifyItemRemoved(position);
     }
 
-    // ✅ Hàm này để cập nhật danh sách được lọc (ví dụ: tìm kiếm theo mã)
     public void setFilteredList(List<User> filteredList) {
         this.users = filteredList;
         notifyDataSetChanged();

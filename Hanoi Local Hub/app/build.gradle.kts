@@ -50,5 +50,20 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-auth")
     // Firebase Bill of Materials (BoM) - Quản lý phiên bản các thư viện Firebase
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+    implementation ("com.google.android.material:material:1.12.0")
+    // Bắt buộc phải có cho các Activity và theme cơ bản
+    implementation ("androidx.appcompat:appcompat:1.6.1")
+
+    // Bắt buộc phải có cho ConstraintLayout
+    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    // Rất nên có vì là chuẩn thiết kế của Google
+    implementation ("com.google.android.material:material:1.12.0")
+
+    // Thư viện biểu đồ chúng ta đang dùng
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 }

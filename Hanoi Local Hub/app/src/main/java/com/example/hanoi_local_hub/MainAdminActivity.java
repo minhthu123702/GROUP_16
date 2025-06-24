@@ -2,7 +2,6 @@ package com.example.hanoi_local_hub;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,7 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainAdminActivity extends AppCompatActivity {
 
     Button btnUserManagement, btnStatistics, btnServiceManagement;
     ImageView ivUserProfile, ivMenu;
@@ -24,7 +23,7 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+        setContentView(R.layout.activity_main);
 
         // Ánh xạ view
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -46,18 +45,18 @@ public class MainMenuActivity extends AppCompatActivity {
                 int id = item.getItemId();
 
                 if (id == R.id.nav_user) {
-                    startActivity(new Intent(MainMenuActivity.this, UserGroupActivity.class));
+                    startActivity(new Intent(MainAdminActivity.this, UserGroupActivity.class));
                     return true;
                 }
 
                 // Các mục này bạn sẽ xử lý sau khi tạo các Activity tương ứng
-//                else if (id == R.id.nav_services) {
-//                    startActivity(new Intent(MainMenuActivity.this, ServiceManagementActivity.class));
-//                    return true;
-//                } else if (id == R.id.nav_stats) {
-//                    startActivity(new Intent(MainMenuActivity.this, StatisticsActivity.class));
-//                    return true;
-//                }
+                else if (id == R.id.nav_services) {
+                    startActivity(new Intent(MainAdminActivity.this, ServiceManagementActivity.class));
+                    return true;
+                } else if (id == R.id.nav_stats) {
+                    startActivity(new Intent(MainAdminActivity.this, StatisticsActivity.class));
+                    return true;
+                }
 
                 return false;
             }
@@ -65,18 +64,22 @@ public class MainMenuActivity extends AppCompatActivity {
 
         // Button chức năng chính: Quản lý người dùng
         btnUserManagement.setOnClickListener(v -> {
-            Intent intent = new Intent(MainMenuActivity.this, UserGroupActivity.class);
+            Intent intent = new Intent(MainAdminActivity.this, UserGroupActivity.class);
+            startActivity(intent);
+        });
+        ivUserProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(MainAdminActivity.this, AdminProfileActivity.class);
             startActivity(intent);
         });
 
         // Các nút chưa dùng sẽ xử lý sau khi tạo Activity tương ứng
-//        btnStatistics.setOnClickListener(v -> {
-//            startActivity(new Intent(MainMenuActivity.this, StatisticsActivity.class));
-//        });
+        btnStatistics.setOnClickListener(v -> {
+            startActivity(new Intent(MainAdminActivity.this, StatisticsActivity.class));
+        });
 
-//        btnServiceManagement.setOnClickListener(v -> {
-//            startActivity(new Intent(MainMenuActivity.this, ServiceManagementActivity.class));
-//        });
+        btnServiceManagement.setOnClickListener(v -> {
+            startActivity(new Intent(MainAdminActivity.this, ServiceManagementActivity.class));
+        });
 
 //        ivUserProfile.setOnClickListener(v -> {
 //            Intent intent = new Intent(MainMenuActivity.this, AdminProfileActivity.class);
