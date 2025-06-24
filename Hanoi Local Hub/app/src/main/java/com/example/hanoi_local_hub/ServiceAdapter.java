@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide; // Thêm thư viện Glide trong build.gradle
+// implementation 'com.github.bumptech.glide:glide:4.16.0'
+
 import java.util.List;
 
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHolder> {
@@ -53,12 +56,21 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
     public void onBindViewHolder(ServiceAdapter.ViewHolder holder, int position) {
         ServiceItem service = serviceList.get(position);
 
-        // Sử dụng getter thay vì truy cập trực tiếp thuộc tính (đúng chuẩn OOP)
-        holder.imageAvatar.setImageResource(service.getImageResId());
+        // Load ảnh từ url Firestore (nếu có ảnh)
+        if (service.getPortfolioImages() != null && !service.getPortfolioImages().isEmpty()) {
+            Glide.with(context)
+                    .load(service.getPortfolioImages().get(0))
+                    .placeholder(R.drawable.image) // ảnh mặc định nếu url null
+                    .into(holder.imageAvatar);
+        } else {
+            holder.imageAvatar.setImageResource(R.drawable.image); // fallback nếu không có ảnh
+        }
+
+        // Set các trường hiển thị
         holder.textTitle.setText(service.getTitle());
-        holder.textPrice.setText(service.getPrice());
-        holder.textRating.setText("★ " + service.getRating());
-        holder.textContact.setText("Đã liên lạc " + service.getContact());
+        holder.textPrice.setText(service.getPricingInfo());
+        holder.textRating.setText("★ " + service.getAverageRating());
+        holder.textContact.setText("Đã có " + service.getReviewCount() + " người đánh giá");
 
         // Bắt sự kiện click item
         holder.itemView.setOnClickListener(v -> {
@@ -68,7 +80,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return serviceList.size();
+        return serviceList != null ? serviceList.size() : 0;
     }
 
     // Hàm cập nhật lại danh sách

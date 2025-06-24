@@ -25,7 +25,7 @@
             android:id="@+id/imgAvatar"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:src="@drawable/image33"
+            android:src="@drawable/image"
             android:scaleType="centerCrop"
             />
 

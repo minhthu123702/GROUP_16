@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder> {
@@ -19,7 +21,6 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     private List<ServiceItem> list;
     private OnItemClickListener listener;
 
-    // Constructor có callback
     public SearchResultAdapter(List<ServiceItem> list, OnItemClickListener listener) {
         this.list = list;
         this.listener = listener;
@@ -39,31 +40,34 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ServiceItem item = list.get(position);
-        holder.imgAvatar.setImageResource(item.getImageResId());
+
+        // Load ảnh từ URL Firestore (nếu có)
+        if (item.getPortfolioImages() != null && !item.getPortfolioImages().isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(item.getPortfolioImages().get(0))
+                    .placeholder(R.drawable.image)
+                    .into(holder.imgAvatar);
+        } else {
+            holder.imgAvatar.setImageResource(R.drawable.image);
+        }
+
         holder.txtTitle.setText(item.getTitle());
-        holder.txtPrice.setText(item.getPrice());
+        holder.txtPrice.setText(item.getPricingInfo());
 
-        // Format rating (hiện cả số và icon ngôi sao)
-        String ratingText = item.getRating();
-        if (!ratingText.endsWith("★")) {
-            ratingText += " ★";
-        }
-        holder.txtRating.setText(ratingText);
+        // Hiện rating dạng "4.9 ★"
+        holder.txtRating.setText(item.getAverageRating() + " ★");
 
-        // Hiển thị: "Đã liên lạc 102 | 20 đánh giá"
-        String contactAndReview = "Đã liên lạc " + item.getContact();
-        if (item.getReviewCount() != null && !item.getReviewCount().isEmpty()) {
-            contactAndReview += " | " + item.getReviewCount() + " đánh giá";
-        }
-        holder.txtContact.setText(contactAndReview);
+        // Hiển thị: "20 đánh giá"
+        String reviewText = item.getReviewCount() > 0 ? (item.getReviewCount() + " đánh giá") : "";
+        holder.txtContact.setText(reviewText);
 
-        // Gán sự kiện click vào item
+        // Click event
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onItemClick(item);
         });
     }
 
-    // Hàm cập nhật lại dữ liệu cho adapter (nếu cần filter động)
+    // Hàm cập nhật lại dữ liệu cho adapter
     public void updateList(List<ServiceItem> newList) {
         this.list = newList;
         notifyDataSetChanged();
