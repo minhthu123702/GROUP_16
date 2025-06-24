@@ -89,14 +89,6 @@ public class SearchActivity extends AppCompatActivity {
             return false;
         });
 
-        findViewById(R.id.btnFilter).setOnClickListener(v -> {
-            CustomerFilterBottomSheetDialogFragment dialog = new CustomerFilterBottomSheetDialogFragment();
-            dialog.setOnFilterApplyListener(option -> {
-                applyCustomerFilter(option);
-            });
-            dialog.show(getSupportFragmentManager(), "CustomerFilter");
-        });
-
         txtSeeMore.setOnClickListener(v -> {
             isShowAll = !isShowAll;
             adapter.setShowAll(isShowAll);
@@ -194,51 +186,5 @@ public class SearchActivity extends AppCompatActivity {
         recyclerResults.setVisibility(RecyclerView.GONE);
         recyclerHistory.setVisibility(RecyclerView.VISIBLE);
         updateSeeMore();
-    }
-
-    // Lọc nâng cao sau khi đã có resultList
-    private void applyCustomerFilter(CustomerFilterOption option) {
-        List<ServiceItem> filtered = new ArrayList<>();
-        for (ServiceItem item : resultList) {
-            boolean isMatch = true;
-
-            // Lọc theo vị trí (location)
-            if (option.location != null && item.getServiceArea() != null) {
-                boolean found = false;
-                for (String area : item.getServiceArea()) {
-                    if (area.equalsIgnoreCase(option.location)) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) isMatch = false;
-            }
-
-            // Lọc theo giá (pricingInfo kiểu String, bạn có thể tách số hoặc lưu kiểu số trên Firestore để dễ so sánh)
-            try {
-                int priceValue = Integer.parseInt(item.getPricingInfo().replaceAll("\\D+", ""));
-                if (option.minPrice != null && priceValue < option.minPrice) isMatch = false;
-                if (option.maxPrice != null && priceValue > option.maxPrice) isMatch = false;
-            } catch (Exception e) {
-                isMatch = false;
-            }
-
-            // Lọc theo rating
-            float ratingValue = (float) item.getAverageRating();
-            if (option.minRating != null && ratingValue < option.minRating) isMatch = false;
-
-            if (isMatch) filtered.add(item);
-        }
-        resultList.clear();
-        resultList.addAll(filtered);
-        resultAdapter.notifyDataSetChanged();
-
-        if (!resultList.isEmpty()) {
-            recyclerResults.setVisibility(RecyclerView.VISIBLE);
-            recyclerHistory.setVisibility(RecyclerView.GONE);
-            txtSeeMore.setVisibility(TextView.GONE);
-        } else {
-            showHistory();
-        }
     }
 }
