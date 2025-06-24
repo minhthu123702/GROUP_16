@@ -62,11 +62,5 @@
         <activity android:name=".CustomerNotification" />
         <activity android:name=".CustomerProfile" />
         <activity android:name=".ServiceManagement.ServiceDetailActivity" />
-
-
-
     </application>
-
-
-
 </manifest>
