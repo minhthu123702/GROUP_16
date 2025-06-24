@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Hanoi_Local_Hub</string>
+    <string name="category_list_description">Danh sách các danh mục dịch vụ</string>
 </resources>

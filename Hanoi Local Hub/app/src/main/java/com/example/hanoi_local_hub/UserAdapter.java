@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import com.bumptech.glide.Glide;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
@@ -20,8 +21,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private OnUserClickListener onUserClickListener;
 
     public interface OnUserClickListener {
-        void onUserClick(User user);
-        void onDeleteClick(User user, int position);
+        void onUserClick(User user);                // Xem chi tiết
+        void onDeleteClick(User user, int position); // Xoá user
     }
 
     public UserAdapter(Context context, List<User> users, OnUserClickListener listener) {
@@ -33,20 +34,29 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_user, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_user, parent, false);
         return new UserViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = users.get(position);
         holder.txtName.setText(user.getName());
         holder.txtCode.setText("Mã: " + user.getCode());
-        holder.imgAvatar.setImageResource(user.getAvatarResId());
-        holder.imgStatus.setImageResource(
-                user.isOnline() ? R.drawable.green_dot : R.drawable.red_dot
-        );
+
+        // Load avatar từ URL nếu có, không thì dùng avatarResId mặc định
+        if (user.getAvatarUrl() != null && !user.getAvatarUrl().isEmpty()) {
+            Glide.with(context)
+                    .load(user.getAvatarUrl())
+                    .placeholder(R.drawable.avatar1)
+                    .error(R.drawable.avatar1)
+                    .into(holder.imgAvatar);
+        } else {
+            holder.imgAvatar.setImageResource(user.getAvatarResId());
+        }
+
+        holder.imgStatus.setImageResource(user.isOnline() ? R.drawable.green_dot : R.drawable.red_dot);
 
         holder.btnDisplay.setOnClickListener(v -> {
             if (onUserClickListener != null) {
@@ -71,7 +81,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         notifyItemRemoved(position);
     }
 
-    // ✅ Hàm này để cập nhật danh sách được lọc (ví dụ: tìm kiếm theo mã)
     public void setFilteredList(List<User> filteredList) {
         this.users = filteredList;
         notifyDataSetChanged();

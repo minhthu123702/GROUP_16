@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.hanoi_local_hub">
-
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <!-- Quyền cho Android 12 trở xuống -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hanoi_Local_Hub"
         tools:targetApi="31">
-
+        <activity
+            android:name=".EditCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StatisticsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ServiceManagementActivity"
+            android:exported="false" />
         <!-- Activity đầu tiên chạy ứng dụng, thường là màn hình đăng nhập -->
         <activity
             android:name=".auth.LoginActivity"
@@ -22,22 +38,27 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Khai báo đầy đủ các Activity còn lại -->
-     <activity android:name=".MainMenuActivity" />
-<!--        <activity android:name=".MainAdmin" />-->
+        </activity> <!-- Khai báo đầy đủ các Activity còn lại -->
+        <activity android:name=".MainAdminActivity" /> <!-- <activity android:name=".MainAdmin" /> -->
         <activity android:name=".AdminProfileActivity" />
         <activity android:name=".UserGroupActivity" />
         <activity android:name=".AdminManagerCustomersActivity" />
+        <activity android:name=".AdminManagerProvidersActivity" />
+        <activity android:name=".ProviderProfileActivity" />
         <activity android:name=".CustomerProfileActivity" />
         <activity android:name=".auth.RegisterActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".MainCustomer" />
         <activity android:name=".ServiceManagement.MyServicesActivity" />
 <activity android:name=".ServiceManagement.AddServiceActivity" ></activity>
 
         <activity android:name=".MainCustomer"/>
         <activity android:name=".ServiceDetailActivity" />
         <activity android:name=".SearchActivity" />
+        <activity android:name=".StatCategoryActivity" />
+        <activity android:name=".StatAreaActivity" />
+
+
         <activity android:name=".CustomerNotification" />
         <activity android:name=".CustomerProfile" />
         <activity android:name=".ServiceManagement.ServiceDetailActivity" />
@@ -45,5 +66,7 @@
 
 
     </application>
+
+
 
 </manifest>
