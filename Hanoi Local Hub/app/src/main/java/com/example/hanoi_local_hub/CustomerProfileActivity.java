@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -19,8 +18,6 @@ public class CustomerProfileActivity extends AppCompatActivity {
     private ImageView btnBack, imgAvatar;
     private TextView tvName;
     private Button btnDelete;
-
-    private Button btnHide;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +38,6 @@ public class CustomerProfileActivity extends AppCompatActivity {
         imgAvatar = findViewById(R.id.imgAvatar);
         tvName = findViewById(R.id.tvName);
         btnDelete = findViewById(R.id.btnDelete);
-        btnHide = findViewById(R.id.btnHide);
 
         // Nhận dữ liệu từ Intent
         Intent intent = getIntent();
@@ -60,8 +56,11 @@ public class CustomerProfileActivity extends AppCompatActivity {
 
             if ("Nam".equalsIgnoreCase(user.getGender())) {
                 rbMale.setChecked(true);
-            } else {
+            } else if ("Nữ".equalsIgnoreCase(user.getGender())) {
                 rbFemale.setChecked(true);
+            } else {
+                rbMale.setChecked(false);
+                rbFemale.setChecked(false);
             }
         }
 
@@ -71,17 +70,6 @@ public class CustomerProfileActivity extends AppCompatActivity {
             intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent1);
             finish();
-        });
-
-        // Nút ẩn/hiện số điện thoại
-        btnHide.setOnClickListener(v -> {
-            if (tvPhone.getVisibility() == View.VISIBLE) {
-                tvPhone.setVisibility(View.GONE);
-                btnHide.setText("Hiện");
-            } else {
-                tvPhone.setVisibility(View.VISIBLE);
-                btnHide.setText("Ẩn");
-            }
         });
 
         // Nút xoá người dùng

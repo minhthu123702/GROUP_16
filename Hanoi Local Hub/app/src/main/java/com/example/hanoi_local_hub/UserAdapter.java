@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import com.bumptech.glide.Glide;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
@@ -37,22 +38,32 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         return new UserViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = users.get(position);
         holder.txtName.setText(user.getName());
         holder.txtCode.setText("Mã: " + user.getCode());
-        holder.imgAvatar.setImageResource(user.getAvatarResId());
+
+        // Load avatar từ URL nếu có, không thì dùng avatarResId mặc định
+        if (user.getAvatarUrl() != null && !user.getAvatarUrl().isEmpty()) {
+            Glide.with(context)
+                    .load(user.getAvatarUrl())
+                    .placeholder(R.drawable.avatar1)
+                    .error(R.drawable.avatar1)
+                    .into(holder.imgAvatar);
+        } else {
+            holder.imgAvatar.setImageResource(user.getAvatarResId());
+        }
+
         holder.imgStatus.setImageResource(user.isOnline() ? R.drawable.green_dot : R.drawable.red_dot);
 
-        // Nút Xem (btnDisplay)
         holder.btnDisplay.setOnClickListener(v -> {
             if (onUserClickListener != null) {
                 onUserClickListener.onUserClick(user);
             }
         });
 
-        // Nút Xoá
         holder.btnDelete.setOnClickListener(v -> {
             if (onUserClickListener != null) {
                 onUserClickListener.onDeleteClick(user, holder.getAdapterPosition());

@@ -77,15 +77,15 @@ public class ProviderProfileActivity extends AppCompatActivity {
         });
 
         // Nút ẩn/hiện số điện thoại
-        btnHide.setOnClickListener(v -> {
-            if (edtCode.getVisibility() == View.VISIBLE) {
-                edtCode.setVisibility(View.GONE);
-                btnHide.setText("Hiện");
-            } else {
-                edtCode.setVisibility(View.VISIBLE);
-                btnHide.setText("Ẩn");
-            }
-        });
+//        btnHide.setOnClickListener(v -> {
+//            if (edtCode.getVisibility() == View.VISIBLE) {
+//                edtCode.setVisibility(View.GONE);
+//                btnHide.setText("Hiện");
+//            } else {
+//                edtCode.setVisibility(View.VISIBLE);
+//                btnHide.setText("Ẩn");
+//            }
+//        });
 
         // Nút xoá người dùng
         btnDelete.setOnClickListener(v -> {
