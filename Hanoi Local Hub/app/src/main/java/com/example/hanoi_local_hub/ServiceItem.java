@@ -1,58 +1,55 @@
 package com.example.hanoi_local_hub;
 
+import java.util.List;
+
 public class ServiceItem {
-    private final int imageResId;
-    private final String title;
-    private final String price;
-    private final String rating;
-    private final String contact;
-    private final String category;
-    private final String desc;        // Mô tả chi tiết
-    private final String area;        // Khu vực phục vụ
-    private final String workTime;    // Giờ làm việc
-    private final String reviewCount; // Số người đánh giá
-    private final String phone;       // Số điện thoại liên hệ
-    private final String email;       // Email liên hệ
+    private String id;                  // Document ID (thủ công set sau khi get từ Firestore)
+    private String title;               // Tên dịch vụ (field: title)
+    private String description;         // Mô tả chi tiết (field: description)
+    private String pricingInfo;         // Giá (field: pricingInfo)
+    private String categoryName;        // Danh mục (field: categoryName)
+    private String operatingHours;      // Giờ làm việc (field: operatingHours)
+    private List<String> serviceArea;   // Khu vực phục vụ (field: serviceArea)
+    private List<String> portfolioImages; // Ảnh (field: portfolioImages)
+    private double averageRating;       // Đánh giá TB (field: averageRating)
+    private int reviewCount;            // Số lượt đánh giá (field: reviewCount)
+    private String providerId;          // ID người cung cấp (field: providerId)
+    // Nếu lấy info liên hệ từ bảng users thì không để phone/email ở đây
 
-    public ServiceItem(
-            int imageResId,
-            String title,
-            String price,
-            String rating,
-            String contact,
-            String category,
-            String desc,
-            String area,
-            String workTime,
-            String reviewCount,
-            String phone,
-            String email
-    ) {
-        this.imageResId = imageResId;
-        this.title = title;
-        this.price = price;
-        this.rating = rating;
-        this.contact = contact;
-        this.category = category;
-        this.desc = desc;
-        this.area = area;
-        this.workTime = workTime;
-        this.reviewCount = reviewCount;
-        this.phone = phone;
-        this.email = email;
-    }
+    // Firebase yêu cầu constructor rỗng
+    public ServiceItem() {}
 
-    // Getter methods
-    public int getImageResId() { return imageResId; }
+    // Getters & Setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+
     public String getTitle() { return title; }
-    public String getPrice() { return price; }
-    public String getRating() { return rating; }
-    public String getContact() { return contact; }
-    public String getCategory() { return category; }
-    public String getDesc() { return desc; }
-    public String getArea() { return area; }
-    public String getWorkTime() { return workTime; }
-    public String getReviewCount() { return reviewCount; }
-    public String getPhone() { return phone; }
-    public String getEmail() { return email; }
+    public void setTitle(String title) { this.title = title; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public String getPricingInfo() { return pricingInfo; }
+    public void setPricingInfo(String pricingInfo) { this.pricingInfo = pricingInfo; }
+
+    public String getCategoryName() { return categoryName; }
+    public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
+
+    public String getOperatingHours() { return operatingHours; }
+    public void setOperatingHours(String operatingHours) { this.operatingHours = operatingHours; }
+
+    public List<String> getServiceArea() { return serviceArea; }
+    public void setServiceArea(List<String> serviceArea) { this.serviceArea = serviceArea; }
+
+    public List<String> getPortfolioImages() { return portfolioImages; }
+    public void setPortfolioImages(List<String> portfolioImages) { this.portfolioImages = portfolioImages; }
+
+    public double getAverageRating() { return averageRating; }
+    public void setAverageRating(double averageRating) { this.averageRating = averageRating; }
+
+    public int getReviewCount() { return reviewCount; }
+    public void setReviewCount(int reviewCount) { this.reviewCount = reviewCount; }
+
+    public String getProviderId() { return providerId; }
+    public void setProviderId(String providerId) { this.providerId = providerId; }
 }

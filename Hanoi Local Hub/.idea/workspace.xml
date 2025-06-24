@@ -45,6 +45,11 @@
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_noti.xml">
+        <config>
+          <theme>@style/Theme.Hanoi_Local_Hub</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_manager_providers_admin.xml">
         <config>
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
@@ -56,6 +61,16 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml">
+        <config>
+          <theme>@style/Theme.Hanoi_Local_Hub</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_service_detail.xml">
+        <config>
+          <theme>@style/Theme.Hanoi_Local_Hub</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_service_home_management.xml">
         <config>
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
         </config>
@@ -100,7 +115,22 @@
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/custom_snackbar_success_layout.xml">
+        <config>
+          <theme>@style/Theme.Hanoi_Local_Hub</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/customer_home.xml">
+        <config>
+          <theme>@style/Theme.Hanoi_Local_Hub</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/customer_profile.xml">
+        <config>
+          <theme>@style/Theme.Hanoi_Local_Hub</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_profile.xml">
         <config>
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
         </config>
@@ -140,12 +170,22 @@
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_service.xml">
+        <config>
+          <theme>@style/Theme.Hanoi_Local_Hub</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_user.xml">
         <config>
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/menu_category.xml">
+        <config>
+          <theme>@style/Theme.Hanoi_Local_Hub</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/services_item.xml">
         <config>
           <theme>@style/Theme.Hanoi_Local_Hub</theme>
         </config>
@@ -174,6 +214,11 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ProviderProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ProviderProfileActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/UserAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/UserAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ServiceManagement/AddServiceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ServiceManagement/AddServiceActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ServiceManagement/MyServicesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ServiceManagement/MyServicesActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ServiceManagement/ServiceAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ServiceManagement/ServiceAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ServiceManagement/ServiceModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/ServiceManagement/ServiceModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_new_service.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_new_service.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,26 +314,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Hanoi Local Hub [testDebugUnitTest].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Hanoi Local Hub [testReleaseUnitTest].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Thu&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/A_UNIVERSITY/N3/gd4/Android/AudioRecordP/local.properties&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.app.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/A_UNIVERSITY/N3/gd4/Android/AudioRecordP/local.properties",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="android.template.2098051811">
       <recent name="com.example.hanoi_local_hub" />
@@ -299,7 +342,7 @@
       <recent name="D:\didong\BTL\Hanoi Local Hub\app\src\main\res\layout\admin" />
     </key>
   </component>
-  <component name="RunManager" selected="Android App.app">
+  <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="Hanoi_Local_Hub.app" />
       <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
@@ -462,7 +505,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/Thi" />
+                        <option value="origin/Quỳnh-Anh" />
                       </list>
                     </value>
                   </entry>
@@ -487,6 +530,11 @@
           <line>49</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/hanoi_local_hub/auth/LoginActivity.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -496,11 +544,13 @@
         <entry key="com.example.hanoi_local_hub">
           <value>
             <CheckInfo lastCheckTimestamp="1750693472118" />
+            <CheckInfo lastCheckTimestamp="1750656578559" />
           </value>
         </entry>
         <entry key="com.example.hanoi_local_hub.test">
           <value>
             <CheckInfo lastCheckTimestamp="1750693472119" />
+            <CheckInfo lastCheckTimestamp="1750656578561" />
           </value>
         </entry>
         <entry key="com.example.hanoilocalhub">
