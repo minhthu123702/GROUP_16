@@ -7,11 +7,15 @@ import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +28,8 @@ public class SearchActivity extends AppCompatActivity {
     private SearchHistoryAdapter adapter;
     private SearchResultAdapter resultAdapter;
     private List<String> historyList;
-    private List<ServiceItem> allServices;      // Lấy từ ServiceDataHolder
-    private List<ServiceItem> resultList = new ArrayList<>();
+    private List<ServiceItem> allServices = new ArrayList<>(); // Toàn bộ dịch vụ lấy từ Firebase
+    private List<ServiceItem> resultList = new ArrayList<>();  // Kết quả tìm kiếm
     private boolean isShowAll = false;
 
     @Override
@@ -38,11 +42,7 @@ public class SearchActivity extends AppCompatActivity {
         txtSeeMore = findViewById(R.id.txtSeeMore);
         edtKeyword = findViewById(R.id.edtKeyword);
 
-        // Nút back
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
-
-        // Lấy danh sách dịch vụ
-        allServices = ServiceDataHolder.allServices;
 
         // Lịch sử tìm kiếm mẫu
         historyList = new ArrayList<>();
@@ -50,7 +50,6 @@ public class SearchActivity extends AppCompatActivity {
         historyList.add("Chụp ảnh");
         historyList.add("Sửa chữa");
 
-        // Adapter cho lịch sử tìm kiếm
         adapter = new SearchHistoryAdapter(historyList, new SearchHistoryAdapter.OnDeleteClickListener() {
             @Override
             public void onDelete(int pos) {
@@ -58,42 +57,28 @@ public class SearchActivity extends AppCompatActivity {
                 adapter.notifyItemRemoved(pos);
                 updateSeeMore();
             }
-
             @Override
             public void onKeywordClick(int pos) {
                 String kw = historyList.get(pos);
                 edtKeyword.setText(kw);
                 edtKeyword.setSelection(kw.length());
-                searchService(kw);
+                triggerSearch();
             }
         });
         recyclerHistory.setAdapter(adapter);
         recyclerHistory.setLayoutManager(new LinearLayoutManager(this));
 
-        // Adapter cho kết quả tìm kiếm (grid 2 cột)
         recyclerResults.setLayoutManager(new GridLayoutManager(this, 2));
         resultAdapter = new SearchResultAdapter(resultList, item -> {
-            // Xử lý khi click vào kết quả (chuyển sang ServiceDetailActivity)
             Intent intent = new Intent(this, ServiceDetailActivity.class);
-            intent.putExtra("imageResId", item.getImageResId());
-            intent.putExtra("title", item.getTitle());
-            intent.putExtra("desc", item.getDesc());
-            intent.putExtra("category", item.getCategory());
-            intent.putExtra("area", item.getArea());
-            intent.putExtra("price", item.getPrice());
-            intent.putExtra("time", item.getWorkTime());
-            intent.putExtra("contact", item.getContact());
-            intent.putExtra("rating", item.getRating());
-            intent.putExtra("count", item.getReviewCount());
-            intent.putExtra("phone", item.getPhone());
-            intent.putExtra("email", item.getEmail());
+            intent.putExtra("serviceId", item.getId());
             startActivity(intent);
         });
         recyclerResults.setAdapter(resultAdapter);
 
         updateSeeMore();
 
-        // Sự kiện tìm kiếm khi nhấn enter hoặc click nút tìm
+        // Khi ấn enter trên ô tìm kiếm
         edtKeyword.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                     actionId == EditorInfo.IME_ACTION_DONE ||
@@ -104,32 +89,56 @@ public class SearchActivity extends AppCompatActivity {
             return false;
         });
 
-        // Sự kiện lọc (nếu cần)
         findViewById(R.id.btnFilter).setOnClickListener(v -> {
-            // TODO: Hiển thị dialog lọc nâng cao
+            CustomerFilterBottomSheetDialogFragment dialog = new CustomerFilterBottomSheetDialogFragment();
+            dialog.setOnFilterApplyListener(option -> {
+                applyCustomerFilter(option);
+            });
+            dialog.show(getSupportFragmentManager(), "CustomerFilter");
         });
 
-        // Sự kiện "Xem thêm"
         txtSeeMore.setOnClickListener(v -> {
             isShowAll = !isShowAll;
             adapter.setShowAll(isShowAll);
             txtSeeMore.setText(isShowAll ? "Thu gọn" : "Xem thêm");
         });
+
+        // Load toàn bộ dịch vụ về local
+        loadAllServicesFromFirebase();
     }
 
-    // Gọi khi muốn tìm kiếm theo keyword hiện tại
+    private void loadAllServicesFromFirebase() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("services")
+                .whereEqualTo("status", "approved")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    allServices.clear();
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        ServiceItem item = doc.toObject(ServiceItem.class);
+                        item.setId(doc.getId());
+                        allServices.add(item);
+                    }
+                    // Cho phép tìm kiếm sau khi đã load xong data
+                    if (!TextUtils.isEmpty(edtKeyword.getText().toString().trim())) {
+                        triggerSearch();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Không thể tải dịch vụ: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
     private void triggerSearch() {
         String keyword = edtKeyword.getText().toString().trim();
         if (!TextUtils.isEmpty(keyword)) {
             addKeywordToHistory(keyword);
             searchService(keyword);
         } else {
-            // Nếu bỏ trống thì show lại lịch sử
             showHistory();
         }
     }
 
-    // Thêm từ khóa mới vào đầu lịch sử, không trùng nhau
     private void addKeywordToHistory(String keyword) {
         historyList.remove(keyword);
         historyList.add(0, keyword);
@@ -137,7 +146,6 @@ public class SearchActivity extends AppCompatActivity {
         updateSeeMore();
     }
 
-    // Ẩn/hiện "Xem thêm" tùy độ dài list (chuẩn là > 3)
     private void updateSeeMore() {
         txtSeeMore.setVisibility(historyList.size() > 3 ? TextView.VISIBLE : TextView.GONE);
         if (historyList.size() <= 3 && isShowAll) {
@@ -147,35 +155,90 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    // Lọc & hiển thị danh sách kết quả tìm kiếm
+    // Tìm kiếm trên list local đã tải về
     private void searchService(String keyword) {
         resultList.clear();
         for (ServiceItem item : allServices) {
-            // Lọc theo tiêu đề, category, khu vực, mô tả,...
-            if (item.getTitle().toLowerCase().contains(keyword.toLowerCase())
-                    || item.getCategory().toLowerCase().contains(keyword.toLowerCase())
-                    || item.getDesc().toLowerCase().contains(keyword.toLowerCase())
-                    || item.getArea().toLowerCase().contains(keyword.toLowerCase())) {
+            if (containsIgnoreCase(item.getTitle(), keyword)
+                    || containsIgnoreCase(item.getCategoryName(), keyword)
+                    || (item.getServiceArea() != null && containsList(item.getServiceArea(), keyword))
+                    || containsIgnoreCase(item.getDescription(), keyword)) {
                 resultList.add(item);
             }
         }
         resultAdapter.notifyDataSetChanged();
 
-        // Hiện kết quả, ẩn lịch sử nếu có kết quả
         if (!resultList.isEmpty()) {
             recyclerResults.setVisibility(RecyclerView.VISIBLE);
             recyclerHistory.setVisibility(RecyclerView.GONE);
             txtSeeMore.setVisibility(TextView.GONE);
         } else {
-            // Nếu không có kết quả, hiện lại lịch sử
             showHistory();
+            Toast.makeText(this, "Không tìm thấy kết quả phù hợp!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // Hiện lại lịch sử tìm kiếm và ẩn kết quả
+    private boolean containsIgnoreCase(String str, String keyword) {
+        return str != null && str.toLowerCase().contains(keyword.toLowerCase());
+    }
+
+    private boolean containsList(List<String> list, String keyword) {
+        if (list == null) return false;
+        for (String s : list) {
+            if (s != null && s.toLowerCase().contains(keyword.toLowerCase())) return true;
+        }
+        return false;
+    }
+
     private void showHistory() {
         recyclerResults.setVisibility(RecyclerView.GONE);
         recyclerHistory.setVisibility(RecyclerView.VISIBLE);
         updateSeeMore();
+    }
+
+    // Lọc nâng cao sau khi đã có resultList
+    private void applyCustomerFilter(CustomerFilterOption option) {
+        List<ServiceItem> filtered = new ArrayList<>();
+        for (ServiceItem item : resultList) {
+            boolean isMatch = true;
+
+            // Lọc theo vị trí (location)
+            if (option.location != null && item.getServiceArea() != null) {
+                boolean found = false;
+                for (String area : item.getServiceArea()) {
+                    if (area.equalsIgnoreCase(option.location)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) isMatch = false;
+            }
+
+            // Lọc theo giá (pricingInfo kiểu String, bạn có thể tách số hoặc lưu kiểu số trên Firestore để dễ so sánh)
+            try {
+                int priceValue = Integer.parseInt(item.getPricingInfo().replaceAll("\\D+", ""));
+                if (option.minPrice != null && priceValue < option.minPrice) isMatch = false;
+                if (option.maxPrice != null && priceValue > option.maxPrice) isMatch = false;
+            } catch (Exception e) {
+                isMatch = false;
+            }
+
+            // Lọc theo rating
+            float ratingValue = (float) item.getAverageRating();
+            if (option.minRating != null && ratingValue < option.minRating) isMatch = false;
+
+            if (isMatch) filtered.add(item);
+        }
+        resultList.clear();
+        resultList.addAll(filtered);
+        resultAdapter.notifyDataSetChanged();
+
+        if (!resultList.isEmpty()) {
+            recyclerResults.setVisibility(RecyclerView.VISIBLE);
+            recyclerHistory.setVisibility(RecyclerView.GONE);
+            txtSeeMore.setVisibility(TextView.GONE);
+        } else {
+            showHistory();
+        }
     }
 }
