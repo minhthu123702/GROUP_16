@@ -60,7 +60,7 @@ public class ViewCategoryActivity extends AppCompatActivity {
 
                         tvCategoryName.setText(name != null ? name : "Tên danh mục");
                         tvCategoryDesc.setText(desc != null ? desc : "Chưa có mô tả");
-                        tvCreateDate.setText("Ngày tạo: " + (createDate != null ? createDate : "Không rõ"));
+                        tvCreateDate.setText("Ngày tạo: " + (createDate != null ? createDate : "22/5/2025"));
 
                         if (imageUrl != null && !imageUrl.isEmpty()) {
                             Glide.with(this).load(imageUrl).into(imgCategory);
