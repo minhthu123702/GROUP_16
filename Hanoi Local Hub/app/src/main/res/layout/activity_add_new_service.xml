@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="Thêm hình ảnh (Tối đa 2 ảnh)"
+                android:text="Thêm hình ảnh (Tối đa 1 ảnh)"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp" />
 

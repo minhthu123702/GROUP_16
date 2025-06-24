@@ -40,6 +40,7 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".CustomerNotification" />
         <activity android:name=".CustomerProfile" />
+        <activity android:name=".ServiceManagement.ServiceDetailActivity" />
 
 
 

@@ -15,7 +15,7 @@ public class ServiceModel {
     private String pricingInfo;
     private List<String> serviceArea;
     private String operatingHours;
-    private List<String> portfolioImages; // Thay thế cho imageResId, có thể chứa nhiều ảnh
+    private String portfolioImages; // Thay thế cho imageResId, có thể chứa nhiều ảnh
     private String status;
 
     // --- Các trường liên hệ (Bổ sung lại theo yêu cầu của bạn) ---
@@ -55,7 +55,7 @@ public class ServiceModel {
     public String getPricingInfo() { return pricingInfo; }
     public List<String> getServiceArea() { return serviceArea; }
     public String getOperatingHours() { return operatingHours; }
-    public List<String> getPortfolioImages() { return portfolioImages; }
+    public String getPortfolioImages() { return portfolioImages; }
     public String getStatus() { return status; }
     public String getContact() { return contact; }
     public String getPhone() { return phone; }
@@ -75,7 +75,7 @@ public class ServiceModel {
     public void setPricingInfo(String pricingInfo) { this.pricingInfo = pricingInfo; }
     public void setServiceArea(List<String> serviceArea) { this.serviceArea = serviceArea; }
     public void setOperatingHours(String operatingHours) { this.operatingHours = operatingHours; }
-    public void setPortfolioImages(List<String> portfolioImages) { this.portfolioImages = portfolioImages; }
+    public void setPortfolioImages(String portfolioImages) { this.portfolioImages = portfolioImages; }
     public void setStatus(String status) { this.status = status; }
     public void setContact(String contact) { this.contact = contact; }
     public void setPhone(String phone) { this.phone = phone; }
