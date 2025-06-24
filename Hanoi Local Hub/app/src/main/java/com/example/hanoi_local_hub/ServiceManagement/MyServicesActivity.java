@@ -209,7 +209,7 @@ public class MyServicesActivity extends AppCompatActivity implements ServiceAdap
     @Override
     public void onHideClick(ServiceModel service) {
         // Nếu đang hiển thị thì đổi thành 'paused', nếu đang ẩn thì đổi lại thành 'approved'
-        String newStatus = service.getStatus().equals("approved") ? "paused" : "approved";
+        String newStatus = service.getStatus().equals("approved") ? "paused" : "hide";
         db.collection("services").document(service.getServiceId())
                 .update("status", newStatus)
                 .addOnSuccessListener(aVoid -> {
@@ -239,4 +239,16 @@ public class MyServicesActivity extends AppCompatActivity implements ServiceAdap
 
 
     }
+    @Override
+    public void onItemViewClick(ServiceModel service) {
+        // Tạo một Intent để mở ServiceDetailActivity
+        Intent intent = new Intent(MyServicesActivity.this, ServiceDetailActivity.class);
+
+        // Gửi ID của dịch vụ được click qua cho màn hình chi tiết
+        // Dùng key "SERVICE_ID" để phân biệt với hành động sửa ("SERVICE_ID_TO_EDIT")
+        intent.putExtra("SERVICE_ID", service.getServiceId());
+
+        // Mở màn hình chi tiết
+        startActivity(intent);
+}
 }

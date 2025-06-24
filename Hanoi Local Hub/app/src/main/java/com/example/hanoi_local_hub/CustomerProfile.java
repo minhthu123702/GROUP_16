@@ -22,7 +22,9 @@ import com.example.hanoi_local_hub.auth.LoginActivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 public class CustomerProfile extends AppCompatActivity {
 
     // --- Xem/Chỉnh sửa avatar/họ tên ---
@@ -160,6 +162,59 @@ public class CustomerProfile extends AppCompatActivity {
         });
 
     }
+    private void setupProviderButton() {
+        // Ánh xạ TextView bên trong LinearLayout
+        final TextView tvManageText = findViewById(R.id.tvManageServiceText);
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        if (currentUser != null) {
+            String uid = currentUser.getUid();
+
+            // Lấy document của người dùng từ Firestore
+            db.collection("users").document(uid).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            // Đọc trạng thái providerStatus
+                            Boolean providerStatus = documentSnapshot.getBoolean("providerStatus");
+
+                            if (Boolean.TRUE.equals(providerStatus)) {
+                                // --- Nếu LÀ nhà cung cấp ---
+                                tvManageText.setText("Quản lý dịch vụ của tôi");
+                                btnManageService.setOnClickListener(v -> {
+                                    startActivity(new Intent(CustomerProfile.this, MyServicesActivity.class));
+                                });
+                            } else {
+                                // --- Nếu KHÔNG PHẢI là nhà cung cấp ---
+                                tvManageText.setText("Yêu cầu trở thành nhà cung cấp");
+                                btnManageService.setOnClickListener(v -> {
+                                    // Chỉ hiện Toast theo yêu cầu
+                                    Toast.makeText(this, "Đã gửi yêu cầu đến quản trị viên!", Toast.LENGTH_LONG).show();
+                                    // Vô hiệu hóa nút và đổi text sau khi nhấn
+                                    tvManageText.setText("Yêu cầu đã được gửi");
+                                    tvManageText.setTextColor(Color.GRAY);
+                                    btnManageService.setEnabled(false);
+                                });
+                            }
+                        } else {
+                            // Nếu không tìm thấy document, mặc định là người dùng thường
+                            tvManageText.setText("Yêu cầu trở thành nhà cung cấp");
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        // Nếu có lỗi mạng, ẩn nút đi cho an toàn
+                        btnManageService.setVisibility(View.GONE);
+                        Toast.makeText(CustomerProfile.this, "Lỗi khi kiểm tra quyền.", Toast.LENGTH_SHORT).show();
+                    });
+        } else {
+            // Nếu không có người dùng đăng nhập, ẩn nút này đi
+            btnManageService.setVisibility(View.GONE);
+        }
+    }
+
+
 
     // Bật/tắt chế độ chỉnh sửa cho từng trường
     private void setEditable(boolean editable) {
